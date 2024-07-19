@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iframe内联框架</title>
+</head>
+<body>
+<h3>嵌入一个bing的页面</h3>
+<iframe src="https://www.bing.com/" width="1024px" height="768px" frameborder="0"></iframe>
+<p>以上为一个1024*768的嵌入式bing页面</p>
+
+<hr/>
+
+<h3>"嵌入"一个本地的页面，但实现方式是超链接跳转</h3>
+<p>看看最底部右下角↘</p>
+<!--这里相当于直接把跳转的页面通过iframe嵌入到当前的页面里面来了-->
+<iframe src="" name="pancake" width="800px" height="600px" frameborder="0"></iframe>
+<a href="7.media.html" target="pancake">点击跳转到劲爆流媒体</a>
+
+</body>
+</html>

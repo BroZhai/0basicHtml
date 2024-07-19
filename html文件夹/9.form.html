@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<!--表单<form ...>就是用来给用户来输入 和 提交信息的-->
+<!--创建一个使用明文get发送的表单，发送终点为第3个网页-->
+<h2>妙妙注册Site</h2>
+<form method="get" action="3.%20Images%20Demonstration.html">
+<!--注意:这里的name为必需项-->
+    <p>你的炫酷id: <input type="text" name="user_id"/></p>
+    <p>你的小秘密: <input type="password" name="user_pwd"/></p>
+    <p>
+        <input type="submit"/>
+        <input type="reset"/>
+    </p>
+</form>
+<hr/>
+<h3>Now, it's time to kick form's ass</h3>
+<form method="get" action="7.media.html">
+    <p>被踹了一脚的炫酷id: <input type="name" name="user" size="45"/></p>
+    <p>只能输⑨位的密码框: <input type="password" name="pwd" maxlength="9"/></p>
+    <p>你是:
+        <input type="radio" value="Angel" name="anthro"/>好人
+        <input type="radio" value="Badass" name="anthro"/>坏人
+        <input type="radio" value="EXCEPTION" name="anthro"/>我去你的你管我是谁
+    </p>
+    <p>请选择你的属性：
+        <input type="checkbox" value="worker" name="info"/>打工人
+        <input type="checkbox" value="baka" name="info"/>摆烂人
+        <input type="checkbox" value="gamer" name="info"/>游戏人
+        <input type="checkbox" value="anime_lover" name="info"/>动漫人
+        <input type="checkbox" value="streamer" name="info"/>直播人
+        <input type="checkbox" value="normies" name="info"/>普通人
+        <input type="checkbox" value="wealthy" name="info"/>有钱人
+    </p>
+    <p>
+        来一张A na taの劲爆写真:
+        <input type="file" size="20">
+        <br/>
+        <input type="image" src="../resources/3/cirno.gif" width="100px" height="100px">
+    </p>
+</form>
+</body>
+</html>
