@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格演示</title>
+</head>
+<body>
+<!--页面中的表格，<table> 双标签-->
+<!--
+tr: 定义一个空行
+td: 一行中的"一部分"，可理解成"列" (但不是列)
+-->
+
+<!--Tips: 可以给table添加border="?px"属性让其显示更明显-->
+<table border="1px">
+    <tr> <!--第一行-->
+        <td>A1</td>
+        <td>A2</td>
+        <td>A3</td>
+        <td>A4</td>
+    </tr>
+    <tr> <!--第二行-->
+        <td>B1</td>
+        <td>B2</td>
+        <td>B3</td>
+        <td>B4</td>
+    </tr>
+    <tr> <!--第三行-->
+        <td>C1</td>
+        <td>C2</td>
+        <td>C3</td>
+        <td>C4</td>
+    </tr>
+</table>
+<hr/>
+<!--某单元格跨行/列-->
+<!--针对"某单元格<td>"进行操作
+rowspan="": 跨几个行
+colspan="": 跨几个列
+-->
+<table border="1px">
+    <tr> <!--A1跨俩列-->
+        <td colspan="2">A1</td>
+        <td>A2</td>
+        <td>A3</td>
+    </tr>
+    <tr> <!--B1跨俩行-->
+        <td rowspan="2">B1</td>
+        <td>B2</td>
+        <td>B3</td>
+        <td>B4</td>
+    </tr>
+    <tr> <!--第三行-->
+        <td>C2</td>
+        <td>C3</td>
+        <td>C4</td>
+    </tr>
+</table>
+
+</body>
+</html>
