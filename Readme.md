@@ -1,4 +1,5 @@
 # 你好 Hello
+![vrc.png](vrc.png "本地图片的描述")
 这里是一只正在学习Web技术的小猫，分割线下面是这只小猫的故事<br/>
 This is a backup repository for a feline creature who is currently learning web services without foreground basics. (Background as well XD)<br/>
 It may be found that this is a sundry place filled with tons of strange logs and files. <br/>
