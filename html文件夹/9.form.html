@@ -16,15 +16,13 @@
         <input type="submit"/>
         <input type="reset"/>
     </p>
-</form>
 <hr/>
 <h3>Now, it's time to kick form's ass</h3>
 <!--来玩转一下input内的其他元素-->
-<form method="get" action="7.media.html">
     <p>被踹了一脚的炫酷id: <input type="name" name="user" size="45"/></p>
     <p>只能输⑨位的密码框: <input type="password" name="pwd" maxlength="9"/></p>
     <p>你是:
-        <input type="radio" value="Angel" name="anthro"/>好人
+        <input type="radio" value="Angel" name="anthro" checked/>好人
         <input type="radio" value="Badass" name="anthro"/>坏人
         <input type="radio" value="EXCEPTION" name="anthro"/>我去你的你管我是谁
     </p>
@@ -39,11 +37,32 @@
     </p>
     <p>
         来一张A na taの劲爆写真:
-        <input type="file" size="20">
+        <input type="file" size="20" name="fileReceived">
         <br/>
         <input type="image" src="../resources/3/cirno.gif" width="100px" height="100px">
     </p>
     <h4>点击上面的劲舞冰精进行提交</h4>
+<hr/>
+<!--独立的下拉框 <selected>-->
+<h4>下拉框测试</h4>
+    <p>
+        <select name="下拉表单返回值">
+            <option value="下拉选项1" selected>选项1</option>
+            <option value="下拉选项2">选项2</option>
+            <option value="下拉选项3">选项3</option>
+            <option value="下拉选项4">选项4</option>
+        </select>
+    </p>
+    <hr/>
+<!-- 文本域(框) <textarea>-->
+<!-- 也请记得设置name=""，rows和cols分别宽高和行高(脑子要转过来)-->
+    <p>文本域(框):
+        <textarea name="textarea" rows=5 cols="30"></textarea>
+    </p>
+    <p>这是一个范围滑块:
+        <input type="range" name="滑块返回值" min="0" max="100"/>
+    </p>
+
 </form>
 </body>
 </html>
