@@ -1,0 +1,5 @@
+/*在CSS文件中，写注释要这么写完:3*/
+h1{
+    color:green;
+    /*设置引用该样式表的(seperatedCSS.)html的<h1>的样式*/
+}
