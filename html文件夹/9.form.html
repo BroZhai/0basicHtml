@@ -60,9 +60,19 @@
         <textarea name="textarea" rows=5 cols="30"></textarea>
     </p>
     <p>这是一个范围滑块:
-        <input type="range" name="滑块返回值" min="0" max="100"/>
+        <input type="range" name="滑块返回值git" min="0" max="100"/>
     </p>
-
+    <!-- 一些限制 以及 表单验证 -->
+    <!--
+    required: 必填项
+    placeholder="提示信息"
+    pattern: 正则表达式相关校验
+       -->
+    <p>你好我是必输框:
+        <input type="text" name="生活必需品" placeholder="请不要无视我OAO..." required>
+    </p>
+    <p><input type="submit" /></p>
 </form>
+
 </body>
 </html>
