@@ -1,0 +1,10 @@
+/*id 和 class 的名称是可以重名的，只需要注意选择类型就好哩*/
+.styleSet1{ /*class选择器，选中了<h1>和<h6>的"组"*/
+    color:green;
+}
+#styleSet1{/*id选择器，选中了<h1>且id="styleSet1"的标签，单独设置样式*/
+    color:wheat;
+}
+h1{/*标签选择器，只会单单的选中<h1>*/
+    color:red;
+}
