@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器: id + class的强大结合</title>
+    <!--属性选择器，可以理解成"关键字检索"+"条件判断"，一种很万能的常用牛逼选择器-->
+
+    <style>
+     /*语法:
+        标签名[关键字]{} //通过关键字查询
+        标签名[关键字="值"]{} //关键字+对应值 查询
+        Tips: "="还可以被换成其他的"正则表达式" (判断条件)
+            如*= 包含，^= 以这个开头，$= 以这个结尾
+     */
+        a{
+            text-decoration:none; /*取消所有a标签的"下划线"*/
+        }
+        a[id]{/*查找有"id"字样的a标签进行设置 (1)*/
+            background:red;
+        }
+        a[target="_blank"]{ /*查找target="_blank"的a标签进行设置  (2)*/
+            background:yellow;
+        }
+
+        a[href^="images"]{ /*查找所有包含href以"images"开头的a标签  (3,4,5)*/
+            background:#95daff;
+        }
+
+    </style>
+
+</head>
+<body>
+<p class="demo">
+    <a href="http://www.baidu.com" class="links item first" id="first">1</a>
+    <a href="http://mikutap.com" class="links item active" target="_blank" title="test">2</a>
+    <a href="images/123.html" class="links item">3</a>
+    <a href="images/123.png" class="links item">4</a>
+    <a href="images/123.jpg" class="links item">5</a>
+    <a href="abc" class="links item">6</a>
+    <a href="/a.pdf" class="links item">7</a>
+    <a href="/abc.pdf" class="links item">8</a>
+    <a href="abc.doc" class="links item">9</a>
+    <a href="abcd.doc" class="links item last">10</a>
+</p>
+</body>
+</html>
