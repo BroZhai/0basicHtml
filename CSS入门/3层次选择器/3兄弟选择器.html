@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟选择器</title>
+<!--从定位主体"灵活往下一位"设置，要指定正确的"下一兄弟标签"-->
+    <style>
+        /*兄弟，用“+”号!*/
+        #second+p{ /*虚晃一枪的定位，借着"兄弟主体"(second)找它下一层"兄弟元素"(同标签)*/
+            color:blue; /*如果下一层"恰好是"兄弟元素就生效*/
+        }
+        #third+p{ /*third的下一层是h3，不是<p>兄弟元素*/
+            color:red; /*h3分割线下面的<p>不生效*/
+        }
+
+        .brother+h2{ /*应用class的"选择单元应用"效果*/
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <p id="first">你好，我是一行一行正常的p标签</p>
+    <p id="second">哦呀，我是第二行的p标签</p>
+    <p id="third">嘿嘿，我是楼上的"兄弟"，他让我变蓝了</p>
+    <h3>我是分割线------------------</h3>
+    <p>哎呀，隔了个h3，怎么就兄弟就不要我了T^T...</p>
+<hr/>
+<!--class可以有"选择单元应用"的效果-->
+    <p class="brother">我是class的1号定位兄弟</p>
+    <h2>谢谢1号定位兄弟，我红了</h2>
+    <h3>我是一只路过的琪露诺，bakabakabakabakabakabakabakabakabakabakabakabakabaka</h3>
+    <p class="brother">我是class的2号定位兄弟</p>
+    <h2>谢谢2号定位兄弟，我也红了</h2>
+
+</body>
+</html>
