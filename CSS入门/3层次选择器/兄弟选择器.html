@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟选择器</title>
+<!-- 兄弟，用“+”号!,而且兄弟是"唯一的"-->
+    <style>
+        #second+p{ /*虚晃一枪的定位，借着"兄弟主体"找它下一层"兄弟元素"(同标签)*/
+            color:blue; /*如果下一层"恰好是"兄弟元素就生效*/
+        }
+        #third+p{ /*third的下一层是h3，不是<p>兄弟元素*/
+            color:red; /*h3分割线下面的<p>不生效*/
+        }
+    </style>
+</head>
+<body>
+    <p id="first">你好，我是一行一行正常的p标签</p>
+    <p id="second">哦呀，我是第二行的p标签</p>
+    <p id="third">嘿嘿，我是楼上的"兄弟"，他让我变蓝了</p>
+    <h3>我是分割线------------------</h3>
+    <p>哎呀，隔了个h3，怎么就兄弟就不要我了T^T...</p>
+
+</body>
+</html>
