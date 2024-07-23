@@ -8,6 +8,7 @@ And most of them have come along with Chinese annotations.<br/>
 Anyways, welcome, and thanks for browsing ^^<br/>
 I hope my journals may help anyone else who also intends to embark on this :3 <br/>
 (Below is the story depicting why this feline creature decided to get claws on this in Chinese)<br/>
+*Tips: MIT license is adopted. Feel free to check and edit yourself, but not for commercial use :3*
 *07.18.2024 Mr-Pancake*<br/>
 ***
 ### 小时候给培训班忽悠去断断续续的学了点web服务
@@ -31,6 +32,7 @@ html, css, js 三大基本网页套件 搞前端<br/>
 
 这里就算是一个个人的学习记录空间了，应该不会有谁来看<br/>
 但以防万一<br/>
+*本项目采用MIT协议，仅供个人学习使用，切勿用于商业用途*<br/>
 <br/>
 欢迎来到这里 :3 <br/>
 如果您也是一位Web新手，那么希望这些日志能帮到你 ^w^ <br/>
