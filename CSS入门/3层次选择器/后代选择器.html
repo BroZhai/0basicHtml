@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后代选择器</title>
+    <!--可以理解成各种"灵活跳变"的选择器,有涉及到"层次"和"级"的概念-->
+    <style>
+        /*后代选择器，选中某个"主体"内所有的 指定"兄弟"(同标签)元素
+        有id和class也会被选中(如果没有单独id或class应用修改的话)
+        */
+        body p{
+            color:red;
+        }
+        #second{ /*第二个p标签的"大哥"*/
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <p id="first">你好，我是一行一行正常的p标签</p>
+    <p id="second">哦呀，我是第二行的p标签，我有“大哥”罩着，所以我是酷蓝色</p>
+    <p id="third">诶嘿，我是第三行p标签，但是我与上俩位"同级":3</p>
+    <ul>嗨，我是无序列表！我和我的孩子们在"同一级"
+        <li>我们在ul肚子里OAO</li>
+        <li>放我们出去，我们也要和css玩QAQ</li>
+        <li>555,我们和ul"强绑定"在一起惹...</li>
+        <p>Ciallo~我是p标签内鬼~~，诶我怎么也给爆了?</p> <!--层级不同，但还是给揪出来的<p>标签-->
+    </ul>
+    <p>我是最后一行的p标签！</p>
+<hr/>
+
+
+</body>
+</html>
