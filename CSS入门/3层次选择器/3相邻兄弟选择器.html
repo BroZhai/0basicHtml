@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>相邻兄弟选择器</title>
-<!--从定位主体"灵活往下一位"设置，要指定正确的"下一兄弟标签"-->
+<!--从定位主体"灵活往下一位"设置，要指定正确的"下一兄弟标签"(只会选一个)-->
     <style>
         /*兄弟，用“+”号!*/
         #second+p{ /*虚晃一枪的定位，借着"兄弟主体"(second)找它下一层"兄弟元素"(同标签)*/
@@ -29,6 +29,7 @@
     <p class="brother">我是class的1号定位兄弟</p>
     <h2>谢谢1号定位兄弟，我红了</h2>
     <h3>我是一只路过的琪露诺，bakabakabakabakabakabakabakabakabakabakabakabakabaka</h3>
+    <img src="../../resources/3/cirno.gif">
     <p class="brother">我是class的2号定位兄弟</p>
     <h2>谢谢2号定位兄弟，我也红了</h2>
 
