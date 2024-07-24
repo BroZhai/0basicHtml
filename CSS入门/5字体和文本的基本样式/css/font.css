@@ -2,9 +2,36 @@
 font-family: 什么字体
 font-size: 字体大小
 font-weight: 字体粗细 (light)
-color: 字体颜色
+color: 字体颜色  【可以是 #xxxxxx，rgb(x,x,x) 和 rgba(x,x,x,透明度)】
+
+    快速"综合"写法:
+    font:(font-style) 粗细 大小 "字体"
+    其中font-style有:
+        normal 默认
+        italic 用字体"自带的斜体"
+        oblique 强制斜体
 */
 
 h3{
     font-size: 50px;
+}
+
+
+
+.baka1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#cirno{
+    font-weight: lighter; /*三个直接参数:lighter bold bolder*/
+}
+
+#cirno+p{
+    color:blue
+}
+
+#last{ /* font:(font-style) 粗细 大小 "字体"*/
+    font: oblique bold 16px "华文楷体";
+    background: cyan;
+    width: 15em; /*em: "字"宽*/
 }
