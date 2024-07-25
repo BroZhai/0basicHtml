@@ -35,8 +35,12 @@ h3{
     color:rgba(0, 0, 255, 0.4) /*使用rgba变文字透明度*/
 }
 
-#last{
+span{
     font: oblique bold 16px "华文楷体";
     background: cyan;
     width: 15em; /*em: "字"宽*/
+}
+img,span{
+    vertical-align: middle;  /*参考"前置元素"的"行高"，进行行内"居中"*/
+    /*可以看到文字出在"cirno"右侧行高中央""*/
 }
