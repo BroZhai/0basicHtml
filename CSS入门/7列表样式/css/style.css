@@ -1,0 +1,35 @@
+/* 
+    列表样式相关
+    list-style: 前面的"小点"样式
+        none 不显示
+        circle 空心圆
+        decimal 数字
+        square 正方形
+*/
+
+
+#titleListBody{ /*统一管理"标题+列表"块*/
+    /*Tips: 前端F12还可以动态的调整，取得一个满意的调整值*/
+
+    width: 300px; /*这里"限定了"所有div元素的"展示范围"，其他的设置同理*/
+    background-color: grey;
+}
+
+.title{
+    background-color: red; /*单独设置的红色，覆盖下层的灰色*/
+    font-size: 26px
+}
+ul li{ 
+    line-height: 30px;
+    list-style: none;
+    color:black;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    font: normal bold 20px "华文楷体";
+    color: yellow;
+    text-decoration: underline;
+}
