@@ -11,6 +11,8 @@ text-decoration: 文本"装饰"
     dotted: 点状
     dashed: 短横
     double: 双划线
+text-shadow: 文本阴影
+    语法: text-shadow: 阴影颜色 x偏移 y偏移 阴影半径 
 
 vertical-align: 文本图片水平对齐 (需要有参照物)
 */
@@ -43,4 +45,10 @@ span{
 img,span{
     vertical-align: middle;  /*参考"前置元素"的"行高"，进行行内"居中"*/
     /*可以看到文字出在"cirno"右侧行高中央""*/
+}
+em{
+    /*语法: text-shadow: 阴影颜色 x偏移(右+) y偏移(下+) 阴影半径 */
+    font: oblique bold 40px "华文楷体";
+    text-shadow: gray 3px 3px 2px;
+    text-align: right;
 }
