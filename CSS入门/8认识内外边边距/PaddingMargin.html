@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>列表样式 和 div的引入</title>
+<link rel="stylesheet" href="css/MarPadBor.css">
+</head>
+    <!-- Tips: Margin外 Border中 Padding内 可用网页F12的"盒子模型"及时查看和修改 -->
+<body>
+    <div id="titleListBody">
+
+    <h2 class="title">全部商品分类</h2>
+        <ul>
+            <li> <!--列表一行 有 三个标签-->
+                <a href="#">图书</a>
+                <a href="#">音像</a>
+                <a href="#">数字商品</a>
+            </li>
+            <li>
+                <a href="#">家用电器</a>
+                <a href="#">手机</a>
+                <a href="#">数码</a>
+            </li>
+            <li>
+                <a href="#">电脑</a>
+                <a href="#">办公</a>
+            </li>
+            <li>
+                <a href="#">家具</a>
+                <a href="#">家装</a>
+                <a href="#">厨具</a>
+            </li>
+            <li>
+                <a href="#">服饰鞋帽</a>
+                <a href="#">个性化妆</a>
+            </li>
+            <li>
+                <a href="#">礼品箱包</a>
+                <a href="#">钟表</a>
+                <a href="#">珠宝</a>
+            </li>
+            <li>
+                <a href="#">食品饮料</a>
+                <a href="#">保健食品</a>
+            </li>
+            <li>
+                <a href="#">彩票</a>
+                <a href="#">旅行</a>
+                <a href="#">充值</a>
+                <a href="#">票务</a>
+            </li>
+        </ul>
+    </div>
+    <p>这是box1，默认的background-repeat(重复平铺)</p>
+    <div id="box1" class="boxDisplay"></div>
+    <hr>
+    <p>这是box2，background-repeat: repeat-x(只铺x第一行)</p>
+    <div id="box2" class="boxDisplay"></div>
+    <hr>
+    <p>这是box3，background-repeat: repeat-y(只铺y第一列)</p>
+    <div id="box3" class="boxDisplay"></div>
+    <hr>
+    <p>这是box4，background-repeat: no-repeat(只会有一个baka)</p>
+    <em>这时我们便可以单独设置这个元素的"位置"</em>
+    <div id="box4" class="boxDisplay"></div>
+    <hr>
+    <p>再来一个渐变色框 (涉及到linear-gradient)</p>
+    <div id="box5" class="boxDisplay"></div>
+    </body>
+
+</html>

@@ -1,0 +1,60 @@
+/* 
+边距写法都是一样的，以margin为例(可直接替换成border 和 padding)】
+    margin: A数px 【设置 上下左右 的边距 都为A数】
+    margin: A数px B数px 【设置 上下为A数，左右为B数】
+        妙用: margin: 0px auto 【自动居中】
+    margin: A数 B数 C数 D数 【分别设置 上A 右B 下C 左D (顺时针)】
+*/
+#titleListBody{ 
+    width: 210px; 
+    background-color: grey;
+    padding: 20px 30px 40px 50px; /*上右下左*/
+    margin: 50px 220px; /*上下50px，左右220px*/
+}
+
+.title{
+    background-color: cyan; 
+    font-size: 26px;
+    background-image: url(../../../resources/CSS/7/down_arrow.png);
+    background-repeat: no-repeat;
+    background-position: 172px 6px;
+    background-size: 25px;
+}
+ul li{ 
+    line-height: 30px;
+    list-style: none;
+    color:black;
+    background-image: url(../../../resources/CSS/7/right_arrow.png);
+    background-size: 22px;
+    background-position: 145px 5px;
+    background-repeat: no-repeat;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    font: normal bold 19px "华文楷体";
+    color: yellow;
+    text-decoration: underline;
+}
+
+.boxDisplay{
+    border: 2px solid red;
+    width: 500px;
+    height: 440px;
+    background-image: url(../../../resources/html/3/cirno.gif);
+}
+#box2{
+    background-repeat: repeat-x;
+}
+#box3{
+    background-repeat: repeat-y;
+}
+#box4{
+    background: white url(../../../resources/html/3/cirno.gif) 185px 164px no-repeat;
+}
+#box5{
+    background-color: #FA8BFF;
+    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+}
