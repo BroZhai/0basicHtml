@@ -1,0 +1,75 @@
+/* 背景样式相关
+    background-color: 背景填充色 (还有高级渐变，直接在线找复制即可)
+    background-image: url(...) 背景"填充"图片 (默认为平铺repeat)
+    background-repeat: 背景元素(图片)重复方式
+        no-repeat: 就一张图，不重复
+        repeat: 平铺重复
+        repeat-x: 铺满x的第一行
+        repeat-y: 铺满y的第一行
+    background-position: Xpx Ypx 背景元素的偏移位置设置
+    background-size: 长px 宽px 设置背景元素的大小(如想保持比例只输入"长px"即可)
+
+*/
+
+#titleListBody{ /*统一管理"标题+列表"块*/
+    width: 210px; /*这里"限定了"所有div元素的"展示范围"，其他的设置同理*/
+    background-color: grey;
+}
+
+.title{
+    background-color: cyan; /*单独设置的红色，覆盖下层的灰色*/
+    font-size: 26px;
+    background-image: url(../../../resources/CSS/7/down_arrow.png);
+    background-repeat: no-repeat;
+    background-position: 172px 6px;
+    background-size: 25px;
+}
+ul li{ 
+    line-height: 30px;
+    list-style: none;
+    color:black;
+    background-image: url(../../../resources/CSS/7/right_arrow.png);
+    background-size: 22px;
+    background-position: 145px 5px;
+    background-repeat: no-repeat;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    font: normal bold 19px "华文楷体";
+    color: yellow;
+    text-decoration: underline;
+}
+/* 设置一下三个新的div盒子作为backgound教材引导*/
+
+.boxDisplay{
+    /* 边框快速设置语法: (独立于background)
+        border: 粗细 (样式) 颜色
+        Tips: "样式"和"字体的划线"样式一样
+            *solid: 实线*
+	        *dotted: 点状*
+	        *dashed: 短横*
+	        *double: 双划线*
+    */
+    border: 2px solid red;
+    width: 500px;
+    height: 440px;
+    background-image: url(../../../resources/html/3/cirno.gif);
+}
+#box2{
+    background-repeat: repeat-x;
+}
+#box3{
+    background-repeat: repeat-y;
+}
+#box4{
+    /* background快速语法: background: 填充颜色 图片url或渐变 X偏移px Y偏移px 重复样式 */
+    background: white url(../../../resources/html/3/cirno.gif) 185px 164px no-repeat;
+}
+#box5{
+    /* 渐变色直接去在线直接找就好了，复制粘贴 */
+    background-color: #FA8BFF;
+    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+}

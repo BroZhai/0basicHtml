@@ -16,7 +16,7 @@
 }
 
 .title{
-    background-color: red; /*单独设置的红色，覆盖下层的灰色*/
+    background-color: cyan; /*单独设置的红色，覆盖下层的灰色*/
     font-size: 26px
 }
 ul li{ 
