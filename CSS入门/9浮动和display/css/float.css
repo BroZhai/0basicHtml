@@ -1,0 +1,36 @@
+div{
+    border: 3px solid black;
+}
+#nav:after{ /*修复父级边框"塌陷"的问题*/
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+#e1{
+    background-color: red;
+    width: 175px;
+    height: 250px;
+    float: left; /*设置往"左边"浮动*/
+}
+
+#e2{
+    background-color: blue;
+    width: 125px;
+    height: 350px;
+    float: left;
+}
+
+#e3{
+    background-color: green;
+    width: 250px;
+    height: 175px;
+    float: right; /*右边浮动*/
+}
+
+#e4{
+    background-color: yellow;
+    width: 200px;
+    height: 200px;
+    float: right;
+}
