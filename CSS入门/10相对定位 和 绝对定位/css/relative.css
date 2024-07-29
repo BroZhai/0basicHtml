@@ -1,0 +1,52 @@
+#Ebox{
+    width: 350px;
+    height: 350px;
+    border: 2px solid red;
+    display: block;
+}
+
+.block{
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    display: block;
+    text-align: center;
+}
+
+.block:hover{
+    background-color: blue;
+}
+
+a{
+    text-decoration: none;
+    line-height: 100px;
+}
+/*Tips: 可以直接用方位+"负(-)值" 进行"直接移动"*/
+#A{
+    position: relative;
+    top: 20px; /*距离上面偏移30px，==bottom: -30px*/
+    left: 20px;
+}
+
+
+
+#B{
+    position: relative;
+    top: -80px; 
+    left: 220px;
+}
+#C{
+    position: relative;
+    top: -80px; 
+    left: 120px;
+}
+#D{
+    position: relative;
+    top: -80px; 
+    left: 20px;
+}
+#E{
+    position: relative;
+    top: -180px; 
+    left: 220px;
+}
