@@ -1,0 +1,52 @@
+body{
+    height: 1500px; /*搞一个巨高的body，让滚动条出来    */
+}
+#nav1{
+    margin-top: 40px;
+    border: 3px solid black;
+    height: 200px;
+    /* position:relative */
+}
+#d1{
+    background-color: red;
+    height: 100px;
+    width: 150px;
+    border: 2px solid black;
+    position: absolute;
+    left: 50px;
+    top: 15px; /*此时父级并未设置position属性，所以d1会向上"溢出"父级
+                (因为是拿"浏览器边界"来当的定位标志)
+    */
+}
+#d1+div{
+    width: 80px;
+    height: 80px;
+    border: 2px solid black;
+    position: absolute;
+    right:0;
+    bottom:0;
+}
+/* -----------------分割线------------------- */
+#nav2{
+    margin-top: 40px;
+    border: 3px solid black;
+    height: 200px;
+    position:relative;
+}
+#d2{
+    background-color: green;
+    height: 100px;
+    width: 150px;
+    border: 2px solid black;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+#d2+div{
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    position: fixed;
+    right:0;
+    bottom:0;
+}
