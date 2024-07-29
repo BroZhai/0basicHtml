@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>玩转display属性</title>
+    <link rel="stylesheet" href="css/display.css">
+</head>
+<body>
+    <div id="nav1">
+    <ul>  <!--注意: 这里<a>标签是行内元素，理论上是应该"全部堆在一行"的
+            但是因为<a>标签都被"嵌套在"<li>列表里面，
+            而列表<li>是块元素
+            所以这里就呈现了"竖列"排布的样子
+        -->
+        <li><a href="#">我是inline a链接1</a></li>
+        <li><a href="#">我是inline a链接2</a></li>
+        <li><a href="#">我是inline a链接3</a></li>
+        <li><a href="#">我是inline a链接4</a></li>
+        <li><a href="#">我是inline a链接5</a></li>
+        <li><a href="#">我是inline a链接6</a></li>
+        <li><a href="#">我是inline a链接7</a></li>
+    </ul>
+    </div>
+    <hr>
+    <div class="nav2">
+        <ul>
+            <li><a href="#">我是inline-block a链接1</a></li>
+            <li><a href="#">我是inline-block a链接2</a></li>
+            <li><a href="#">我是inline-block a链接3</a></li>
+            <li><a href="#">我是inline-block a链接4</a></li>
+            <li><a href="#">我是inline-block a链接5</a></li>
+            <li><a href="#">我是inline-block a链接6</a></li>
+            <li><a href="#">我是inline-block a链接7</a></li>
+        </ul>
+        </div>
+        <hr>
+        <h3>另一种示例 (按钮button默认为"inline-block元素")</h3>
+    <div class="nav2">
+        <button><a href="#">按钮1</a></button>
+        <button><a href="#">按钮2</a></button>
+        <button><a href="#">按钮3</a></button>
+        <button><a href="#">按钮4</a></button>
+        <button><a href="#">按钮5</a></button>
+        <button><a href="#">按钮6</a></button>
+        <button><a href="#">按钮7</a></button>
+    </div>
+    <h4>我们给他强制重新搞成"竖着的"(强改回block)</h4>
+    <div class="nav2">
+        <button class="btn2"><a href="#">按钮1</a></button>
+        <button class="btn2"><a href="#">按钮2</a></button>
+        <button class="btn2"><a href="#">按钮3</a></button>
+        <button class="btn2"><a href="#">按钮4</a></button>
+        <button class="btn2"><a href="#">按钮5</a></button>
+        <button class="btn2"><a href="#">按钮6</a></button>
+        <button class="btn2"><a href="#">按钮7</a></button>
+    </div>
+</body>
+</html>

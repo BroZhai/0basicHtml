@@ -1,0 +1,44 @@
+
+#nav1{ /*设置"导航栏"边框 基本样式*/
+    border:4px solid grey;
+    line-height: 30px;
+}
+
+#nav1 li{
+    list-style: none;
+    text-indent: -2em;
+}
+#nav1 li a{
+    border: 2px solid red;
+    text-decoration: none;
+}
+/* 以上为默认的display展示，接下来我们来玩玩 行内块元素 inline-block :3 */
+
+.nav2{
+    border:4px solid grey;  
+    line-height: 30px;
+    display: inline-block; /*设置 inline元素"诱捕器"*/
+    text-indent: -2.5em;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.nav2 li{
+    list-style: none;
+    /* text-indent: -2em; */
+    display: inline-block;  /*强改成"inline-block"，这就可以和上面"并集"力(结合到一起)*/
+    margin-left: 60px;
+}
+.nav2 li a{
+    border: 2px solid red;
+    text-decoration: none;
+    /* margin-left: 20px; */  /*也可以动这里*/
+}
+
+/*---------横按钮 变 竖着按钮 示例-----------*/
+.nav2 button{
+    margin-left: 30px;
+}
+.btn2{
+    display: block; /*又变回竖着的了*/
+}
