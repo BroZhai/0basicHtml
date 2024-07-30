@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloVue!</title>
+    <!-- 咱的第一个Vue实例！！
+    主要分成以下几步:
+        1. 准备容器<div> （确定作用域）
+        2. 从外部url导包 (想当于Vue库，分为"开发版本包" 和 "生产版本包")
+            开发版: 开发时候用这个，有错误提示&调试
+            生产版: 最终"上线"的时候 用的(减小项目体积)
+        3. 创建Vue实例 new Vue()
+        4. 指定配置项 -> 渲染数据
+         a. el:"指的css选择器" ("#" "." )
+         b. data: {变量: 提供数据}
+               -->
+</head>
+<body>
+    <!-- 1. 创建div容器，{{msg}}为一个变量 -->
+    <div id="idSelector">
+        <h2>{{msg}}</h2> <!--动态的"变量"可直接嵌入到各种html元素标签中！--> 
+    </div>
+
+    <!-- 2. 导包，引入外部js文件 (这里用的本地下载的"开发板"vue.js)
+        也可以是直接外链导入:
+       开发: <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+       生产: <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+    -->
+    <script src="../package/vue.js" type="text/javascript" charset="UTF-8"></script>
+
+    <!-- 3.创建Vue实例 
+        在上面的vue.js包导入了之后，全局就有了Vue示例的构造函数
+        直接用 构函的语法 创建实例即可
+    -->
+     <script>
+        const app=new Vue({
+            el:"#idSelector",
+            data:{
+                msg:"你看到的我~你看到的我~是Vue的包，成~功~导入了 :3"
+            }
+        })
+     </script>
+
+</body>
+</html>
