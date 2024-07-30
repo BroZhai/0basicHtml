@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>差值表达式</title>
+    <!-- 咱来详细看看"{{ }}是个什么东西" -->
+     <!-- 对于差值表达式的"变量"来说:
+        1. 可以直接展示相应的信息
+        2. 可以调用一些js函数()进行处理
+        3. 可以进行"直接行内条件判断" (不能直接用if else，得换种"灵巧"的写法)
+        4. 里面可以用"."来进一步选择某个对象的"具体值"
+    
+        注意:
+        a. 使用的数据一定要"事先声明"(在实例里面有对应的"变量")
+        b. 差值表达式内 不能有"if" "else"等关键字样
+        c. 不能在 "标签属性<xxx="{{变量名}}">" 中"直接使用"
+            (后面再讲怎么办~~)
+     -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="hello">
+        <h3>{{intro}}</h3>
+        <img src="../../resources/html/3/cirno.gif">
+        <p>{{shout}}</p>
+        <p>{{"这是一个大写的"+shout.toUpperCase()}}</p> <!--字符串拼接 + js.字符全大写()-->
+        <hr>
+        <img id="fairy" src="../../resources/VUE/2/bigFairy.webp"> 
+        <p>你好，这里是琪露诺的好朋友“{{friend.name}}”desu</p>
+        <p>我比琪露诺先生 {{friend.age>=9 ? "大":"小"}} 哦~~</p> <!--直接"行内条件判断"=="大" -->
+                        <!--注意这个地方用的是"friend."age，必须"从根往下找"  -->
+    </div>  
+    <script>
+        const app=new Vue({
+            el:"#hello",
+            data:{
+                intro:"你好，我是劲舞琪露诺(ᗜˬᗜ)",
+                shout:"baka",
+                friend:{  //建立一个"朋友"对象
+                    name:"大酱",
+                    age:10
+                }
+            }
+        })
+    </script>
+</body>
+</html>
