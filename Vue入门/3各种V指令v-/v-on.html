@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on “@” 注册(监听和触发)事件</title>
+    <!-- 与某个元素互动时，会触发什么事情 
+        语法: v-on:XXX事件="逻辑表达式 or methods中的'直接函数名'" 
+        其中"v-on:"常被简写成"@"，这下看懂了(( -->
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+        <div id="app">
+        <!-- 使用v-on注册一个"鼠标点击'减值'"事件(:click 鼠标单击事件) -->
+        <button v-on:click="baka_value--">-</button>
+        <span>你的笨蛋指数是:{{baka_value}}</span>
+        <!-- 用懒人写法"@"再写个'加值' -->
+        <button @click="baka_value++">+</button>
+    </div>
+    <hr>
+    <div id="bpp">  
+        <!-- 换种实现方式，这里是监听"鼠标划入"(:mouseenter)
+         同时触发的是"methods"中的函数，而不再是直接的逻辑语句
+         (日后肯定也是就触发"各种方法()"的啦~~)
+          -->
+        <button @mouseenter="sub">-</button>  <!--对应下面bpp实例中的sub()方法-->
+        <span>你的笨蛋指数是:{{baka_value}}</span>
+        <button @mouseenter="add">+</button> <!-- 同上，对的是add()-->
+
+    </div>
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app" ,
+            data:{
+                baka_value:80 //设置默认笨蛋指数为80
+            }
+        })
+
+        const bpp=new Vue({
+            el:"#bpp" ,
+            data:{
+                baka_value:80 //设置默认笨蛋指数为80
+            },  // <--注意这个","
+            methods:{ //从这里开始，就是实现各种方法了，上面会调用这里
+                sub(){
+
+                    bpp.baka_value--; //记得是“从实例'往内'”，实例.值(要不然找不到)
+
+                },  // <-- 不管"在内"还是"在外"，各个"项"之间一定要有这个","!!
+                add(){
+                    
+                    bpp.baka_value++;
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
