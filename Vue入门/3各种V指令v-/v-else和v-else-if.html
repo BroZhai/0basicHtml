@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-else 和 v-else-if</title>
+    <!-- 这俩玩意是配合着"v-if"来使用的，本质上就是 if-else 和 if-elif-elif...的结构 -->
+     <!-- 简单练练手 -->
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <div id="app">
+        <h2>你的笨蛋指数是{{baka_value}}</h2>
+        <h3 v-if="baka_value >= 90">天哪，我想Cirno先生找到它的A级玩伴了！<br>
+            <img src="../../resources/html/3/cirno.gif"> <!--蹦出惊喜图片XD-->
+        </h3>
+        <h3 v-else-if="baka_value >=80 ">你是良好的B级笨蛋捏:3</h3>
+        <h3 v-else-if="baka_value >=70 ">你是一般路过C级笨蛋 owo</h3>
+        <h3 v-else-if="baka_value >=60 ">有时，当一个D级的笨蛋也不错 ^w^</h3>
+        <h3 v-else>你太聪明啦！！</h3>
+    </div>
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el: "#app",
+            data:{
+                baka_value: 85 //在这里设置你的"笨蛋指数"，看看设置>90会有什么结果?
+            }
+        })
+    </script>
+</body>
+</html>
