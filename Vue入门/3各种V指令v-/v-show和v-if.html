@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> V-Show 和 V-if 的区别</title>
+    <!-- 
+        v-show: 只是单纯的控制css层的display来达到"显示与否"的效果，代码结构仍留存在网页文档流中
+            适合控制需要"频繁出现消失"的页面
+        v-if: 这个就更"激进"了，直接控制网页文档流中"元素的删除与否"，达到"物理意义上的消失"
+            要么出现，要么消失
+    -->
+    <style>
+        .box{ /*简单设置盒子的样式*/
+            border: 2px solid black;
+            width: 150px;
+            height: 50px;
+            text-align:center;
+            line-height: 50px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <div id="cpp"> <!--注意作用范围要是一个"整体的域"-->
+        <div v-show="demonstrate" class="box">我是v-show框</div>
+        <div v-if="demonstrate" class="box">我是v-if框</div>
+        <h3>现在demonstrate的状态为: {{demonstrate}}</h3>
+        <h3>请到F12控制台中 调试和查看我俩的"源代码" 还在不在^w^</h3>
+        <!-- 调试成false后，v-show的代码仍然还在，但v-if的就归西力... -->
+    </div>
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el: "#cpp",
+            data:{
+                demonstrate:true //同时控制上面俩box
+            }
+        })
+    </script>
+</body>
+</html>
