@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>v-on “@” 注册(监听和触发)事件</title>
+    <link rel="stylesheet" href="css/v-on.css">
     <!-- 与某个元素互动时，会触发什么事情 
         语法: v-on:XXX事件="逻辑表达式 or methods中的'直接函数名'" 
         其中"v-on:"常被简写成"@"，这下看懂了(( -->
@@ -10,47 +11,102 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
         <div id="app">
+        <h3>鼠标"点击"+/-改变你的baka值</h3>
         <!-- 使用v-on注册一个"鼠标点击'减值'"事件(:click 鼠标单击事件) -->
         <button v-on:click="baka_value--">-</button>
         <span>你的笨蛋指数是:{{baka_value}}</span>
         <!-- 用懒人写法"@"再写个'加值' -->
         <button @click="baka_value++">+</button>
     </div>
+
     <hr>
     <div id="bpp">  
         <!-- 换种实现方式，这里是监听"鼠标划入"(:mouseenter)
          同时触发的是"methods"中的函数，而不再是直接的逻辑语句
          (日后肯定也是就触发"各种方法()"的啦~~)
           -->
+        <h3>鼠标"划入"+/-改变你的baka值</h3>
         <button @mouseenter="sub">-</button>  <!--对应下面bpp实例中的sub()方法-->
         <span>你的笨蛋指数是:{{baka_value}}</span>
         <button @mouseenter="add">+</button> <!-- 同上，对的是add()-->
-
+        <br>
+        <button @click="dis">妙妙小按钮</button> <!--注册控制方法-->
+        <p v-show="display"> <!--上面dis()方法内"影响data" 响应的地方-->
+        <img src="../../resources/html/3/xiaomao.jpg"><br>
+        你找到我了，不是吗?
+        </p>
     </div>
+    <hr>
+    <!-- v-on的传参，提前在methods里写好 方法(接收参数，...){}
+        在传参时直接 ="方法(发送参数,...)" 即可
+        来练练手~~
+    -->
+     <div id="cpp">
+        <h2>情绪小卖部</h2>
+        <h3>你现在有 {{amount}} 个金币 </h3>
+        <ul>
+            <li><button @click="sad(1)">悲伤1块</button></li>
+            <li><button @click="anger(2)">生气2块</button></li>
+            <li><button @click="joy(5)">快乐5块</button></li>
+        </ul>
+        <!-- tips: 在Vue中判断两值是否相等时，建议用"==="全等 -->
+        <p v-if="this.item===1">你获得了"悲伤"，但悲伤的日子终究会过去，相信快乐日子终将会到来 :3</p>
+        <p v-else-if="this.item===2">你获得了"生气"，但很多时候"退一步"来想，你便会发现一个更好的解决方案 :3</p>
+        <p v-else-if="this.item===3">你购买了"快乐"，快乐是短暂的，也正是因为如此，人们才会更加的去珍惜已有的快乐，直至下一次快乐的到来 :3</p>
+        <!-- 原来直接在div中 也可以直接用"this"的 Owo? (这里"this"指代的直接就是"cpp") -->
+     </div>
+
+    
     <script>
-        // Vue脚本相关
-        const app=new Vue({
+        //第一个区域的Vue实例
+        const app=new Vue({ 
             el:"#app" ,
             data:{
                 baka_value:80 //设置默认笨蛋指数为80
             }
         })
-
+        
+        //第二个区域的Vue实例
         const bpp=new Vue({
             el:"#bpp" ,
             data:{
-                baka_value:80 //设置默认笨蛋指数为80
+                baka_value:80, //设置默认笨蛋指数为80
+                display: false
             },  // <--注意这个","
             methods:{ //从这里开始，就是实现各种方法了，上面会调用这里
                 sub(){
-
                     bpp.baka_value--; //记得是“从实例'往内'”，实例.值(要不然找不到)
-
                 },  // <-- 不管"在内"还是"在外"，各个"项"之间一定要有这个","!!
-                add(){
-                    
-                    bpp.baka_value++;
-                    
+                add(){          
+                    bpp.baka_value++;      
+                },
+                dis(){
+                    this.display=!this.display //设置"切换隐藏/显示"
+                    //this在这个"作用域"里就 直接指代"bpp"(省的以后你一个一个查 实例名字)
+                    //等同于 bpp.display!=bpp.display
+                }
+            }
+        })
+
+        //第三个区域的Vue实例
+        const cpp=new Vue({
+            el:"#cpp",
+            data:{
+                amount:999,
+                item:0
+            },
+            methods:{
+                sad(price){
+                    this.amount-=1; //要习惯于用"this."
+                    this.item=1;
+                },
+                anger(price){
+                    this.amount-=2;
+                    this.item=2;
+                },
+                joy(price){
+                    this.amount-=5;
+                    this.item=3;
                 }
             }
         })

@@ -1,0 +1,25 @@
+#cpp{
+    border: 2px solid black;
+    width: 500px;
+    height: 200px;
+    border-radius: 15px;
+    position: relative;
+}
+#cpp h2{
+    text-align: center ;
+    margin-top: 2px;
+    position: relative;
+}
+#cpp h3{
+    text-align: center;
+    margin-top: -12px;
+}
+#cpp ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 53px;
+}
+#cpp p{
+    text-indent: 2em;
+    font: italic lighter 15px "黑体";
+}
