@@ -15,7 +15,8 @@
                 Tips: 要啥取啥，只要item可写成: v-for="item in 列表" 
                 "item"即为列表的"每一项"，在调用键值对时 额外注意
             -->
-            <li v-for="(item,index) in deviceList">{{item}}，对应下标:{{index}}</li>
+            <li v-for="(item,index) in deviceList" :key="item.id">{{item}}，对应下标:{{index}}</li>
+                                      <!-- 标准的写法这里要加":key=唯一标识符"，便于Vue自己去维护 -->
         </ul>
     </div>
     <hr>
