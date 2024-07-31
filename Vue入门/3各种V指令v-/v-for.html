@@ -13,14 +13,35 @@
         <ul>Pancake先生的便携式移动电子设备
             <!-- 语法v-for="(item列表子对象,index下标) in 列表"
                 Tips: 要啥取啥，只要item可写成: v-for="item in 列表" 
+                "item"即为列表的"每一项"，在调用键值对时 额外注意
             -->
             <li v-for="(item,index) in deviceList">{{item}}，对应下标:{{index}}</li>
         </ul>
     </div>
-
+    <hr>
+    <!-- 练练手，做个可删除书架 (我草那个del()方法爆了)-->
+    <div id="bookshelf">
+        <ul>另一个神奇的小书架子
+            <li v-show="display" v-for="(item,index) in booklist">序号:{{item.id}}，书名《{{item.name}}》，作者: {{item.author}}
+                <button @click="del(item.id)">移除该书</button>
+                <!-- 写一个del()方法，给它传"书"自带的id进去 去定位删除 -->
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div id="filterExercises">
+        <!-- 再练习一下filter()是怎么使用的 -->
+         <h3>你好，我是劲爆数组</h3>
+         <ul>
+            <li v-for="item in numlist">数字:{{item.value}}</li>
+         </ul>
+         <button @click="odd">只留奇数</button>
+         <button @click="even">只留偶数</button>
+         <button @click="reset">重置数组</button>
+    </div>
     <script>
         // Vue脚本相关
-        const app=new Vue({
+        const app=new Vue({ //第一个实例
             el:"#app",
             data:{
                 deviceList:[
@@ -30,6 +51,72 @@
                     "Bose QC Earbuds",
                     "Audio-technica ATH-CK350iS",
                 ]
+            }
+        })
+
+        const bookshelf=new Vue({ //第二个实例
+            el:"#bookshelf",
+            data:{
+                // 列表里面存"键值对"
+                booklist:[
+                    {id:1, name:"琪露诺的大冒险", author:"冰雪聪明的⑨"},
+                    {id:2, name:"嘉立创PCB专业版快速入门", author:"蜜糖煎饼小猫"},
+                    {id:3, name:"ddos攻击指南", author:"学黑客攻防"},
+                    {id:4, name:"舞萌DX V1.31-H 快速检修手册", author:"KohaD"}
+                ],
+                display: true
+            },
+            methods:{
+                del(inComingid){
+                    /* 用filter(),通过"配置"只保留你想要的东西
+                    语法: filter(自定义"表内"对象名(简称A) => 条件语句) [条件语句e.g. A.属性===XXX等]
+
+                    filter工作逻辑: [1,2,3,4] --> (1,4)传给filter --> [1,4] (存在虚拟DOM中，不会影响原数组)
+                    要想看出来变化，我们便需要"手动"将虚拟DOM中的数据"手动覆盖回"原数组
+                    但是这个地方是个"逆向思路"，我们传(1,4)进来 就要 保留[2,3]
+                    */
+                    this.booklist=this.booklist.filter(item => item.id!=inComingid);
+                                                 //自定义 列表内"对象名" =>（的XXX属性），
+                                                 //保留"id不等于"传入进来的那个"item.id" 的 余下项 (除id相等外都保留)
+                                                 //就是"变相"删掉了传入id进来的item
+                }
+            }
+        })
+
+        const num=new Vue({
+            el:"#filterExercises",
+            data:{
+                numlist:[
+                    {value:1},
+                    {value:2},
+                    {value:3},
+                    {value:4},
+                    {value:5},
+                    {value:6},
+                    {value:7},
+                ],
+                Backup:[
+                    {value:1},
+                    {value:2},
+                    {value:3},
+                    {value:4},
+                    {value:5},
+                    {value:6},
+                    {value:7},
+                ]
+            },
+            methods:{
+                odd(){ //只留奇数
+                    this.numlist=this.numlist.filter(number => number.value%2!==0)
+                                                    //这里的 列表内"自定义"对象名number
+                                                    // 用该名字调用.value得值后 进行逻辑判断
+                },
+                even(){ //只留偶数
+                    this.numlist=this.numlist.filter(number => number.value%2===0)
+                },
+                reset(){
+                    this.numlist=this.Backup;
+                }
             }
         })
     </script>
