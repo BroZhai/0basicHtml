@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>漫画翻页小练习</title>
+    <style>
+        #app{
+            position: relative;
+        }
+        #app img{
+            height: 250px;
+        }
+        #app button{
+            display: inline-block;
+            margin-left: 43px;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> 
+        <h3>漫画翻页小剧场</h3>
+        <img :src="list[counter]">
+        <br>
+        <button v-if="counter!=0" @click="prev">上一页</button>
+        <button v-if="counter!=3" @click="next">下一页</button>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                /*申明一个"列表"数据结构，存漫画路径*/
+                list:[ 
+                    '../../resources/VUE/3/m1.png',
+                    '../../resources/VUE/3/m2.png',
+                    '../../resources/VUE/3/m3.png',
+                    '../../resources/VUE/3/m4.png'
+                ],
+                counter:0
+            },
+            methods:{
+                prev(){
+                    if(this.counter<=0){ //防止越界
+                        this.counter=0;
+                    }
+                    else{
+                        this.counter--;
+                    }
+                },
+                next(){
+                    if(this.counter>=3){
+                        this.counter=3;
+                    }
+                    else{
+                        this.counter++;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
