@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for的作用</title>
+    <!-- 用于"重复生成标签" 的同时 遍历 数组，对象，数字等... -->
+     <!-- 更多的时候，这个是用来偷懒"减工作量"的 -->
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <ul>Pancake先生的便携式移动电子设备
+            <!-- 语法v-for="(item列表子对象,index下标) in 列表"
+                Tips: 要啥取啥，只要item可写成: v-for="item in 列表" 
+            -->
+            <li v-for="(item,index) in deviceList">{{item}}，对应下标:{{index}}</li>
+        </ul>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                deviceList:[
+                    "Amazfit GTR 3 Pro",
+                    "Newsmy B50 Music Player",
+                    "DaoFeng F2 E-dictionary",
+                    "Bose QC Earbuds",
+                    "Audio-technica ATH-CK350iS",
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
