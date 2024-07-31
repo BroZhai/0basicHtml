@@ -1,0 +1,23 @@
+#app{
+    border: 2px solid black;
+    width: 400px;
+    height: 215px;
+    border-radius: 15px;
+    position: relative;
+}
+#app h3{
+    text-align: center;
+}
+#app p{
+    margin-left: 10px;
+}
+#pwd{
+    position: relative;
+    left: 75px;
+}
+#app button{
+    display: inline-block;
+    margin-left: 100px;
+    width:60px;
+    height: 30px;
+}

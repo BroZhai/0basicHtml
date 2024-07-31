@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model 前后端双向数据绑定</title>
+    <!-- 认识一下v-model，视图层的数据 <=双向即刻同步=> 后台的数据 -->
+    <link rel="stylesheet" href="css/v-model.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> 
+        <h3>一点也不唐突的登入框</h3>
+        <!-- 在下面的俩输入框添加"v-model"，一会儿F12去看看是否同步
+            v-model="data中定义的变量名" 
+        -->
+        <p>你的炫酷name: <input type="text" name="username" v-model="Username"></p>
+        <p id="pwd">口令: <input type="password" name="pwd" v-model="Passcode"></p>
+        <!-- 注: name是浏览器的取得的"返回参数名" 不要和v-model搞混了 -->
+        <button @click="clear">重置</button>
+        <button @click="login">登录</button>
+        <!--         
+        <input type="submit" &"reset">: 没我俩啥事了，Vue你开心就好 :\
+        -->
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                Username: "",
+                Passcode:""
+            },
+            methods:{ //简单实现下"登录"和"清除"
+                login(){ //F12控制台 打印"记录在后台的" 登录信息
+                    console.log("用户名:"+this.Username,"密码:"+this.Passcode);
+                    console.log("这是哪个笨蛋写的明文传输?控制台都看光光啦~~")
+                },
+                clear(){
+                    this.Username='';
+                    this.Passcode='';
+                    // 物理清除草（
+                }
+            }
+        })
+    </script>
+</body>
+</html>
