@@ -97,15 +97,15 @@
             },
             methods:{
                 sad(price){
-                    this.amount-=1; //要习惯于用"this."
+                    this.amount-=price; //要习惯于用"this."
                     this.item=1;
                 },
                 anger(price){
-                    this.amount-=2;
+                    this.amount-=price;
                     this.item=2;
                 },
                 joy(price){
-                    this.amount-=5;
+                    this.amount-=price;
                     this.item=3;
                 }
             }
