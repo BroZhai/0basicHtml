@@ -11,14 +11,16 @@
     <div id="app">
         <h1>妙妙记事本</h1>
             <div id="interact">
-                <input type="text">
-                <button>添加任务</button>
+                <input type="text" placeholder="来输入你的计划活动?" v-model="addtask">
+                <button @click="add">添加任务</button>
                 <ul>
-                    <li>默认项1&nbsp&nbsp&nbsp&nbsp<button>删除此项</button></li>
+                    <li v-for="(item,index) in tasklist" :key="item.id">{{index+1}}. {{item.name}}&nbsp&nbsp&nbsp&nbsp
+                        <button @click="del(item.id)">删除此项</button></li>
                 </ul>
-                <p>合计任务项:  <button>清除所有任务</button></p>
-                
+                <p>合计任务项:{{tasklist.length}} &nbsp&nbsp&nbsp&nbsp<button @click="clear">清除所有任务</button></p>
+                <em>样式不重要，重要的是功能XDD</em>
             </div>
+            
     </div>
 
     <script>
@@ -26,7 +28,26 @@
         const app=new Vue({
             el:"#app",
             data:{
-
+                tasklist:[ //设置俩 默认任务项
+                    {id:1, name:"劲爆敲代码"},
+                    {id:2, name:"爽爽玩游戏"}
+                ],
+                addtask:"" //提前设置一个"代加"任务项
+            },
+            methods:{
+                add(){
+                    //unshift({}):插入到列表"最前面"，push({}):尾部，注意内部要"保持和列表一样的'结构'"
+                    this.tasklist.push({
+                        id: +new Date(), //用时间戳"随机生成一个id"，确保唯一性（展示用的是index 不是id）
+                        name: this.addtask
+                    })
+                },
+                del(inComingid){
+                    this.tasklist=this.tasklist.filter(task => task.id!=inComingid)
+                },
+                clear(){
+                    this.tasklist=[]
+                }
             }
         })
     </script>
