@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>妙妙记事本——各种v指令的总复习</title>
+    <link rel="stylesheet" href="css/agendaNote.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app">
+        <h1>妙妙记事本</h1>
+            <div id="interact">
+                <input type="text">
+                <button>添加任务</button>
+                <ul>
+                    <li>默认项1&nbsp&nbsp&nbsp&nbsp<button>删除此项</button></li>
+                </ul>
+                <p>合计任务项:  <button>清除所有任务</button></p>
+                
+            </div>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+
+            }
+        })
+    </script>
+</body>
+</html>
