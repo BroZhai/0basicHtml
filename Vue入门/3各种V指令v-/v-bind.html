@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind ":" 设置"标签属性"</title>
+    <!-- 动态的设置某个"标签属性" -->
+     <link rel="stylesheet" href="css/v-bind.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <!-- 语法: v-bind:标签属性="表示式(变量)"
+        Tips: "v-bind:" 可以被直接简写成 ":"
+        咱来做一个不同按钮，不同图片的示例 :3 (设置img的"src=[表示式]")
+        -->
+    <div id="app">
+        <ul>
+            <li><button @click="cat">小猫</button></li>
+            <li><button @click="baka">笨蛋</button></li>
+            <li><button @click="manga">小漫画</button></li>
+        </ul>
+        <hr>
+        <!-- 这里的"src"和"title"通过v-bind就被设置成了"动态变动的" -->
+        <img v-bind:src="imgUrl" v-bind:title="imgTitle">
+        <!-- 懒人写法 -->
+        <!-- <img :src="imgUrl" :title="imgTitle"> -->
+        <p>Tips: 鼠标悬停在不同的图片上应该会有不同的"提示"</p>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                imgUrl:'../../resources/VUE/3/default.png',
+                imgTitle:"这一张默认放在这里的图片"
+            },
+            methods:{
+                //下面这些就是 要"动态替换" 标签属性的"值"了
+                cat(){
+                    this.imgUrl='../../resources/html/3/xiaomao.jpg', //src=...
+                    this.imgTitle="I don't think you like kissing boys, so I decide to snuggle you :3" //title=...
+                },
+                baka(){
+                    this.imgUrl='../../resources/VUE/3/baka.jpg',
+                    this.imgTitle="笨蛋正在高速移动！！" 
+                },
+                manga(){
+                    this.imgUrl='../../resources/VUE/3/manga.jpg',
+                    this.imgTitle="暖心小剧场" 
+                },
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+#app{
+    border: 2px solid black;
+    width: 600px;
+    height: 415px;
+    border-radius: 15px;
+    position: relative;
+}
+#app ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 90px;
+}
+#app p{
+    font-size: 20px;
+    position: absolute;
+    bottom: -14px;
+    margin-left: 73px;
+}
+#app img{
+    width:300px;
+    margin-left: 150px;
+}
