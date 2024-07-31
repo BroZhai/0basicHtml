@@ -86,7 +86,7 @@
         const num=new Vue({
             el:"#filterExercises",
             data:{
-                numlist:[
+                numlist:[ //会"实时变动"的数组
                     {value:1},
                     {value:2},
                     {value:3},
@@ -95,7 +95,7 @@
                     {value:6},
                     {value:7},
                 ],
-                Backup:[
+                Backup:[ //备份的数组，用于reset
                     {value:1},
                     {value:2},
                     {value:3},
@@ -114,7 +114,7 @@
                 even(){ //只留偶数
                     this.numlist=this.numlist.filter(number => number.value%2===0)
                 },
-                reset(){
+                reset(){  //直接还原"备份的值"
                     this.numlist=this.Backup;
                 }
             }
