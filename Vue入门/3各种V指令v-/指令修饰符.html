@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令修饰符".XXXX"</title>
+    <!-- 就是通过"."指明的一些"指令后缀"，封装了不同的js代码，以达到简化代码的目的
+        具体的话咱来看例子 
+    -->
+    <link rel="stylesheet" href="css/decoration.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> 
+        <!-- 借用一下"妙妙记事本的代码" -->
+        <h1>妙妙记事本(带回车版)</h1>
+        <div id="interact">
+            <!-- 在这里的"输入框"，我们多写一个"监听键盘回车"事件，用@keyup.XXX(按键)
+                Tips: keyup 键位"抬起时"触发 (和@click共用一个 "加事件" 方法add())
+            -->
+            <input type="text" @keyup.enter="add" placeholder="来输入你的计划活动?" v-model="addtask">
+            <button @click="add">添加任务</button>
+            <ul>
+                <li v-for="(item,index) in tasklist" :key="item.id">{{index+1}}. {{item.name}}&nbsp&nbsp&nbsp&nbsp
+                    <button @click="del(item.id)">删除此项</button></li>
+            </ul>
+            <p>合计任务项:{{tasklist.length}} &nbsp&nbsp&nbsp&nbsp<button @click="clear">清除所有任务</button></p>
+            <em>样式不重要，重要的是功能XDD</em>
+        </div>
+    </div>
+    <hr>
+    <!-- v-model的相关修饰，.trim 和 .number -->
+    <div id="bpp">
+        <p>有"神奇魔力"的输入框:
+            <!-- 在v-model后面加.trim，只会移除 字符串"两边"的空格!! -->
+            <input type="text" v-model.trim="trimText" @keyup.enter="printText" name="trim" placeholder="我会自动删'左右'空格哦，请在F12内调试查看~">
+        </p>
+        <p>有"数字之力"的输入框:
+            <!-- v-model.number: 强转 "数字字符串" 为 "数字" -->
+            <input type="text" v-model.number="pureNum" @keyup.enter="printNum" name="pureNum" placeholder="我会将'字符串数字'直接换成数字哦，试试?">
+        </p>
+    </div>
+    <hr>
+    <!-- 防止"事件冒泡", @事件.stop
+        
+    -->
+    <div id="cpp">
+        <div id="daddy" @click="daddyALT">
+            <p>
+                我是父元素
+            </p>
+            <!-- 在不加 ".stop"的情况下，子元素弹窗后 会继续触发"父元素的弹窗" -->
+            <!-- <div id="child" @click="childALT"> -->
+            <div id="child" @click.stop="childALT"> <!--@click加了".stop"，阻止了向外父元素的"冒泡触发"-->
+                <p>我是子元素</p>
+            </div>
+        </div>
+        <!-- @事件名.prevent: 禁止这项事件的发生(Ban操作) -->
+        <a href="https://www.bing.com" @click.prevent>你不许"点击"上Bing了</a>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({ //第一个实例
+            el:"#app",
+            data:{
+                tasklist:[ //设置俩 默认任务项
+                    {id:1, name:"劲爆敲代码"},
+                    {id:2, name:"爽爽玩游戏"}
+                ],
+                addtask:"" //提前设置一个"代加"任务项
+            },
+            methods:{
+                add(){
+                    this.tasklist.push({
+                        id: +new Date(), 
+                        name: this.addtask
+                    })
+                    this.addtask=''; /*清除输入框，草，之前忘记了*/
+                },
+                del(inComingid){
+                    this.tasklist=this.tasklist.filter(task => task.id!=inComingid)
+                },
+                clear(){
+                    this.tasklist=[]
+                }
+            }
+        })
+
+        const bpp=new Vue({ //第二个实例
+            el:"#bpp",
+            data:{
+                trimText:"",
+                pureNum:""
+            },
+            methods:{
+                printText(){
+                    console.log("删掉'左右两边'空格的文字为:"+this.trimText)
+                },
+                printNum(){
+                    console.log("'字符数字'转的纯数字为:"+this.pureNum)
+                }
+            }
+        })
+
+        const cpp=new Vue({ //第三个实例
+            el:"#cpp",
+            data:{
+
+            },
+            methods:{
+                daddyALT(){
+                    alert("父元素被点击力")
+                },
+                childALT(){
+                    alert("子元素被点击力")
+                }
+            }
+        })
+    </script>
+</body>
+</html>
