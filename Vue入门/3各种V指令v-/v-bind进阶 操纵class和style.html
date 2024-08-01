@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind :XXX 操纵class和style</title>
+    <link rel="stylesheet" href="css/v-bindAdvance.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app">
+        <!-- 默认样式即为box -->
+        <div class="box">
+        </div>
+        <p>原box样式</p>
+        <hr>
+        <!-- 现在，我们来用v-bind来对它的class "动点手脚" -->
+        <div class="box" :class="['setPink','larger']"></div>
+        <p>动态引用了 :class="['setPink','larger']" 设置成了该样式</p>
+    </div>
+    <hr>
+    <div id="bpp">
+        <h3>请选择你的下载器</h3>
+        <ul>
+            <li v-for="(item,index) in button" 
+            :class="{active:index===activeIndex}" @click="activeIndex=index">
+        <!-- {class属性: (这里也可以接t/f条件判断)}
+         此处index为Vue自动生成的序号，activeIndex是我们人为指定的"亮起index" 
+         这里巧就巧在:@click Vue自动生成序号后，"点击"不同的选项时 会直接"将对应的'生成index'
+         传到下面的'亮起activeIndex'，实现"点哪亮哪"-->
+                <a href="#">{{item.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div id="cpp">
+        <!-- 使用 ":style={}"强制增加/修改 新样式 -->
+        <div class="box" :style="{'border-radius':'100px','background-color':'red'}"></div>
+        <p>我还是上原来的class="box"哦，但是我有":style={xxx}"给我进一步的打扮了下</p>
+    </div>
+    <hr>
+    <div id="dpp">
+        <!-- 进阶style，内部使用"动态变量" -->
+         <div id="out">
+                            <!--这里可直接用data里的变量！(percent) -->
+            <div id="in" :style="{'width':percent+'%'   }">
+                <!-- tips: width:百分比% (即为现有的长度*百分比 得值) -->
+                <span>{{percent}}%</span>
+            </div>
+         </div>
+         <button @click="percent=25">25%</button>
+         <button @click="percent=50">50%</button>
+         <button @click="percent=75">75%</button>
+         <button @click="percent=100">100%</button>
+    </div>
+    <script>
+        // Vue脚本相关
+        const app=new Vue({ //第一个实例
+            el:"#app",
+            data:{
+                
+            }
+        })
+
+        const bpp=new Vue({ //第二个实例
+            el:"#bpp",
+            data:{
+                activeIndex:0, //指定的"亮起index"
+                button:[
+                    {id:1, name:"P2P下载"},
+                    {id:2, name:"高速下载器"},
+                    {id:3, name:"普通下载"},
+                ],
+            },
+        })
+
+        const cpp=new Vue({ //第三个实例
+            el:"#cpp",
+            data:{
+
+            }
+        })
+
+        const dpp=new Vue({  //第四个实例
+            el:"#dpp",
+            data:{
+                percent:0,
+            }
+        })
+    </script>
+</body>
+</html>
