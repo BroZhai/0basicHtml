@@ -20,7 +20,6 @@
                 <p>合计任务项:{{tasklist.length}} &nbsp&nbsp&nbsp&nbsp<button @click="clear">清除所有任务</button></p>
                 <em>样式不重要，重要的是功能XDD</em>
             </div>
-            
     </div>
 
     <script>
@@ -41,6 +40,7 @@
                         id: +new Date(), //用时间戳"随机生成一个id"，确保唯一性（展示用的是index 不是id）
                         name: this.addtask
                     })
+                    this.addtask=''; /*补上提交后"清除输入框"的功能*/
                 },
                 del(inComingid){
                     this.tasklist=this.tasklist.filter(task => task.id!=inComingid)
