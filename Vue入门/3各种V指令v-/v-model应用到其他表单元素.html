@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>v-model应用到"其他表单元素"</title>
+    <!-- 咱要去浏览器中用 Vue的开发工具 去看 相应的"前后数据变化"-->
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
@@ -29,6 +30,7 @@
             </select>
         </p>
         <p>需要新手教程吗?:
+            <!-- 默认下面设置的为true，前后同步成功的话，这里默认就会打钩 -->
             <input v-model="tutorial" type="checkbox" value="req">需要
         </p>
 
