@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"计算"属性computed的引入</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <ul>
+            <li v-for="(item,index) in list" :key="item.id">
+                品名:{{item.name}}  数量:{{item.amount}}
+            </li>
+        </ul>
+        <!--此处访问的是computed:{}里面的值-->
+        <p>用computed算出共计 {{totalStat}} 个宝石</p>
+        <p>用methods算出共计 {{methodCount}} 个宝石 <button @click="calculate">手动计算</button></p>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                list:[
+                    {id:"1",name:"绿宝石",amount:3},
+                    {id:"2",name:"红宝石",amount:2},
+                    {id:"3",name:"青金石",amount:5},
+                ],
+                methodCount:0,
+            },
+            methods:{
+                calculate(){ 
+                    /*本质上computed实现的东西，在methods内也能实现
+                    但是computed有缓存，会"自动保存"计算结果，有"缓存命中"可直接再次调用
+                    只有当"原数据变化"时，computed才会被再次调用计算
+                    而methods中的方法只会"死笨的一直算"
+                    */
+                    this.methodCount=0;
+                    for(i=0;i<this.list.length;i++){
+                        this.methodCount+=this.list[i].amount;
+                    }
+                }
+            },
+            computed:{ //新成员！ computed:{}
+                // 这个玩意可以直接理解成 "专门来计算" 并 "得返回值"的地方
+                // 里面看似写的是 函数()，实际上还是"变量"，可以在div中直接{{ computed内的‘方法名’ }}访问
+                totalStat(){
+                    let total=this.list.reduce((sum,item) => sum+item.amount ,0);
+                    /* reduce()函数，会"自动的遍历"(for)数组中的每一"单个（行,）元素"，这里即用"item"指代
+                        用法 数组对象.reduce( 回调函数() ,初始值)
+                        方便这里理解的话，
+                        reduce( (返回结果值'变量', 当前‘行内元素’) => 执行运算【当前变量 + 当前遍历'行内元素'.属性】,首次起始值 从 0开始 )
+                                                              (=>传给)
+                    */
+                    return total; //在computed中，每个'方法'都需要 返回一个(结果)变量！
+                },
+            }
+        })
+    </script>
+    <!--我干，没js基础好像有点小小的爆炸了(( -->
+</body>
+</html>
