@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Computed 的 get set完整写法</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <p>姓:<input type="text" v-model="lastName" placeholder="lastName">
+             名:<input type="text" v-model="firstName" placeholder="firstName">
+            &nbsp&nbsp&nbsp&nbsp 所得姓名: {{showName}}</p> <!--调用computed内的showName得'名字'-->
+        <button @click="lastName='琪', firstName='露诺'">点我"外部修改"showName的值名为"琪露诺"</button>
+        <!--  -->
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                lastName:"",
+                firstName:"",
+            },
+            computed:{
+                //一般的"简单写法"(只有get，只能老实计算 和 返回值，别人在外部"欺负"它 就会"哭o(╥﹏╥)o")
+                /*showName(){
+                    return this.lastName+this.firstName;
+                }*/
+
+                //完整写法
+                showName:{ //注意这里不再带"()"
+                    get(){
+                        //这里即对应上面的"简单写法" (老实区)
+                        return this.lastName+this.firstName
+                    },
+                    set(externalName){ //注意这里要 自定义一个"用于'接收'的形参"
+                        //这里是"被欺负"时的 "妥协区" (有了"妥协区"就不会爆炸了)
+                        //要做的事情是将"输入进来的名字" 重新拆成"姓"和"名" 放回到视图层中，用.slice()方发
+                        this.lastName = externalName.slice(0,1) //从index 0开始 切割到 第一个字符的"左边" (只有第一个字符)
+                        this.firstName = externalName.slice(1) //从index 1开始 直接切到底
+                    }
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>
