@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-model应用到"其他表单元素"</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app" style="position: relative; border: 2px solid black;"> 
+        <img src="../../resources/VUE/3/demon.jpg" style="height: 260px; float: right;">
+        <!-- 普通输入框同步到后台data中的userid -->
+        <p>用户id:<input type="text" v-model="userid" placeholder="你好呀，我是一般路过text输入框" 
+            style="width: 16em;" value="userid"></p>
+        <!-- 同上，但v-model直接写在<textarea内> -->
+        <p>来一段你的介绍?<br><textarea v-model="profile" placeholder="这里的数据会同步到后台实例中的'profile'变量中~~"
+             style="width: 337px; height: 56px;" value="intro"></textarea></p>
+        <p>请选择你的种族: <!--由于是单选，每选中一个选项就是"一个单独的值"，覆盖data中的对应变量-->
+            <input type="radio" v-model="species" name="classification" value="human">人
+            <input type="radio" v-model="species" name="classification" value="fluffy">兽
+            <input type="radio" v-model="species" name="classification" value="god">神
+        </p>
+        <p>选择你的始发地:
+            <select v-model="origin"> <!--下拉框的关联data写在这行，下面的选中的option会返回值到这里-->
+                <option value="forest">原始之森</option>
+                <option value="metropolis">凡间之都</option>
+                <option value="wonderland">仙境之界</option>
+                <option value="Assimilation Area">共和之境</option>
+            </select>
+        </p>
+        <p>需要新手教程吗?:
+            <input v-model="tutorial" type="checkbox" value="req">需要
+        </p>
+
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                userid:"",
+                profile:"",
+                species:"",
+                origin:"",
+                tutorial:true,
+            }
+        })
+    </script>
+</body>
+</html>
