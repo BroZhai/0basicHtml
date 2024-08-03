@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不知道是谁的计算机成绩单</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+
+        <ul>
+            <li v-for="(item,index) in list" :key="item.id">编号:{{item.id}} 科目:{{item.subject}} 成绩:{{item.score}}
+                <button @click="delSub(item.id)">删除该科</button>
+            </li>
+        </ul>
+        <p>总成绩:{{SUM}} &nbsp&nbsp&nbsp&nbsp 平均分{{AVG}}</p>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                list:[
+                    {id:1,subject:'计算机组成原理',score:58},
+                    {id:2,subject:'操作系统OS',score:71},
+                    {id:3,subject:'计算机网络',score:75},
+                ],
+                subjectAdd:"",
+                scoreAdd:"",
+                total:""
+            },
+
+            methods:{
+                delSub(subId){
+                    this.list=this.list.filter(subject => subject.id!=subId)
+                }
+            },
+
+            computed:{
+                SUM(){
+                    let sum=this.list.reduce((number,item) => number+item.score,0);
+                    this.total=sum;
+                    return sum;
+                },
+                AVG(){
+                    return this.total/this.list.length;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
