@@ -15,6 +15,8 @@
             </li>
         </ul>
         <p>总成绩:{{SUM}} &nbsp&nbsp&nbsp&nbsp 平均分{{AVG}}</p>
+        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model="scoreAdd"> <button @click="submit">提交</button></p>
+       
     </div>
 
     <script>
@@ -35,10 +37,18 @@
             methods:{
                 delSub(subId){
                     this.list=this.list.filter(subject => subject.id!=subId)
+                },
+                submit(){
+                    this.list.push({ //一一对应设置list内的元素(id,subject,score)
+                        id:+new Date(),
+                        subject:this.subjectAdd,
+                        score:this.scoreAdd
+                    })
                 }
             },
 
             computed:{
+                //写出了 求和 和 平均值 的computed方法
                 SUM(){
                     let sum=this.list.reduce((number,item) => number+item.score,0);
                     this.total=sum;
