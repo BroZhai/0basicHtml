@@ -12,7 +12,11 @@
              名:<input type="text" v-model="firstName" placeholder="firstName">
             &nbsp&nbsp&nbsp&nbsp 所得姓名: {{showName}}</p> <!--调用computed内的showName得'名字'-->
         <button @click="lastName='琪', firstName='露诺'">点我"外部修改"showName的值名为"琪露诺"</button>
-        <!--  -->
+        <!-- 这里对应下面computed showName:{}的set()，
+            因为这里"外部修改了" showName的返回值，
+            如果有外部修改 就必须要在 showName设置set()以"处理‘外部修改’"
+            不然就会报错
+        -->
     </div>
 
     <script>
@@ -28,7 +32,7 @@
                 /*showName(){
                     return this.lastName+this.firstName;
                 }*/
-
+               
                 //完整写法
                 showName:{ //注意这里不再带"()"
                     get(){
