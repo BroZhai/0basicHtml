@@ -119,7 +119,12 @@
                     return sum;
                 },
                 AVG(){
-                    return this.total/this.list.length;
+                    if(this.list.length===0){
+                        return 0; //没有成绩项了，直接用0替代NaN
+                    }
+
+                    return (this.total/this.list.length).toFixed(2);
+                    //.toFixed(数值): 保留几位小数
                 }
             }
         })
