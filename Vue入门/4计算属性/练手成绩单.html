@@ -3,19 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>不知道是谁的计算机成绩单</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
 
     <div id="app"> <!--设定"作用域"-->
+         <div class="table">
+            <table border="1px" style="width: 400px;">
+        <thead>  <!--展示表格标题-->
+                <tr>
+                    <td>学科编号</td>
+                    <td>科目</td>
+                    <td>成绩</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            
+            <tbody v-if="list.length>0"> <!--展示成绩信息(如有)-->
+                <tr v-for="(item,index) in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.subject}}</td>
+                    <!-- 分数低于60时成绩红温(应用".red" class) 用{xxx: 布尔条件表达式}来写 -->
+                    <td :class="{red: item.score<60 }">{{item.score}}</td> 
+                    <td style="text-align: center;"><button @click="delSub(item.id)">删除该科</button></td>
+                </tr>
+            </tbody>
 
+            <tbody v-else> <!--显示"暂无数据"(没有任何信息)-->
+                <tr>
+                    <td colspan="4" style="text-align: center;">暂无数据惹(都给你删光力！)</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="2">总分: {{SUM}}</td>
+                    <td colspan="2">平均分: {{AVG}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model.number="scoreAdd"> <button @click="submit">提交</button></p>
+        <em>Tips:分数低于60时成绩就会"红温"(应用".red" class)<br>
+            以及在输入"数值"时记得用v-model.number"强制转数值"，不然就会是'字符串拼接'XDDD
+        </em>
+
+         </div>
+
+        <!--
         <ul>
             <li v-for="(item,index) in list" :key="item.id">编号:{{item.id}} 科目:{{item.subject}} 成绩:{{item.score}}
                 <button @click="delSub(item.id)">删除该科</button>
             </li>
         </ul>
         <p>总成绩:{{SUM}} &nbsp&nbsp&nbsp&nbsp 平均分{{AVG}}</p>
-        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model="scoreAdd"> <button @click="submit">提交</button></p>
+        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model="scoreAdd"> <button @click="submit">提交</button></p> 
+        -->
        
     </div>
 
@@ -31,7 +78,8 @@
                 ],
                 subjectAdd:"",
                 scoreAdd:"",
-                total:""
+                total:0,
+                counter:4
             },
 
             methods:{
@@ -40,10 +88,11 @@
                 },
                 submit(){
                     this.list.push({ //一一对应设置list内的元素(id,subject,score)
-                        id:+new Date(),
+                        id:this.counter,
                         subject:this.subjectAdd,
                         score:this.scoreAdd
                     })
+                    this.counter++;
                 }
             },
 
