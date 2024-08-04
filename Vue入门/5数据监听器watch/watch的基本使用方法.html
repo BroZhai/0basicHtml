@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch的基本使用方法</title>
+    <!-- watch: 即刻'监视'数据的变化，分为 "新值" 和 "旧值"
+        也分为"简单写法" 和 "完整写法"，咱这里就先看简单写法 
+    -->
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+
+    <div id="app">
+        <p>请输入文字: <input type="text" v-model="basicData"></p>
+        <p>更新前(上一个)的值:{{oldD}} &nbsp&nbsp&nbsp&nbsp 更新后(当前)的值:{{newD}} </p>
+        <hr>
+        <p>来更新一下obj对象内objData的值: <input type="text" v-model="obj.objData"></p>
+        <em>请在F12控制台内查看"对象内部值"的变化</em>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                basicData:"",
+                obj:{ //这里声明了一个"对象"，里面是它对应的各种的"属性值"
+                    objData:"",
+                },
+                newD:"", 
+                oldD:"",
+            },
+            watch:{ //监视数据"项"，里面写 "要监视的直接数据" 或 "对象数据" 的 '监视方法'
+
+            //先以监听"直接数据"为例
+                basicData(newValue,oldValue){ //在data中的"basicData"上放个眼线，同时设置两个形参
+                //更新的数据会对应到newValue中，而上次未改动的数据则是对应到oldValue中
+                    this.newD=newValue;
+                    this.oldD=oldValue;
+                //在实际的开发中，一般我们更多的会用到"newValue"(形参部分也可以"只写newValue")
+                },
+
+            //再来看看"针对对象"内部数据的监视
+            //Tips: 我们要用"对象.属性名" 来设置 对象内 具体要监听的 属性对象
+                "obj.objData"(newValue,oldValue){
+                    this.obj.objData=newValue;
+                    console.log("obj.objData的旧值为:",oldValue," 新值变化为:",this.obj.objData);
+                    
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
