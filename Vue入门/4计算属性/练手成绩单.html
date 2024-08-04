@@ -85,14 +85,29 @@
             methods:{
                 delSub(subId){
                     this.list=this.list.filter(subject => subject.id!=subId)
+                    this.counter--; //更新用于记录的id编号(巧办法XD)
                 },
                 submit(){
+                    //这里还要做一些细节处理，判断"科目"和"分数"是否为空 或 "对应值"
+                    if(this.subjectAdd===""){
+                        alert("好像没输科目名哦owo?");
+                        return;
+                    }
+                    if(typeof this.scoreAdd!=='number'){ //score输入的类型不为 number(数值) [包括 空 和 字符串]
+                        //用typeof查类型
+                        alert("成绩不能为空 或 字符串哦OAO...");
+                        return;
+                    }
                     this.list.push({ //一一对应设置list内的元素(id,subject,score)
                         id:this.counter,
                         subject:this.subjectAdd,
                         score:this.scoreAdd
                     })
                     this.counter++;
+
+                    //添加完成后 清空输入框
+                    this.subjectAdd=''
+                    this.scoreAdd='';
                 }
             },
 
