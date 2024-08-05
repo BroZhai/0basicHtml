@@ -1,0 +1,27 @@
+
+{
+    "data": {  //外部嵌套的"整体data"
+        "code": 200,
+        "msg": "success",
+        "data": [  //内部嵌套的另一个"实际展示的data",为"[]"，表示一个数组Array ==> data[]
+                   //所以访问到这里的元素要进行"两次data" ((
+                   //json对象.data.data[index].index内属性
+            { 
+                // 数组内"第一个元素"data[0]
+
+                "title": "最新超级爆笑笑话段子精选：我想纹个二维码可以吗？",
+                "content": "我是笑话",   
+                "time": "2021-05-26 23:46:10"
+            }
+        ],
+        "time": 1722822513,
+        "usage": 0,
+        "log_id": "678900589696036864"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+        "content-length": "1587",
+        "content-type": "application/json; charset=utf-8"
+    },
+}

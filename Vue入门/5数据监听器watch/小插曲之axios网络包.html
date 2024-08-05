@@ -2,13 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>什么是axios库，干啥用的?</title>
+    <!-- axios是一个功能强大的"网络请求库"，可以用来发送各种网络请求如 post get等
+        并会"接收"从服务器(api接口)返还回来的"各种信息"
+        而我们人要做的，就是对这些"返回数据"进行操作了 (提取"关键信息")
+        【更重要的是要学会去看api文档】
+
+        基础使用语法: (axios为一个对象) 
+        Get请求:
+        axios.get('地址').then(function(服务成功响应的对象'形参'){}, function(失败对象'形参'){})
+        其中, '地址'中可以用?'key'=value...来向服务器传递请求参数
+        如果有多个"?"请求，则可以用"&"把这些请求一一连起来(/joke?token=xxx & num=xxx...)
+
+        Post请求:
+        axios.post('地址', 参数对象).then(...) [后面同上]
+        参数'对象'示例: {key:value, key2:value2 ...}
+    -->
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <!-- 导入axios库 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <div id="app"> <!--设定"作用域"-->
-
+    <!-- 一个笑话api口: https://v2.alapi.cn/api/joke 
+        来自: https://www.free-api.com/doc/378
+      -->
+    <div id="app"> 
+        <p><input type="text" placeholder="请输入要请求的笑话数量" v-model.number="jokeNum">&nbsp&nbsp&nbsp&nbsp<button @click="getJoke">获取笑话</button></p>
+        
+        <p>获取到的笑话标题为:</p>
+        <p v-html="jokeContent"></p> <!--这里用v-html，为了解析内容中的<br>标签 或 其他html元素-->
+        <em>因为笑话的返回内容太长了，这里就只取了他们所返回的"标题"<br>
+            更多内容请在F12控制台内查看 服务器返回的json对象<br>
+            api限制了"单页page"只能返回10个笑话元素,这里没实现page翻页,所以输入的笑话数量不能大于10哦，会报错OAO</em>
     </div>
 
     <script>
@@ -16,7 +42,46 @@
         const app=new Vue({
             el:"#app",
             data:{
+                mytoken:"LwExDtUWhF3rH5ib", //该token并非永久，过期要重新手动去获取
+                jokeNum:"",
+                jokeContent:"",
+            },
+            methods:{
+                getJoke(){
+                    this.jokeContent="";　//清除当前已有标题
 
+                    if(this.jokeNum<1){
+                        alert("baka温馨提示: 请求笑话数不能小于1哦owo~~");
+                        return;
+                    }
+                    axios.get('https://v2.alapi.cn/api/joke?token='+this.mytoken+'&num='+this.jokeNum).then(function(reponseObj){
+                        /*这个返回的json结构有点难蚌，嵌套了两层data
+                            详细请看"axios返回的json对象结构.txt"
+                        */
+                       console.log(reponseObj.data);
+                       if(reponseObj.data.data.length>1){
+                            for(i=0;i<reponseObj.data.data.length;i++){
+                                this.jokeContent+=reponseObj.data.data[i].title;
+                                this.jokeContent+="<br/>"; 
+                                /*注意: 这里加的<br/>为"纯文本"，在返回的内容中"只会当成文本<br/>被处理"
+                                 要想让<br>正常工作，我们"设定该返回内容'整体'"为v-html,这样<br>才会被解析成"html标签元素"
+                                (但是这样通常会有"安全风险"，所以慎用owo)
+                                */
+                            }
+                       }else{
+                        this.jokeContent=reponseObj.data.data[0].title;
+                       }
+                        
+                      /*注意这里有个".bind(this)"，因为在"回调(跳转)函数"中
+                        "this"指代的对象发生了变化，它不再指向原外部的Vue实例，而是内部的json对象
+                        如果要想声明这个this重新指向外部的Vue实例对象，我们就要手动在function(){}后面加一个在".bind(this)"
+                      */
+                    }.bind(this),function(errObj){ 
+                        this.jokeContent="发生了错误";
+                    }.bind(this))
+
+                    this.jokeNum=""; //清除 请求的输入笑话数量
+                },
             }
         })
     </script>
