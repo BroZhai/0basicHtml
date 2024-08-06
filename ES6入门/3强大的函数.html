@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>有关函数的"各种东西"</title>
+</head>
+<body>
+
+    <script> //ES6书写区域
+        //1.　设置"参数默认值"
+        function add(a=7,b=2){  //这里直接用"="指定默认值
+            return a+b; //4+2
+        }
+        console.log("The result is:"+add(4));　//这里不传参的话，就会调用上面设定的"默认值",定义了的话就用传入的参
+
+        //2. "剩余"参数
+
+        //先来创建一个妙妙对象(注意内部的数据类型是"键值对"，在编程时，可以用pokemon["动态名字"]来实现"动态访问")
+        //而pokemon.xxx则是一种"很直接"的访问方式，写下去就"写死了",不像[" "]能"灵活变通"
+        let pokemon={
+            name:"Glaceon",
+            type:"Ice",
+            species:"Fresh Snow Pokémon",
+        }
+        //现在，我们只想"选择这份对象"中的某些"特定"属性，并将其在F12中打印出来 (用一个方法())
+         let displayContent = selectAttribute(pokemon,"name","type"); //方法会返回一个"对象"，提前用"变量"存起来
+         
+        //实现selectAttribute()方法
+        function selectAttribute(pokemonObj,...remainKeys){ //这里"...自定义名"来 一键带过 所有余下的"剩余参数" ("name"[0],"type"[1]),并自动存为一个数组remainKeys[]
+            //remaingKeys中的 '第一个元素' "name"的index为0
+            let returnPoke=Object.create(null); //创建一个空的返回对象,准备赋值
+            returnPoke[remainKeys[0]]=pokemonObj[remainKeys[0]] // 返回对象[剩余参数列表[0]的元素("name")]=传入对象[剩余参数列表[0]的元素("name")]
+            returnPoke[remainKeys[1]]=pokemonObj[remainKeys[1]] // 原理同上
+            //Tips:上面的部分也可以用for来写，但这里为了方便理解就这么写了
+            return returnPoke;
+        } 
+
+        console.log(displayContent); // 在控制台打印"冰布"
+
+    </script>
+
+</body>
+</html>
