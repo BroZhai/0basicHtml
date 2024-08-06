@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模版字符串``</title>
+    <!-- 模版字符串，一个很长的元素 内部嵌"变量"${变量名}
+        这样就可以动态的传递一些东西进去了 
+    -->
+</head>
+<body>
+
+    <div id="Box"></div>
+    <script> //ES6书写区域
+    const boxObj=document.querySelector("#Box");
+    //querySelector("xxx")定位选择某个 id 或 class 元素
+        let name="baka";
+        let value="⑨";
+        let templateStr=`
+        <ul>
+            <li>你好，我是${name}，我有${value}点智慧</li>
+        </ul>` ;//声明 模版字符串 用 `反引号`，这样里面的变量${}才会被正确识别 
+        boxObj.innerHTML=templateStr;
+    </script>
+    
+</body>
+</html>
