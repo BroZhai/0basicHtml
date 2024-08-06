@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>let和const</title>
-    <!-- 起个头，上午就先到这里OwO -->
+    <!-- let和const的作用都是用来"声明变量"，
+        但它们相较于一般的js有了一些"船新"的特性: 没有"变量提升"了
+            变量提升:
+                2.[这里会"自动"多出来个var a(undefind)]
+                console.log(a);
+                var a=3; //1. 这里的var一写，就会自动在最上面"提前声明"一个"空"(var a)数据类型，不赋值，但是能访问
+            像这样，var后面越多，数据就会乱到爆炸( 
+        因为没有了"变量提升"，let和const就不会像var一样"在开头提前声明"，因此在console.log()时"会直接报错"
+
+
+        let: 声明一般可改数据类型 (总之就是用这个，别再用var了)
+        const: 声明"常量"数据类型(声明后不可改,尝试再改会爆)
+
+        除此之外，它们还只是个"块作用域"，出了"{}"就认不到了，并且"相同域"中只能声明一次！
+
+        小Tips: 
+        ==: "允许类型转换"的相等比较(如 0 与 'false' 相等 )
+        ===: 不允许类型转换的"强行比较" (只有当两个操作数"完 全 一 样"时才会返回true)
+    --> 
 </head>
 <body>
+    <em>请去F12控制台查看输出信息</em>
+    <script> //ES6书写区域
+
+        //先来看看let
+        let a=3;
+        console.log("这是'外面域'的a:"+a);
+        if(1===1){
+            let a=5; //不同"域"的重复声明
+            console.log("这是'内部域'的a:"+a);
+        }  
+
+        //然后是const
+        const species="sylveon"; //这里的"直接量"species声明后就不再可改了
+        console.log("你好，我是:"+species);
+
+        //但，如果是一个 对象{} 的话，那么它的"内部属性"还是可以修改滴 (但是"对象"依然不能被重复声明! pokemon={}; <== NO )
+        const pokemon={
+            name:"sylveon",
+            species:"fairy"
+        }
+        console.log("更改前的pokemon: 名称:"+ pokemon.name +" 种类:"+ pokemon.species);
+        pokemon.name="leafeon"; pokemon.species="grass";
+        console.log("更改后的pokemon: 名称:"+ pokemon.name +" 种类:"+ pokemon.species);
+
+
+    </script>
     
 
 </body>
