@@ -40,9 +40,12 @@
 
         //3."扩展"运算符: 将一个数组"分割", 然后再将各个"分离的项"作为参数传给函数
         const numList=[40,20,30,50,90,10,70];
-        console.log("The maximum value within numList[] is: "+Math.max(...numList)); //这里就用"...numList"把numList[]的元素给"打散了"
+        console.log("The maximum value within numList[] is: "+Math.max(...numList)); //这里就用"...numList"把numList[]内的元素给"打散了"
 
-        //4."重磅级" 箭头函数 => 【可简单理解成把"function"换写成了"=>"】
+        //4."重磅级"     【可简单理解成把"function"换写成了"=>"】
+        //且箭头函数 没有"this对象"(他会自动跳出去找"外面的上一层"对象,将外部找到的(调用方法()的)对象指定为this)
+        //"最根层"的this对象为windows
+
         //原本声明方法的写法
         let subA=function(a,b){
             return a-b;
