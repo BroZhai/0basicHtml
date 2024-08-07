@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构赋值,更精简的"取各种数据"</title>
+    <!-- 简单来说，这个玩意是为了我们"更方便的从各种数据对象中" 快速提取数据用的 -->
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+    <script> //ES6书写区域
+    //创建一个宝可梦"大集合"对象
+    let pokemons={
+        sylveon:{
+            name:"仙布",
+            species:"Fairy",
+            skills:["Bite","Draining Kiss","Tackle","Swift"]
+        },
+        leafeon:{
+            name:"叶布",
+            species:"Grass",
+            skills:["Razor Leaf","Magical Leaf","Giga Drain","Leaf Blade"]
+        },
+        glaceon:{
+            name:"冰布",
+            species:"Ice",
+            skills:["Ice Wind","Ice Shard","Ice Fang","Blizzard"]
+        }
+    }
+    let{sylveon,leafeon,glaceon}=pokemons; //从宝可梦"大集合"中，将三个"伊布对象"挨个 通过对应的名称'解构'(提取)出来
+    console.log(sylveon,leafeon,glaceon); //可以在F12中看到对应'解构'出来的 三个伊布对象
+
+
+    let externalPokemonList=[sylveon,leafeon,glaceon];  //里面的元素都是"对象"
+    //已经'提取出来'的对象 可以"直接用"，这里用了另外一个数组 将提取出来的仨伊布对象存了起来
+
+    //骚操作：用Object.keys直接对 “大对象集合” 直接提出 内部对象的"声明对象名" 
+    //(pokemons中提出["sylveon","leafeon","glaceon"]直接作为一个"名字列表")
+    let pokemonNames=Object.keys(pokemons);
+    console.log(pokemonNames);  //　==> ["sylveon","leafeon","glaceon"]
+
+    console.log("------------我是分割线，下面是战斗小剧场--------------")
+
+    //现在有对象了，我们可以直接通过 对象　去 访问他们对应的'属性'
+    for(let i=0;i<=2;i++){
+        console.log(externalPokemonList[i].name+pokemonNames[i]+" 使用了技能: "+externalPokemonList[i].skills[1]);
+    }
+    </script>
+
+</body>
+</html>
