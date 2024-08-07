@@ -25,7 +25,8 @@
             name:"冰布",
             species:"Ice",
             skills:["Ice Wind","Ice Shard","Ice Fang","Blizzard"]
-        }
+        },
+        PPs:[120,231,145],
     }
     let{sylveon,leafeon,glaceon}=pokemons; //从宝可梦"大集合"中，将三个"伊布对象"挨个 通过对应的名称'解构'(提取)出来
     console.log(sylveon,leafeon,glaceon); //可以在F12中看到对应'解构'出来的 三个伊布对象
@@ -34,16 +35,17 @@
     let externalPokemonList=[sylveon,leafeon,glaceon];  //里面的元素都是"对象"
     //已经'提取出来'的对象 可以"直接用"，这里用了另外一个数组 将提取出来的仨伊布对象存了起来
 
-    //骚操作：用Object.keys直接对 “大对象集合” 直接提出 内部对象的"声明对象名" 
-    //(pokemons中提出["sylveon","leafeon","glaceon"]直接作为一个"名字列表")
+    //骚操作：用Object.keys直接对 “大对象集合” 直接提出 所有内部的"属性" 
+    //(pokemons中提出["sylveon","leafeon","glaceon" 还有 "PPs"]直接作为一个"名字列表", PPs[]算'属性对象'，也会给传进来，这里注意owo!!)
     let pokemonNames=Object.keys(pokemons);
-    console.log(pokemonNames);  //　==> ["sylveon","leafeon","glaceon"]
+    console.log(pokemonNames);  //　==> ["sylveon","leafeon","glaceon","PPs"(无关项)]
 
     console.log("------------我是分割线，下面是战斗小剧场--------------")
 
     //现在有对象了，我们可以直接通过 对象　去 访问他们对应的'属性'
+    let{PPs}=pokemons; //将"大集合"中 列表PPs:[] 中每个伊布的PP值读出来，然后直接用PPs[xxx]去访问
     for(let i=0;i<=2;i++){
-        console.log(externalPokemonList[i].name+pokemonNames[i]+" 使用了技能: "+externalPokemonList[i].skills[1]);
+        console.log(externalPokemonList[i].name+pokemonNames[i]+" 使用了技能: "+externalPokemonList[i].skills[1]+", 当前PP剩余: "+PPs[i]);
     }
     </script>
 
