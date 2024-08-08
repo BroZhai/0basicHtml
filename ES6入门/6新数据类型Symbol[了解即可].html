@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>新数据类型Symbol</title>
+    <!-- 原始数据类型Symbol 表示一个独一无二的值(每个值的内存地址都不一样)-->
+
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    // 声明两个symbol数据类型
+    const name1=Symbol("描述性信息1");  //Symbol后面的("") 就一描述性信息，没啥实际作用，而前面声明的"变量"才是重点
+    const name2=Symbol("描述性信息2"); //　它们俩都是独一无二的，内存地址都不一样
+    console.log(name1===name2); //false，因为内存地址都不一样XD
+
+    // 通常用法: 给对象定义某个"隐藏的"私有变量，只能通过特定的方式去访问和修改
+    let pid=Symbol("pokemon的id编号");
+    console.log(pid); //Symbol(603495F)
+    
+    let pokemon={
+        name:"Glaceon",
+    }
+    pokemon[pid]="603495F"; //在这里，给pokemon对象新增一个"隐藏私有变量"pid(上面声明的)
+    console.log(pokemon[pid]); //对于对象里的"私有变量"来说，我们只能通过"[]"去访问,而不能用"."
+
+    /*或者是直接在对象里面去写 (用[])*/
+    let pokemon2={
+        [pid]:"307369F",  // <== 这样写
+        name:"Leafeon",
+    }
+    //然后获取的方式就比较"特殊"了
+    console.log(Object.getOwnPropertySymbols(pokemon2)); //只列举Symbols()
+    console.log(Reflect.ownKeys(pokemon2)); //列举"所有变量"【包括Symbols】
+    
+    </script>
+
+</body>
+</html>
