@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象的一些"扩展"功能</title>
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+        // 1.es6 在对象的属性赋值时 可以"简写"
+        let name="Mr-Pancake", species="pancake";
+        const player={
+            name, //这里可以直接这样写，等价于name: name(上面的"Mr-Pancake"变量)
+            species,//同上
+            makeIntro(){ //在声明方法时，可以直接这样写 "方法名(){}"
+                console.log("你好，我是: "+this.name);
+            }
+        }
+        player.makeIntro();
+
+
+        // 2.直接返回一个{对象}
+        function fn(x,y){
+            return {x,y}; //用"{}"创建一个对象，里面附上要返回的"属性"有哪些
+        }
+        console.log(fn("我是x属性的值","我是y属性的值"));
+        try{
+            throw new Error("我是超级混沌大错误 :3");
+        }catch(error){
+            console.log("你好，我是catch，刚刚抓到了一个错误，如果有没抓到的错误，那么程序就会在此终止");
+        }
+
+
+        // 3.针对要访问"属性名" 的 "组合构成名" ==> 灵活跳变访问不同的属性名
+        const b50={
+            b1:"FREEDOM DiVE",
+            b2:"んつあつあ。",
+            b3:"World's end loneliness",
+            b4:"Rising on the horizon",
+            b5:"Re:End of Time"
+        }
+        console.log("b50列表的前4首歌为:");
+        
+        let tracks=[];
+        for(let i=1;i<=4;i++){
+            tracks[i-1]=[b50["b"+i]] //可以通过"对象[xx+xx]"这种 拼接的方式去动态灵活访问属性
+        }
+        console.log(tracks);
+        
+        // 4.对象Object的方法 
+        //  is() 和 === (其中is()的判断"更严谨") 【这两个东西都用于比较“两个值是否完全相等”】
+        console.log("NaN === NaN的值为:"+NaN === NaN); //false
+        console.log("Object.is(NaN,NaN)的值为:"+Object.is(NaN,NaN)) //true 了解即可
+
+        // assign() 对象的"合并"
+        // Object.assign(返回空对象{},拼合对象1,拼合对象2...)
+        let pancake=Object.assign({}, //这里的{}即为 返回生成的 pancake{}对象
+        //以下为要"拼合"的对象 (不论"子对象"有多少属性，在最后都会拼成一个统一的"大集合")
+        {ownmer:"Mr-Pancake",duration:"27 Days"},
+        {syrup_ratio:45, starch:50, oil: 5},
+        {ability:"restore user's 40% of Health Points, come along with hapiness :3"}
+    )
+        console.log("这里为返回的pancake{}对象:");
+        console.log(pancake);
+        
+    </script>
+
+</body>
+</html>
