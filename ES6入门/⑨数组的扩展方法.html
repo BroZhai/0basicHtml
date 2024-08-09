@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组的扩展方法&功能</title>
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+
+    // 1. from() 和 of()　方法【建立在大类Array之上的】
+    /*(a) from(伪数组，[可选回调函数]): 将"伪数组"转成"数组"
+            伪数组: '动态'生成的一个"假数组"，看下面例子【Tips: 伪数组F12中没有concat()方法】
+            [可选回调函数]: 针对前面"伪数组"中 每个元素的操作
+    */
+    function add(){ // <== 注意这里没写"形参"
+        console.log(arguments); // "argument": 强行传进来的那些"参数", 这就成了一个"伪数组"【自动形成的】
+        let arr=Array.from(arguments); //用Array.from()将传进来的"伪数组" 打包成 一个正式的数组
+        console.log(arr); // [[Prototype]]: Array(0) 转成力
+
+        let arr2=Array.from(arguments, element => { // "[可选回调函数]"示例
+            console.log("取得了:"+element);
+        })
+    }
+    add("ba","ka",9); // 强 行 塞 入
+
+    //(b) 用Array.of() 直接将"一组值"(任意数据类型混合) 转换成 数组
+    let mixValueArr=Array.of(7,"ba",'ka',[5,"⑨",2,1],{name:"Pancake"});
+    console.log(mixValueArr);
+    console.log(mixValueArr[4].name+mixValueArr[3][1]+" is "+mixValueArr[1]+mixValueArr[2]); //整活
+
+    // 2.copyWithin(): 将数组内 某个区域的值 “覆盖” 到数组另一区域
+    //语法:数组对象.copyWithin(开始覆盖index位置，指定覆盖的"原"元素)
+    let num=[1,2,3,7,8,9];
+    console.log(num.copyWithin(0,3)) // ==> ["7,8,9",7,8,9]
+
+    /*3.find() 和 findIndex()
+        find(查找条件函数()): 根据"查找条件函数" 在数组中 去找到第一个符合条件的"值"并返回
+        findIndex(查找条件函数()): 同上，但查到返回的是的是"下标"
+    */ 
+    let nList=[1,9,-3,2,-9,0];
+    console.log("nList中第一个小于0的值为:"+nList.find( minvalue => {
+        return minvalue<0;
+    })+" 它的下标为: "+nList.findIndex( minvalue =>{
+        return minvalue<0;
+    }));
+    </script>
+
+</body>
+</html>
