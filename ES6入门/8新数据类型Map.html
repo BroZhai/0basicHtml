@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map 任意键值对映射</title>
+    <!-- 设定任意两个数据类型的 之间的 键值对"映射"关系, 并保存到一个"大集合"中-->
+    <!-- 本质上和Set的用法很像，也有 delete() has() size 等属性和方法，具体还能用啥F12控制台展开来看-->
+    <!-- 一般设置映射语法 map对象.set("键名", 对应值)  它们之间用","隔开-->
+    <!-- 取"键名"对应值用 map对象.get("键名") -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    //声明一个Map对象
+    let myMap=new Map();
+    myMap.set("智慧冰精","Cirno"); // 设定"自定"键值映射
+    console.log("'智慧冰精'对应的值是: "+myMap.get("智慧冰精")); //通过"键名"取得 "值"
+
+    //类似Set的一些方法
+    console.log(myMap.has("智慧冰精")); //has()
+    myMap.set("冰精的智商为",99);
+    myMap.set("冰精的小伙伴有:",["大酱","露米娅","Mr-Pancake"]);
+    console.log(myMap.size); //.size展示大小
+    console.log(myMap.get("冰精的小伙伴有:"));
+    
+
+    </script>
+
+</body>
+</html>
