@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set{}"集合"数据类型</title>
+    <link rel="icon" href="data:," />
+    <!-- Set{},声明一个"没有重复元素"的数据集合，有重复的元素会自动删掉 -->
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    //创建一个Set{}集合
+    let mySet1=new Set([1,2,2,3,3,3,4,4,4,4,5,5,5,5,5]);  // new Set([xxx,xxx...])
+    console.log(mySet1); //控制台输出Set(5):[1,2,3,4,5] (重复的值被剔除了)
+
+    //Set{}元素的添加add()，删除delete() 和 校验has(值)
+    let mySet2=new Set();
+    mySet2.add("智慧冰精的智力为: ");
+    mySet2.add("⑨⑨⑨");
+    console.log(mySet2);
+
+    mySet2.delete("⑨⑨⑨");
+    console.log(mySet2);
+    console.log("⑨⑨⑨现在被删除惹");
+
+    //mySet2.add(8);  // <==这里可以变动注释
+    console.log("现在Set中有'8'吗: "+mySet2.has(8));
+    
+    //将Set集合转换成数组 (巧用"扩展运算符")
+    let mySet3=new Set([1,"baka",[7,3,5,4]]);
+    console.log(mySet3);
+    console.log("mySet3的长度为: "+mySet3.size);
+    let arrOut=[...mySet3];
+    console.log(arrOut); //成功打散成数组
+    
+    /* Tips: set中写入的"对象"不能被释放(写进去就写死独立了)【要想释放可以用WeakSet()】 
+    可以把WeakSet()看成一个"削弱版"的Set:
+        1. 只能传"对象"进去，不能传其他数据类型
+        2. 不可以迭代遍历
+        3. 没有ForEach()
+        4. 没有size属性
+    */
+    
+    
+
+    </script>
+
+</body>
+</html>
