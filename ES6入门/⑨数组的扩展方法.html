@@ -30,10 +30,10 @@
     //(b) 用Array.of() 直接将"一组值"(任意数据类型混合) 转换成 数组
     let mixValueArr=Array.of(7,"ba",'ka',[5,"⑨",2,1],{name:"Pancake"});
     console.log(mixValueArr);
-    console.log(mixValueArr[4].name+mixValueArr[3][1]+" is "+mixValueArr[1]+mixValueArr[2]); //整活
+    console.log(mixValueArr[4].name+mixValueArr[3][1]+" is "+mixValueArr[1]+mixValueArr[2]); //整活: Pancake⑨ is baka
 
     // 2.copyWithin(): 将数组内 某个区域的值 “覆盖” 到数组另一区域
-    //语法:数组对象.copyWithin(开始覆盖index位置，指定覆盖的"原"元素)
+    //语法:数组对象.copyWithin(开始覆盖index位置，要复制的对象"起始下标")
     let num=[1,2,3,7,8,9];
     console.log(num.copyWithin(0,3)) // ==> ["7,8,9",7,8,9]
 
@@ -43,7 +43,7 @@
     */ 
     let nList=[1,9,-3,2,-9,0];
     console.log("nList中第一个小于0的值为:"+nList.find( minvalue => {
-        return minvalue<0;
+        return minvalue<0; //定义"查找条件"函数
     })+" 它的下标为: "+nList.findIndex( minvalue =>{
         return minvalue<0;
     }));
