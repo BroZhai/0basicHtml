@@ -47,6 +47,52 @@
     })+" 它的下标为: "+nList.findIndex( minvalue =>{
         return minvalue<0;
     }));
+
+    console.log("---------------我是超级分隔符----------------");
+
+    /*4. keys() values() 和 entries() 均会返回一个"数组遍历器"[Array Iterator{}]
+        数组遍历器: 一个"抽象东西"，但是"遍历器"就意味着你可以用for...of去遍历这个"器中"的每一个"键"和"值"
+        Tips: 其实数组本质上也还是一个"键值对集合"(Map): 只不过"键名"是index(自动生成的), 而"键值"就是数组的values了
+    */
+
+    //(a) keys()返回一个"数组'键名'遍历器"，而'就是index',咱可以用for..of去遍历
+    let indexArr=[7,3,5,5,6,0,8].keys(); // .keys()自动“摘出”每个index (共7个元素, index 0-6)
+    console.log(indexArr); //F12查看下类型是不是"数组遍历器"[Array Iterator{}]
+
+    for(let index of indexArr){
+        console.log("当前遍历的'键名'(index)为:"+index);
+    }
+    console.log("接下来是遍历这些index所对应的值")
+
+    //(b) values()则将返回一个"数组'值'遍历器"，原理同上
+    let valueArr=[7,3,5,5,6,0,8].values();
+    console.log(valueArr);
+    for(let value of valueArr){ //for...of遍历
+        console.log(value);
+    }
+
+    //(c) entries()就是上面俩的综合，一个既有"键名"又有"键值"的一个"遍历器"，需要两个"接收器"
+    let entryArr=[7,3,5,5,6,0,8].entries();
+    for(let [index,value] of entryArr){
+        console.log("entryArr的index: "+index+" 值为: "+value);
+    }
+        //Tips:对于entries返回的"遍历器",我们可以通过"数组对象.next().value()" 来手动控制 显示下一个
+        //这个好像对纯数字列表无效(? 
+        let letter=['p','a','n','c','a','k','e'];
+        let pancake=letter.entries();
+        console.log("手动控制展示entryArr的第一个'entryValue'为: "+pancake.next().value);
+        console.log("手动控制展示entryArr的第二个'entryValue'为: "+pancake.next().value);
+        console.log("手动控制展示entryArr的第三个'entryValue'为: "+pancake.next().value);
+    
+    
+    
+    /* 6. .includes() 返回一个布尔值，表示这个数组"是否包含给定的值" 
+        和Set{}的has()很像
+    */
+    let number=[5,6,7,8,9];
+    console.log(number.includes(9)); //true
+    console.log(number.includes('9')); //false,字符'9'并不存在XD
+
     </script>
 
 </body>
