@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>迭代器</title>
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    //创建一个迭代器 (通过数组内部的Symbol.iterator()方法)
+    let items=["first","second","third"];
+    const ite=items[Symbol.iterator](); //关键
+    console.log("第一次调用next().value");
+    console.log(ite.next().value);  // none => "first"
+    /*迭代器的.next()方法"返回的是一个对象": {value: 下一个值, done: 是否没有值了(布尔)}
+      所以上面直接通过".value"去调用了 迭代器返回对象内 "下一个值" 的属性
+      (注意，调用 迭代器对象.next() ".value" 或 ".done" 都会跑向下一个 )
+    */
+
+    console.log(ite.next().value); // "first" => "second" 
+    console.log(ite.next().value,"done为:",ite.next().done);// "second" => "third",然后后面的ite.next().done 会直接继续"third" => "undefined"
+    //third的下一个就没值了,这里ite.next().done直接就跑到了"下个元素" undefind, 因此下个done值就在这里显示为"true"
+
+    </script>`
+
+</body>
+</html>
