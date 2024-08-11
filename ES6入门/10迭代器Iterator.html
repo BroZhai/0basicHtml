@@ -10,7 +10,7 @@
     <em>请在F12控制台查看相应信息</em>
 
     <script> //ES6书写区域
-    //创建一个迭代器 (通过数组内部的Symbol.iterator()方法)
+    //创建一个迭代器 (通过数组内部"自带的"的Symbol.iterator()方法)
     let items=["first","second","third"];
     const ite=items[Symbol.iterator](); //关键
     console.log("第一次调用next().value");
