@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成器Generator</title>
+    <!-- 生成器Generator 和 迭代器Iterator 息息相关，简单来说，他就是来"提供"迭代器 或 实现程序"暂停继续"的功能
+        一共有两个作用: 
+        1. 为"不具备迭代器的数据对象"(如对象),让它实现一个 迭代器 的功能，方便"数据遍历" (这真的方便吗?
+        2. 可以实现"异步编程"，通过"yield"关键字 像伊布一样"灵活的启停"(划掉 【为'改变执行流'提供了可能】
+    -->
+
+    <!-- 生成器声明方法 function* 函数名(参数){}... 【就多了个"*"】-->
+    <!-- 对于成功声明了"生成器"的函数()来说，它内部就"有了迭代器Iterator" -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    //1. 简单声明一个"生成器"("间断器")[其实也算是一个函数声明，不过里面可以用'间断关键字'yield 来划分不同的"执行区间"]
+    function* susfun(){
+        console.log("Hihi~程序开始咯~~");
+        console.log("让我也来第一个yield前面插个队^w^");
+        yield "这里是第一个yield,已被间断,等待执行next()"; //区间1(yield后面即为 返回的"value"值)
+
+        console.log("那么来继续执行吧！我在第二个yield前站一下owo");
+        yield "这里是第二个yield,再执行next()的值将会是undefined, done将变为true"; //区间2
+        console.log("注意哦,这后面之后就没有yield了,我只是一般路过console.log告知一下捏~");
+        
+    }
+    //再构造一个"函数对象"指向前面的生成器
+    let sus=susfun(); //这个时候，这个函数对象就已经包含"迭代器"了，可以手动用next()去遍历上面定义的"不同yield区间"
+
+    console.log(sus.next()); //0 ==> 执行到第一个yield区间
+    console.log(sus.next()); //第一个yield区间 ==> 第二个yield区间(网上)
+    console.log(sus.next()); //第二个yield区间 ==> undefined
+
+    console.log("----------------我是分隔符-------------------");
+    
+
+    //2. 在生成器里面"动态传参"
+    function* add(){
+        console.log("add()函数开始了");
+        let x=yield "这里的第一个yield的value"; 
+        //注意这里"不是给x直接赋值"，这里的x充当一个"接收形参"，在到下一次遇到yield时 再传参到这里
+        console.log("刚刚经过了第一个yield,即将到下一个yield了");
+        let y=yield "你好，这里是第二个yield的value，在这里给上面的x传参"; //此时这里给"上一个变量"x　传参
+        console.log("第二个yield也过去了,x接收到的参数值为: "+x);
+        
+        return x+y; //注意: 可以把return也视为一个yield, 在.next()到的这里时给"上一个变量"y 传参
+    }
+
+    let addFun=add();
+    console.log(addFun.next());// 0 ==>第一个yield
+    console.log(addFun.next(2));// 第一个yield ==> 第二个yield (此时 执行区间"完全没过了"x，在这里给形参x赋值)
+    console.log(addFun.next(7));// 第二个yield ==> return (yield) (同上 执行区间这里"完全没过了"y，给形参y赋值) 
+    //x=2, y=7, return应该为9 {返回的是一个"对象"，return的值在 对象的"value中"}，【return的done 直接为true】
+    
+    console.log("----------------我是分隔符2-------------------");
+
+    //3. 为不具备Iterator的数据类型(如对象)去提供一个Interator,这样时候就可以方便 "选择性的遍历" 该数据类型
+    function* pokeEntries(obj){
+        let pokeEnt=Object.entries(obj); //自动获取到 对象的所有的 属性"键值对"，并存到一个数组中去
+        //对象的属性本身就是"键:值对", 故用.entries() .keys() 或.values() 会"自动提取"对应的值
+
+        //console.log(pokeEnt); //此时pokeEnt结构为: [['name','sylveon'],['type','fairy'],['skills',["Bite","Draining Kiss","Tackle","Swift"]]
+        //每一个"一维数组"就是"单独一对'键值对'"，存在"二位数组"中
+        //在每次for时 遍历的就是 不同的"一维数组(键值对)"
+        
+        for(let [keynames,value] of pokeEnt){
+            yield [keynames,value]; //这里"yield"为关键,为之后外部调用的for 提供"间断暂停" 的帮助
+        }
+    }
+
+    let pokemon={ //构造一个pokemon对象
+        name:"sylveon",　
+        type:"fairy",
+        skills:["Bite","Draining Kiss","Tackle","Swift"],
+    }
+
+    pokemon[Symbol.iterator]=pokeEntries; //为对象"手动增加"一个 Interator属性 指向 上面专门给写的"生成器"pokeEntries
+
+    console.log(pokemon); //(我们F12查看一下这个对象是否有"Symbol(Symbol.iterator)"这个属性，有就说明成了)
+    //现在，对象内部有 生成器生成的"迭代器"了，我们便可以用for...of 指向这个"生成器"进行遍历 (生成器内部 再指向 迭代器)
+    for(let [knames,val] of pokeEntries(pokemon) ){
+        //Tips: 在这个外部的for of中，这个循环会自动调用迭代器对象的next()方法，直到done属性为true
+        //所以我们要做的，就是在内部写好 "yield"的暂停段 就好了
+        console.log(knames,":",val);
+        // console.log(`${knames} : ${val}`); //这个只是"单纯的拿值"，尤其是最后的'skills[]',里面的"值会直接显示出来"，而不像上面那样仍有一个"数组对象"
+    }
+
+    </script>
+
+</body>
+</html>
