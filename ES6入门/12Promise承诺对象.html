@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise 承诺对象</title>
+    <!-- 相当于一个"容器"，保存着"未来才会结束"的一个(异步事件)的"状态"和"结果" 
+        其中每个异步事件的状态共分为3种: 
+        Pending: 事件正在等待响应中...
+        Resolved: 获取"事件成功"的响应
+        Rejected: 获取"事件失败"的响应
+
+        在这三种状态中，只有可能从 Pending->Resolved/Rejecte，并且这些状态是"不受到外界改变"的，且"内部"状态一旦改变就不"不会再变"
+        
+        ps: axios网络请求库就是以这玩意为底层实现的
+    -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    //声明一个Promise对象,用一个变量存储( 语法 new Promise(回调函数('成功'resolved函数，失败rejected函数){...}) ) 
+    //ps: 回调函数的形参是两个"函数",可以直接在内部使用: resolved('成功事件'的返回数据), rejected('失败事件'的返回数据)【这玩意是个'高阶函数'，参数也用函数我擦】
+    let pro=new Promise(function(resolved,rejected){
+        let pokemon={ //建立一个要返回的对象
+            response:200, // 默认回复200 OK, 可以改成其他的测试 
+            name:'Leaflon',
+            status:{
+                HP:230,
+                LV:19,
+                Secert_msg:"To who is reading this line, ♡Love you~~",
+            }
+        }
+
+    /*补充 ES6中 setTimeout()的语法:
+        setTimeout(要延迟执行的函数(), 延迟执行时间[单位为ms])
+    */ 
+        setTimeout(function(){
+            if(pokemon.response===200){ //返回码为"成功"，传出数据对象
+                resolved(pokemon); //resolved只能传回一个数据，但是不限制数据类型
+            }
+            else{// 返回码为"失败"，返回错误信息
+                rejected("对不起，返回码不为200,数据被rejected了...");
+            }
+        },1500);
+    })
+    
+    console.log(pro);
+    //在定义好Promise对象后，调用该对象的.then()方法
+    // 语法: 对象.then( (resolved返回的数据对象) => {针对resolved数据的操作}, (rejected返回的数据对象) => {针对rejected数据的操作})
+    pro.then((resolvedVal)=>{
+        console.log(resolvedVal);
+        console.log(resolvedVal.status.Secert_msg);
+    },(rejectedValue)=>{
+        console.log(rejectedValue);
+    })
+
+    //Tips: 一般情况下，我们可以用一个timeOut()来实现"定时"功能，来封装上面的函数
+    /* function timeOut(timeValue){
+        return new Promise((resolved,rejected) => {  //ES6函数写法owo,　这个"手动定时器"直接返回一个Promise对象，然后
+            ...
+            setTimeout(function(){
+                ...
+            },timeValue) 外部"封装"的timeValue传到这里来，实现控制定时的功能
+            ...
+        })   
+        ...
+    }
+    
+    timeOut(时间值).then( (resolvedValue) => {...}, (rejectedValue) => {...} ); 
+    //在外部调用timeOut()并传入控制时间
+    因为内部会在 到指定时间之后 返回一个Promise对象，我们就可以"直接"接在后面写 .then()来处理 resovled 或 rejected　返回值
+    */
+
+    </script>
+
+</body>
+</html>
