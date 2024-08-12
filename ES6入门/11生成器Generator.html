@@ -90,6 +90,43 @@
         // console.log(`${knames} : ${val}`); //这个只是"单纯的拿值"，尤其是最后的'skills[]',里面的"值会直接显示出来"，而不像上面那样仍有一个"数组对象"
     }
 
+    console.log("----------------我是分隔符3-------------------");
+
+    //最后补充一个简单的实际应用场景()
+    //想要实现的效果是: 页面加载 -> 加载完成 -> 隐藏loading (每一步都是"异步操作"，需要"按序"执行)
+
+    // console.log("三个方法直接执行，执行顺序出问题了:");
+    // load();
+    // demonstrate();
+    // hideload();  执行完load()后，这一行先被执行惹...然后爆了
+
+
+    function* process(){
+        load();
+        yield demonstrate(); //这里"卡点"暂停，确保hideload()不会被"优先执行"XDD
+        hideload();
+    }
+
+    let pro=process();
+    pro.next(); //开始执行 0 ==> 第一个 yield 区间
+
+    function load(){
+        console.log("页面正在加载...");
+    }
+
+    function demonstrate(){
+        setTimeout(() => { 
+            console.log("页面加载完成!");
+            pro.next(); //确定该demonstrate()函数执行完后，通知此时卡在"yield demonstrate()"的yield继续去执行剩余的代码
+            //【这样的"异步"就确保了执行顺序】
+        },1500);
+    }
+
+    let hideload=() => { // 练习一下ES6的函数声明法^^
+        console.log("加载页面现已隐藏");
+    }
+        
+
     </script>
 
 </body>
