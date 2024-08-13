@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>让方法去"异步"(按序)执行的async</title>
+    <!-- 简单来说，这个玩意和Generator使用起来是一个道理，就是Generator的一个"语法糖"
+        语法糖: 给你吃一个好吃的糖果，让你看代码更容易XD (其实就是代码的一种"易读"简化)
+        在Generator中，我们在function* xxx(){内部这里使用 "yield"关键字来控制函数不同 "区间"的执行}
+        而在async中，我们用"await"
+
+        而不同于Genetator的一点是，Generator我们还可以"手动next()"去控制"运行的区间"
+        而async只能是我们自定执行区间，电脑"自动的"在获取到相应时"自动按序"去执行相应的区间，我们不再能"手动next()"【但这恰好就是"电脑自动按序执行"所需要的】
+        async返回的会是一个Promise对象，我们只能对这个Promise对象进行.then().catch() 来处理对象时resolve()还是reject()
+
+      -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    /*声明一个async函数
+        语法: async function 名(){...};
+    */
+
+    //来，让我们再次请出 11生成器结尾的 "加载哥仨"，将他们重构为 返回promise'值'对象(对应async中的await)，再用async重写加载步骤
+   async function process() { 
+        //期待顺序 load() ==> demonstrate() ==> hideload()，原来的执行顺序: load() ==> hideload() ==> demonstrate()
+        let load_msg=await load();  // await  会把后面的 返回的promise对象"解析值"(resolve 或 reject) "自动提出来" 赋给前面的变量 (当然你也可以直接手动.then().catch()出来XD)
+        console.log(load_msg);
+        //用await时后面对应的数据类型必须是一个"promise"对象'值'(resolve 或 reject)，如果不是的话，await会自己尝试去转[如 '字符串' ==> resolve("字符串")]
+        let demon_msg=await demonstrate();
+        console.log(demon_msg);
+        let hide_msg=await hideload();
+        console.log(hide_msg);
+        
+        return Promise.resolve("所有await都已按序执行！");
+   }
+
+    function load(){ //await 后面接的函数 一定要返回一个Promise对象！
+        //这里想偷懒的话可以直接写一个"resolve" promise返回对象
+        // return Promise.resolve("页面正在加载");
+
+        let loading=new Promise((resolve,reject) =>{
+            let status=true;
+            if(status){
+                resolve("页面正在加载...");
+            }else{
+                //懒得写，正在加载怎么会出错啊~~(恼 
+                //reject你先一边凉快去吧XDDD
+            }
+        })
+        return loading;
+    }
+
+    function demonstrate(){
+        return new Promise((resolve,reject) =>{
+            setTimeout(() => { 
+            resolve("页面加载完成!");
+            },1500);
+        })
+    }
+
+    let hideload=() => { //注意，这个是ES6的写法
+        return Promise.resolve("加载现已隐藏"); //这里该偷懒了，反正和上面的load()一样owo
+    }
+
+
+    //执行async的process()，取得其返回的promise对象'值'(resolve 或 reject) 并进行相应的操作
+    process().then((resolveValue => {
+        console.log(resolveValue);
+   })).catch((rejectValue)=>{
+        console.log(rejectValue);
+        console.log("捕获到错误");
+   });
+
+    </script>
+
+</body>
+</html>
