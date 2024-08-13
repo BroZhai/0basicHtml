@@ -23,7 +23,7 @@
     <script> //ES6书写区域
     //声明一个Promise对象,用一个变量存储( 语法 new Promise(回调函数('成功'resolve函数，失败reject函数){...}) ) 
     //ps: 回调函数的形参是两个"函数",可以直接在内部使用: resolve('成功事件'的返回数据), reject('失败事件'的返回数据)【这玩意是个'高阶函数'，参数也用函数我擦】
-    //而 "resolve(xxx)" "reject(xxx)" 这些就是Promise对象的'返回值'
+    //而 调用"resolve(xxx)" "reject(xxx)" 时，就是return Promise对象的'返回值' [和后面的async知识相关]
     let pro=new Promise(function(resolve,rejecte){
         let pokemon={ //建立一个要返回的对象
             response:200, // 默认回复200 OK, 可以改成其他的测试 
