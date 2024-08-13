@@ -101,12 +101,45 @@
     let promiseAll= Promise.all([promise1,promise2,promise3]) //里面用"数组"传多个promise对象
     promiseAll.then((p1Res,p2Res,p3Res) => {
         //p1,p2,p3这三个对象"都成功被resolved时" 才会进入到这里
-        //然后在对挨个resolved的对象单独操作owo
+        //然后再对挨个resolved的对象单独操作owo
         console.log(p1Res,p2Res,p3Res);
     }).catch((p1Res,p2Res,p3Res) => { //直接跟在".then()"后面的".catch()", 对应的就是"rejected对象"的处理
         //所有promise对象中"任何一个"报错就会跑到这儿来，再做后续的处理OAO...
         console.log(p1Res,p2Res,p3Res);
     });
+
+    // race(): 两个函数操作之间的"竞速"，看谁"快"(先有响应) 就先执行谁 [设置某个请求的"超时时间"]
+    // 这里用一个"图片加载超时"为例子
+    function requestImg(imgUrl){
+        return new Promise((resolved,rejected)=>{
+            let img=new Image();
+            img.onload=function(){
+                resolved(img);
+            }
+            img.src=imgUrl;
+        })
+    }
+    function timeOut(){
+        return new Promise((resolved,rejected)=>{
+            setTimeout(() =>{
+                rejected("阿偶，图片请求超过2000ms未响应，我不请求了:("); //利用浏览器的"3G"网络速度进行"超时模拟",记得停用缓存
+            },2000);
+        })
+    }
+
+    let request_url='https://tse1-mm.cn.bing.net/th/id/OIP-C.2P_qaF4VYE0lKuob8WnMHwHaKe?rs=1&pid=ImgDetMain';
+
+    //要用一个"数组"(一定是数组！)来表示内部要"竞速"的 俩回调函数, 里面"谁更快响应" 谁就先进到后面的then
+    //这里用了一个"懒人简写"，then()就只对应resolved, 而catch()就只对应rejected [天才！]
+    Promise.race([requestImg(request_url),timeOut()]).then((resolvedValue)=>{
+        console.log(resolvedValue); // 如果在超时前图片被解析出来，就会跳转到这里owo
+        document.body.appendChild(resolvedValue);
+    }).catch((rejectedValue)=>{ //而超时的rejected 响应就会对应到这里
+        console.log(rejectedValue);
+    }).finally(()=>{ // .finally() "最终必做操作"小补充
+        console.log("这里是finally,不论前面结果怎样，这一行终将会被执行owo");
+    });
+
 
     </script>
 
