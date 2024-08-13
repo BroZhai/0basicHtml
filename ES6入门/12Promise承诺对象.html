@@ -6,10 +6,11 @@
     <!-- 相当于一个"容器"，保存着"未来才会结束"的一个(异步事件)的"状态"和"结果" 
         其中每个异步事件的状态共分为3种: 
         Pending: 事件正在等待响应中...
-        Resolved: 获取"事件成功"的响应
-        Rejected: 获取"事件失败"的响应
+        resolve: 获取"事件成功"的响应
+        reject: 获取"事件失败"的响应
 
-        在这三种状态中，只有可能从 Pending->Resolved/Rejected，并且这些状态是"不受到外界改变"的，且"内部"状态一旦改变就不"不会再变"
+
+        在这三种状态中，只有可能从 Pending->resolve/reject，并且这些状态是"不受到外界改变"的，且"内部"状态一旦改变就不"不会再变"
         
         ps: axios网络请求库就是以这玩意为底层实现的
     -->
@@ -20,9 +21,10 @@
     <em>请在F12控制台查看相应信息</em>
 
     <script> //ES6书写区域
-    //声明一个Promise对象,用一个变量存储( 语法 new Promise(回调函数('成功'resolved函数，失败rejected函数){...}) ) 
-    //ps: 回调函数的形参是两个"函数",可以直接在内部使用: resolved('成功事件'的返回数据), rejected('失败事件'的返回数据)【这玩意是个'高阶函数'，参数也用函数我擦】
-    let pro=new Promise(function(resolved,rejected){
+    //声明一个Promise对象,用一个变量存储( 语法 new Promise(回调函数('成功'resolve函数，失败reject函数){...}) ) 
+    //ps: 回调函数的形参是两个"函数",可以直接在内部使用: resolve('成功事件'的返回数据), reject('失败事件'的返回数据)【这玩意是个'高阶函数'，参数也用函数我擦】
+    //而 "resolve(xxx)" "reject(xxx)" 这些就是Promise对象的'返回值'
+    let pro=new Promise(function(resolve,rejecte){
         let pokemon={ //建立一个要返回的对象
             response:200, // 默认回复200 OK, 可以改成其他的测试 
             name:'Leaflon',
@@ -38,27 +40,27 @@
     */ 
         setTimeout(function(){
             if(pokemon.response===200){ //返回码为"成功"，传出数据对象
-                resolved(pokemon); //resolved只能传回一个数据，但是不限制数据类型
+                resolve(pokemon); //resolve只能传回一个数据，但是不限制数据类型
             }
             else{// 返回码为"失败"，返回错误信息
-                rejected("对不起，返回码不为200,数据被rejected了...");
+                reject("对不起，返回码不为200,数据被reject了...");
             }
         },1500);
     })
     
     console.log(pro);
     //在定义好Promise对象后，调用该对象的.then()方法
-    // 语法: 对象.then( (resolved返回的数据对象) => {针对resolved数据的操作}, (rejected返回的数据对象) => {针对rejected数据的操作})
-    pro.then((resolvedVal)=>{
-        console.log(resolvedVal);
-        console.log(resolvedVal.status.Secert_msg);
-    },(rejectedValue)=>{
-        console.log(rejectedValue);
+    // 语法: 对象.then( (resolve返回的数据对象) => {针对resolve数据的操作}, (reject返回的数据对象) => {针对reject数据的操作})
+    pro.then((resolveVal)=>{
+        console.log(resolveVal);
+        console.log(resolveVal.status.Secert_msg);
+    },(rejectValue)=>{
+        console.log(rejectValue);
     })
 
     //Tips: 一般情况下，我们可以用一个timeOut()来实现"定时"功能，来封装上面的函数
     /* function timeOut(timeValue){
-        return new Promise((resolved,rejected) => {  //ES6函数写法owo,　这个"手动定时器"直接返回一个Promise对象，然后
+        return new Promise((resolve,reject) => {  //ES6函数写法owo,　这个"手动定时器"直接返回一个Promise对象，然后
             ...
             setTimeout(function(){
                 ...
@@ -68,9 +70,9 @@
         ...
     }
     
-    timeOut(时间值).then( (resolvedValue) => {...}, (rejectedValue) => {...} ); 
+    timeOut(时间值).then( (resolveValue) => {...}, (rejectValue) => {...} ); 
     //在外部调用timeOut()并传入控制时间
-    因为内部会在 到指定时间之后 返回一个Promise对象，我们就可以"直接"接在后面写 .then()来处理 resovled 或 rejected　返回值
+    因为内部会在 到指定时间之后 返回一个Promise对象，我们就可以"直接"接在后面写 .then()来处理 resolve 或 reject　返回值
     */
 
 
@@ -78,20 +80,20 @@
 
     /*Promise对象的一些其他方法:
         resolve(): 可"直接返回"一个Promise状态为"resovled"的数据对象，直接在外部用.then()去进行后续操作
-        reject(): 和上边同理，返回数据对象为"rejected"
+        reject(): 和上边同理，返回数据对象为"reject"
     */
 
-    let resObj=Promise.resolve("这是一个被resolved过的baka对象ᗜˬᗜ");
+    let resObj=Promise.resolve("这是一个被resolve过的baka对象ᗜˬᗜ");
     resObj.then((bakaPromise) =>{
         console.log(bakaPromise);
     })
 
     // all()方法: 很多时候，我们通常会遇到很多的Promise对象，要等他们"统一完成"之后我们再去做进一步的处理
     /* 如下所示 */
-    let promise1=new Promise((resolved,rejected) => {resolved("加载文字资源...")});
-    let promise2=new Promise((resolved,rejected) => {resolved("加载图片资源...")});
-    // let promise2=new Promise((resolved,rejected) => {rejected("我靠，图片资源爆炸啦！")});
-    let promise3=new Promise((resolved,rejected) => {resolved("加载动画资源...")});
+    let promise1=new Promise((resolve,reject) => {resolve("加载文字资源...")});
+    let promise2=new Promise((resolve,reject) => {resolve("加载图片资源...")});
+    // let promise2=new Promise((resolve,reject) => {reject("我靠，图片资源爆炸啦！")});
+    let promise3=new Promise((resolve,reject) => {resolve("加载动画资源...")});
 
     /*假设这是一个网页内容，我们当然希望的是当网页 "完全加载" 之后 再呈现给用于，但一个一个确认promise返回对象太麻烦了
     因此就有了这个“懒人一键all()”获取的函数
@@ -99,10 +101,10 @@
     
     let promiseAll= Promise.all([promise1,promise2,promise3]) //里面用"数组"传多个promise对象
     promiseAll.then((p1Res,p2Res,p3Res) => {
-        //p1,p2,p3这三个对象"都成功被resolved时" 才会进入到这里
-        //然后再对挨个resolved的对象单独操作owo
+        //p1,p2,p3这三个对象"都成功被resolve时" 才会进入到这里
+        //然后再对挨个resolve的对象单独操作owo
         console.log(p1Res,p2Res,p3Res);
-    }).catch((p1Res,p2Res,p3Res) => { //直接跟在".then()"后面的".catch()", 对应的就是"rejected对象"的处理
+    }).catch((p1Res,p2Res,p3Res) => { //直接跟在".then()"后面的".catch()", 对应的就是"reject对象"的处理
         //所有promise对象中"任何一个"报错就会跑到这儿来，再做后续的处理OAO...
         console.log(p1Res,p2Res,p3Res); //只会有reject的值，resolve的会为"undefined"
     });
@@ -110,18 +112,18 @@
     // race(): 两个函数操作之间的"竞速"，看谁"快"(先有响应) 就先执行谁 [设置某个请求的"超时时间"]
     // 这里用一个"图片加载超时"为例子
     function requestImg(imgUrl){
-        return new Promise((resolved,rejected)=>{
+        return new Promise((resolve,reject)=>{
             let img=new Image();
             img.onload=function(){
-                resolved(img);
+                resolve(img);
             }
             img.src=imgUrl;
         })
     }
     function timeOut(){
-        return new Promise((resolved,rejected)=>{
+        return new Promise((resolve,reject)=>{
             setTimeout(() =>{
-                rejected("阿偶，图片请求超过2000ms未响应，我不请求了:("); //利用浏览器的"3G"网络速度进行"超时模拟",记得停用缓存
+                reject("阿偶，图片请求超过2000ms未响应，我不请求了:("); //利用浏览器的"3G"网络速度进行"超时模拟",记得停用缓存
             },2000);
         })
     }
@@ -129,12 +131,12 @@
     let request_url='https://tse1-mm.cn.bing.net/th/id/OIP-C.2P_qaF4VYE0lKuob8WnMHwHaKe?rs=1&pid=ImgDetMain';
 
     //要用一个"数组"(一定是数组！)来表示内部要"竞速"的 俩回调函数, 里面"谁更快响应" 谁就先进到后面的then
-    //这里用了一个"懒人简写"，then()就只对应resolved, 而catch()就只对应rejected [天才！]
-    Promise.race([requestImg(request_url),timeOut()]).then((resolvedValue)=>{
-        console.log(resolvedValue); // 如果在超时前图片被解析出来，就会跳转到这里owo
-        document.body.appendChild(resolvedValue);
-    }).catch((rejectedValue)=>{ //而超时的rejected 响应就会对应到这里
-        console.log(rejectedValue);
+    //这里用了一个"懒人简写"，then()就只对应resolve, 而catch()就只对应reject [天才！]
+    Promise.race([requestImg(request_url),timeOut()]).then((resolveValue)=>{
+        console.log(resolveValue); // 如果在超时前图片被解析出来，就会跳转到这里owo
+        document.body.appendChild(resolveValue);
+    }).catch((rejectValue)=>{ //而超时的reject 响应就会对应到这里
+        console.log(rejectValue);
     }).finally(()=>{ // .finally() "最终必做操作"小补充
         console.log("这里是finally,不论前面结果怎样，这一行终将会被执行owo");
     });
