@@ -77,14 +77,13 @@
     console.log("--------------我是分割线1-----------------");
 
     /*Promise对象的一些其他方法:
-        resolved(): 可"直接返回"一个Promise状态为"resovled"的数据对象，直接在外部用.then()去进行后续操作
-        rejected(): 和上边同理，返回数据对象为"rejected"
+        resolve(): 可"直接返回"一个Promise状态为"resovled"的数据对象，直接在外部用.then()去进行后续操作
+        reject(): 和上边同理，返回数据对象为"rejected"
     */
 
     let resObj=Promise.resolve("这是一个被resolved过的baka对象ᗜˬᗜ");
     resObj.then((bakaPromise) =>{
         console.log(bakaPromise);
-        
     })
 
     // all()方法: 很多时候，我们通常会遇到很多的Promise对象，要等他们"统一完成"之后我们再去做进一步的处理
@@ -105,7 +104,7 @@
         console.log(p1Res,p2Res,p3Res);
     }).catch((p1Res,p2Res,p3Res) => { //直接跟在".then()"后面的".catch()", 对应的就是"rejected对象"的处理
         //所有promise对象中"任何一个"报错就会跑到这儿来，再做后续的处理OAO...
-        console.log(p1Res,p2Res,p3Res);
+        console.log(p1Res,p2Res,p3Res); //只会有reject的值，resolve的会为"undefined"
     });
 
     // race(): 两个函数操作之间的"竞速"，看谁"快"(先有响应) 就先执行谁 [设置某个请求的"超时时间"]
