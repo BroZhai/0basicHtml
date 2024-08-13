@@ -9,7 +9,7 @@
         Resolved: 获取"事件成功"的响应
         Rejected: 获取"事件失败"的响应
 
-        在这三种状态中，只有可能从 Pending->Resolved/Rejecte，并且这些状态是"不受到外界改变"的，且"内部"状态一旦改变就不"不会再变"
+        在这三种状态中，只有可能从 Pending->Resolved/Rejected，并且这些状态是"不受到外界改变"的，且"内部"状态一旦改变就不"不会再变"
         
         ps: axios网络请求库就是以这玩意为底层实现的
     -->
@@ -72,6 +72,41 @@
     //在外部调用timeOut()并传入控制时间
     因为内部会在 到指定时间之后 返回一个Promise对象，我们就可以"直接"接在后面写 .then()来处理 resovled 或 rejected　返回值
     */
+
+
+    console.log("--------------我是分割线1-----------------");
+
+    /*Promise对象的一些其他方法:
+        resolved(): 可"直接返回"一个Promise状态为"resovled"的数据对象，直接在外部用.then()去进行后续操作
+        rejected(): 和上边同理，返回数据对象为"rejected"
+    */
+
+    let resObj=Promise.resolve("这是一个被resolved过的baka对象ᗜˬᗜ");
+    resObj.then((bakaPromise) =>{
+        console.log(bakaPromise);
+        
+    })
+
+    // all()方法: 很多时候，我们通常会遇到很多的Promise对象，要等他们"统一完成"之后我们再去做进一步的处理
+    /* 如下所示 */
+    let promise1=new Promise((resolved,rejected) => {resolved("加载文字资源...")});
+    let promise2=new Promise((resolved,rejected) => {resolved("加载图片资源...")});
+    // let promise2=new Promise((resolved,rejected) => {rejected("我靠，图片资源爆炸啦！")});
+    let promise3=new Promise((resolved,rejected) => {resolved("加载动画资源...")});
+
+    /*假设这是一个网页内容，我们当然希望的是当网页 "完全加载" 之后 再呈现给用于，但一个一个确认promise返回对象太麻烦了
+    因此就有了这个“懒人一键all()”获取的函数
+    看似方便一键全部获取promise对象，但是，一旦其中的任何一个promise"炸了"，就会判定为"整体失败"*/
+    
+    let promiseAll= Promise.all([promise1,promise2,promise3]) //里面用"数组"传多个promise对象
+    promiseAll.then((p1Res,p2Res,p3Res) => {
+        //p1,p2,p3这三个对象"都成功被resolved时" 才会进入到这里
+        //然后在对挨个resolved的对象单独操作owo
+        console.log(p1Res,p2Res,p3Res);
+    }).catch((p1Res,p2Res,p3Res) => { //直接跟在".then()"后面的".catch()", 对应的就是"rejected对象"的处理
+        //所有promise对象中"任何一个"报错就会跑到这儿来，再做后续的处理OAO...
+        console.log(p1Res,p2Res,p3Res);
+    });
 
     </script>
 
