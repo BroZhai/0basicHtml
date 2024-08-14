@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6引入的"模块"系统</title>
+    <!-- 所谓"模块",就是一外部文件，这个文件会开放一些"接口"(或提供一些数据) 供 其他程序去"引用"
+        静态访问模块是不会生效的，必须要依赖一个服务器! 
+    -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script type="module"> //这里为"外部程序"，引用'模块'的地方，在这里我们小修改一下script的标签"type=module"
+    /* 是时候使用import关键字引入模块了！ (这不Py导包吗?)
+        语法: import 数据对象or接口 from '外部js路径'   
+        Tips: "数据对象or接口"对应的就是 模块文件中 export的东西，在import时通常用 解构赋值"{xxx...}"来选择需要export数据 
+        你也可以一键"* as 自定义名"全选所有export对象
+            import * as wow from "./modules/index.js";
+            后面用wow."属性" 去调用不同的export数据对象
+    */
+    import {name,introduce} from "./modules/index.js";
+    console.log(`后面的参数 "${name}" 来自外部的模块export的哦owo`);
+    console.log(`这个是里面传出来的introduce()方法: ${introduce()}`);
+
+    import Pancake from "./modules/index.js"; // 如果不用解构赋值{}，那么这里期待的就是一个 单一的default export数据对象
+    console.log(Pancake); 
+    let food=new Pancake();
+    food.eat();
+
+    /*Tips: 当有default的export对象时，如果想用".default"获取该值
+        那么则必须要" 全选"另起对象名后 才能 "对象名.default"调用
+    */
+
+    
+    </script>
+
+</body>
+</html>
