@@ -10,7 +10,7 @@
 
         而不同于Genetator的一点是，Generator我们还可以"手动next()"去控制"运行的区间"
         而async只能是我们自定执行区间，电脑"自动的"在获取到相应时"自动按序"去执行相应的区间，我们不再能"手动next()"【但这恰好就是"电脑自动按序执行"所需要的】
-        async返回的会是一个Promise对象，我们只能对这个Promise对象进行.then().catch() 来处理对象时resolve()还是reject()
+        async返回的会是一个Promise对象'值'，我们只能对这个Promise对象进行.then().catch() 来处理对象时resolve()还是reject()
 
       -->
     <link rel="icon" href="data:," />
@@ -22,6 +22,7 @@
     <script> //ES6书写区域
     /*声明一个async函数
         语法: async function 名(){...};
+        ps: 只有在async内才能用"await"关键字，和function* xxx(){中用"yield"同理}
     */
 
     //来，让我们再次请出 11生成器结尾的 "加载哥仨"，将他们重构为 返回promise'值'对象(对应async中的await)，再用async重写加载步骤
