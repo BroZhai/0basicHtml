@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Es6的自定class类</title>
+    <!-- 说白了就是 仿制Java 声明class自定义类的写法，主要是因为原js(ES5)中的写法太具有'迷惑性'了
+        ES5中声明一个类:
+             function Person(name,age){
+                this.name=name;
+                this.age=age;
+                ...
+             }
+                搞的像是"声明了一个函数()"似的
+            Person.prototype.sayName=function(){...}; //声明该类的一个方法
+            
+    -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+
+    <em>请在F12控制台查看相应信息</em>
+
+    <script> //ES6书写区域
+    // ES6 造类 【关键字"class"】
+    class Person{
+        constructor(name,age){ //"实例化"构造函数，当用new创建对象时就会调用这里【每个class必须要有constructor!】
+            this.name=name;
+            this.age=age;
+        }
+    //增加"类"的方法 (注意，这里 多个方法间 可不用","隔开)
+    sayName(){
+        console.log("Hello! This is "+this.name);
+        }
+    }
+    //Tips: 利用"Object.assign()"往类里面 一次性"添加多个函数"(浅拷贝)
+    Object.assign(Person.prototype,{ //这里"要被拷贝进去"的多个方法之间 就要用","隔开了
+        sayAge(){
+            console.log("I'm "+this.age+" year old");
+        },
+        calculate(a,b){
+            let valueA=`${a}`;
+            let valueB=String(b);
+            console.log(valueA +" + "+ valueB +' = ⑨');
+        }
+    })
+
+    let p1=new Person("Pancake",23);
+    console.log(p1);
+    p1.sayName();
+
+    // 类的继承 extends (完 全 就 是 J q v a)
+    console.log("-------------------我是分割线---------------------");
+    class Pokemon{ //创建一个父类clasws
+        constructor(name,lv){
+            this.name=name;
+            this.lv=lv;
+            console.log(`父类中的constructor()被执行了!`)
+        }
+        greet(){
+            console.log(`这是宝可梦: ${this.name} 给你打的一个招呼ʕ•̀ω•́ʔ✧`);
+        }
+        showlv(){
+            return this.lv;
+        }
+    }
+
+    class Eevee extends Pokemon{ // 子类 继承extends 父类
+        constructor(name,lv,species){
+            super(name,lv); //用"super(对应参数...)"调用父类的"构造函数"
+            //【调用父类其他的函数则是 "super.其他函数名(对应参数...)"】
+            this.species=species;
+        }
+        actSkill(skill){ // 子类独有方法
+            console.log(`${this.name} 发动了物种"${this.species}" 特有的技能 ${skill}`);
+        }
+        greet(){ //重写父类方法
+            console.log(`等级为${super.showlv()}的 ${this.species} 和你贴贴了♡~~`)
+        }
+    }
+
+    let sylveon=new Eevee("笨蛋仙布",18,"sylveon");
+    console.log(sylveon);
+    sylveon.actSkill("Draing Kiss");
+    sylveon.greet();
+
+
+    </script>
+
+</body>
+</html>
