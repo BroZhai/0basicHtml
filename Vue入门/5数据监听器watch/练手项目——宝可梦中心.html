@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>喵喵购物车</title>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <script src="../vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <h2>Pancake先生的特价宝可梦商店</h2>
+         <div class="table">
+            <table border="1px" style="width: 450px;">
+        <thead>  <!--展示表格标题-->
+                <tr style="text-align: center;">
+                    <td>是否选中</td>
+                    <td>商品名称</td>
+                    <td>购买个数</td>
+                    <td>单价</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            
+            <tbody v-if="shoplist.length>0"> <!--展示水果信息-->
+               <tr style="text-align: center;" v-for="(item,index) in shoplist" :key="item.id">
+                <td @click="singlecheck(index)"><input type="checkbox" v-model="item.isChecked"></td>
+                <td>{{item.name}}</td>
+                <td><button @click="decrease(index)">-</button>&nbsp&nbsp{{item.num}}&nbsp&nbsp<button @click="increase(index)">+</button></td>
+                <td>{{item.price}}</td>
+                <td>{{item.num * item.price}}</td> <!--这里直接对应computed中 单个水果的计算方法"的返回值"-->
+                <td><button @click="del(item.id)">删除该项</button></td>
+               </tr>
+            </tbody>
+
+            <tbody v-else> <!--显示"暂无数据"(没有任何信息)-->
+                <tr>
+                    <td colspan="6" style="text-align: center;">目前没有道具商品了哦_(:з」∠)_...</td>
+                </tr>
+            </tbody>
+
+            <tfoot> <!--底部全选 和计算页-->
+                <tr>
+                   <td colspan="2" @click="allcheck"><input type="checkbox" v-model="checkall">全选</td>
+                   <td colspan="4">当前总价:{{sum}}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+         </div>
+
+        <!--
+        <ul>
+            <li v-for="(item,index) in list" :key="item.id">编号:{{item.id}} 科目:{{item.subject}} 成绩:{{item.score}}
+                <button @click="delSub(item.id)">删除该科</button>
+            </li>
+        </ul>
+        <p>总成绩:{{SUM}} &nbsp&nbsp&nbsp&nbsp 平均分{{AVG}}</p>
+        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model="scoreAdd"> <button @click="submit">提交</button></p> 
+        -->
+       
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                shoplist:[
+                    {id:1,name:'解麻药',num:1,price:2,isChecked:false},
+                    {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
+                    {id:3,name:'万灵药',num:1,price:2,isChecked:false},
+                    {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
+                    {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
+                    {id:6,name:'活力块',num:1,price:9,isChecked:true},
+                ],
+                pay:0,
+                checkall:false,
+            },
+
+            methods:{
+                increase(index){
+                    this.shoplist[index].num++;
+                },
+                decrease(index){
+                    if(this.shoplist[index].num>0){
+                        this.shoplist[index].num--;
+                    }
+                    else{
+                        alert("嗯? 想让我给你倒贴钱?没门！！")
+                    }
+                },
+                del(itemIndex){
+                    this.shoplist=this.shoplist.filter(shopitem => shopitem.id!=itemIndex); //"shopitem"单个对象
+                },
+
+                //以下两个方法纯纯是为了"点框框"也能选中
+                singlecheck(itemIndex){
+                    this.shoplist[itemIndex].isChecked=!this.shoplist[itemIndex].isChecked;
+                },
+                allcheck(){
+                    this.checkall=!this.checkall;
+                },
+                submit(){
+
+                }
+            },
+
+            computed:{ 
+                sum(){
+                    let totalValue=this.shoplist.reduce((result,singleshopitem) => result+singleshopitem.num*singleshopitem.price,0);
+                    return totalValue;
+                }
+
+            },
+        })
+    </script>
+</body>
+</html>
