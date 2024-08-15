@@ -27,13 +27,13 @@
                 </tr>
             </thead>
             
-            <tbody v-if="shoplist.length>0"> <!--展示水果信息-->
+            <tbody v-if="shoplist.length>0"> <!--展示商品信息-->
                <tr style="text-align: center;" v-for="(item,index) in shoplist" :key="item.id">
                 <td @click="singlecheck(index)"><input type="checkbox" v-model="item.isChecked"></td>
                 <td>{{item.name}}</td>
                 <td><button @click="decrease(index)">-</button>&nbsp&nbsp{{item.num}}&nbsp&nbsp<button @click="increase(index)">+</button></td>
                 <td>{{item.price}}</td>
-                <td>{{item.num * item.price}}</td> <!--这里直接对应computed中 单个水果的计算方法"的返回值"-->
+                <td>{{item.num * item.price}}</td> <!--这里直接对应computed中 单个商品的计算方法"的返回值"-->
                 <td><button @click="del(item.id)">删除该项</button></td>
                </tr>
             </tbody>
@@ -46,23 +46,15 @@
 
             <tfoot> <!--底部全选 和计算页-->
                 <tr>
-                   <td colspan="2" @click="allcheck"><input type="checkbox" v-model="checkall">全选</td>
-                   <td colspan="4">当前总价:{{sum}}</td>
+                   <td colspan="2" ><input type="checkbox" v-model="selectAll">全选</td>　
+                   <!--注意，上方的selectAll是一个 "计算属性"变量(computed)，这里是在"获取"它的值，对应的就是它get方法的返回值-->
+                   <td colspan="3">当前总价:{{totalPrice}}</td>
+                   <td style="text-align: center;"><button>结算({{totalItems}})</button></td>
                 </tr>
             </tfoot>
         </table>
 
          </div>
-
-        <!--
-        <ul>
-            <li v-for="(item,index) in list" :key="item.id">编号:{{item.id}} 科目:{{item.subject}} 成绩:{{item.score}}
-                <button @click="delSub(item.id)">删除该科</button>
-            </li>
-        </ul>
-        <p>总成绩:{{SUM}} &nbsp&nbsp&nbsp&nbsp 平均分{{AVG}}</p>
-        <p>新增科目:<input type="text" v-model="subjectAdd">&nbsp&nbsp&nbsp 分数:<input type="text" v-model="scoreAdd"> <button @click="submit">提交</button></p> 
-        -->
        
     </div>
 
@@ -79,7 +71,6 @@
                     {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
                     {id:6,name:'活力块',num:1,price:9,isChecked:true},
                 ],
-                pay:0,
                 checkall:false,
             },
 
@@ -103,9 +94,10 @@
                 singlecheck(itemIndex){
                     this.shoplist[itemIndex].isChecked=!this.shoplist[itemIndex].isChecked;
                 },
-                allcheck(){
-                    this.checkall=!this.checkall;
-                },
+                // allcheck(){
+                //     this.checkall=!this.checkall;
+                // },
+
                 submit(){
 
                 }
@@ -115,6 +107,46 @@
                 sum(){
                     let totalValue=this.shoplist.reduce((result,singleshopitem) => result+singleshopitem.num*singleshopitem.price,0);
                     return totalValue;
+                },
+                selectAll:{ //这里用一个完整的get set写法，因为"全选"的按钮值 肯定在未来还会被改变
+                //get用来正向判断 "所有的选项有没有没选中"
+                get(){
+                    let judge=this.shoplist.every(shopitem => shopitem.isChecked===true); //看看每个shopitem是否都被勾选
+                    /*.every()函数: 检查数组中所有的元素 是否都满足 给定的测试函数
+                        用法: 数组.every(数组单个元素变量 => 条件表达式);
+                    */ 
+                   return judge;
+                },
+                
+                // set用来反向控制 所有商品的选中与否
+                set(incomingValue){ //记得传一个形参，来存储接收外部来的"变化值"
+                    // console.log(incomingValue);
+                    this.shoplist.forEach(shopitem => shopitem.isChecked=incomingValue);
+                    /* .forEach()函数: 针对数组中的"每个元素"都要做的操作
+                        用法: 数组.forEach(数组单个元素变量 => 要做的操作)
+                    */
+                }
+                },
+
+                //以下两个方法用于统计计算 "选中的个数" 和 "只计算选中的价格"
+                totalItems(){
+                    return this.shoplist.reduce((numbers,shopitem)=>{
+                        if(shopitem.isChecked===true){
+                            return numbers+shopitem.num;
+                        }else{ //reduce函数在内部"每次迭代执行时" 都需要return一个值，不然就会炸OAO
+                            return numbers; //对于"没打钩的值"，我们直接pass回number值 继续下一个轮回迭代
+                        }
+                    },0)    
+                },
+
+                totalPrice(){
+                    return this.shoplist.reduce((money,shopitem)=>{
+                        if(shopitem.isChecked){ //偷懒了，反正直接就是布尔
+                            return money+shopitem.num * shopitem.price;
+                        }else{
+                            return money;
+                        }
+                    },0)
                 }
 
             },
