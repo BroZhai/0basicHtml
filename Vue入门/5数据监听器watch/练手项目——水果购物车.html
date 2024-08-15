@@ -30,16 +30,16 @@
                <tr style="text-align: center;" v-for="(item,index) in fruitlist" :key="item.id">
                 <td><input type="checkbox" v-model="item.isChecked"></td>
                 <td>{{item.name}}</td>
-                <td><button>-</button>&nbsp&nbsp{{item.num}}&nbsp&nbsp<button>+</button></td>
+                <td><button @click="decrease(index)">-</button>&nbsp&nbsp{{item.num}}&nbsp&nbsp<button @click="increase(index)">+</button></td>
                 <td>{{item.price}}</td>
                 <td>{{item.tot}}</td>
-                <td><button>删除该项</button></td>
+                <td><button @click="del(item.id)">删除该项</button></td>
                </tr>
             </tbody>
 
             <tbody v-else> <!--显示"暂无数据"(没有任何信息)-->
                 <tr>
-                    <td colspan="5" style="text-align: center;">目前没有水果商品哦...</td>
+                    <td colspan="6" style="text-align: center;">目前没有水果商品了哦...</td>
                 </tr>
             </tbody>
 
@@ -70,20 +70,30 @@
             el:"#app",
             data:{
                 fruitlist:[
-                    {id:1,name:'苹果',num:1,price:2,isChecked:false,tot:3},
-                    {id:2,name:'香蕉',num:1,price:3,isChecked:true,tot:3},
-                    {id:3,name:'梨子',num:1,price:2,isChecked:false,tot:3},
-                    {id:4,name:'火龙果',num:1,price:4,isChecked:false,tot:3},
-                    {id:5,name:'西瓜',num:1,price:5,isChecked:false,tot:3},
-                    {id:6,name:'葡萄',num:1,price:6,isChecked:true,tot:3},
+                    {id:1,name:'苹果',num:1,price:2,isChecked:false,tot:0},
+                    {id:2,name:'香蕉',num:1,price:3,isChecked:true,tot:0},
+                    {id:3,name:'梨子',num:1,price:2,isChecked:false,tot:0},
+                    {id:4,name:'火龙果',num:1,price:4,isChecked:false,tot:0},
+                    {id:5,name:'西瓜',num:1,price:5,isChecked:false,tot:0},
+                    {id:6,name:'葡萄',num:1,price:6,isChecked:true,tot:0},
                 ],
                 pay:0,
             },
 
             methods:{
-                delSub(subId){
-                    this.list=this.list.filter(subject => subject.id!=subId)
-                    this.counter--; //更新用于记录的id编号(巧办法XD)
+                increase(index){
+                    this.fruitlist[index].num++;
+                },
+                decrease(index){
+                    if(this.fruitlist[index].num>0){
+                        this.fruitlist[index].num--;
+                    }
+                    else{
+                        alert("想让我给你倒贴钱?没门！！")
+                    }
+                },
+                del(fid){
+                    this.fruitlist=this.fruitlist.filter(fruit => fruit.id!=fid); //"fruit"单个对象
                 },
                 submit(){
 
