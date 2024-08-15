@@ -8,7 +8,8 @@
     -->
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script> -->
+     <script src="../vue.js"></script>
 
     <div id="app">
         <p>请输入文字: <input type="text" v-model="basicData"></p>
@@ -41,7 +42,7 @@
                 },
 
             //再来看看"针对对象"内部数据的监视
-            //Tips: 我们要用"对象.属性名" 来设置 对象内 具体要监听的 属性对象
+            //Tips: 我们要用"对象.属性名" 来设置 对象内 具体要监听的 属性对象(记得用"引号")
                 "obj.objData"(newValue,oldValue){
                     this.obj.objData=newValue;
                     console.log("obj.objData的旧值为:",oldValue," 新值变化为:",this.obj.objData);
