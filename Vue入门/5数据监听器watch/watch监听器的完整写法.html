@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch监听器的完整写法</title>
+    <link rel="icon" href="data:," />
+</head>
+<body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script> 改本地js了，太卡了-->
+    <script src="../vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <h3>当前Pokemon对象</h3>
+        <p>名字: {{pokemon.name}}</p>
+        <p>等级: {{pokemon.lv}}</p>
+        <hr>
+        <h4>来尝试修改一下??</h4>
+        <p>修改的新名字: <input type="text" @keyup.enter="rename" v-model="changedName"> <em>(可单独回车提交)<em></p>
+        <p>修改的lv: <input type="text" @keyup.enter="clv" v-model.number="changedLv"> <em>(可单独回车提交)<em></p>
+        <button @click="submit">统一提交</button><br>
+        <em>请在F12控制台内查看相关响应信息</em>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                pokemon:{
+                    name:"leaflon",
+                    lv:62,
+                },
+                changedName:"",
+                changedLv:"",
+
+            },
+            methods:{
+                rename(){
+                    this.pokemon.name=this.changedName;  
+                },
+                clv(){
+                    this.pokemon.lv=this.changedLv;
+                },
+                
+                submit(){
+                    if(this.changedName!=="" || this.changedLv!==""){
+                        this.pokemon.name=this.changedName;
+                        this.pokemon.lv=this.changedLv;
+                    }else{
+                        alert("请填写完整owo");
+                    }
+                    
+                }
+            },
+
+            watch:{ //watch的完整写法，多了两个参数deep 和immediate, 还有handler(){ 具体要做的一些事情 }
+                pokemon:{ //直接传了"一整个pokemon对象"进去，将要监视"pokemon"的所有属性"变化"【但看的整体还是对象】
+                    deep:true, //deep: 是否监视所有(多个)属性?
+                    immediate:false, //immediate: 是否"一进页面就执行"?
+                    handler(newValue){ //只会在数据"被修改的时候" 才会被触发【且只能获取到更新后的值newValue】
+                        console.log("检测到Pokemon的属性发生了变化！");                
+                        console.log(newValue);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
