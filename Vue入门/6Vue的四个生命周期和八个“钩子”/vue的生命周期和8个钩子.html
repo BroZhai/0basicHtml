@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的四个生命周期</title>
+    <!-- 任何一个Vue实例基本都可以分为4个生命周期: 
+     1. 创建后台数据 (创建阶段)
+     2. 在视图层中去渲染 (挂载阶段)
+     3. 操作即时变更视图中的数据 (更新阶段)
+     4. Vue实例不再被需要，删了　(销毁阶段)
+
+     其中每一个生命周期在"开头"和"结尾"各对应一个特别的"钩子"(到对应阶段就会被触发的函数)
+     在声明对应的"钩子函数"时，它们必须"成对出现"(有头有尾)
+     Tips: 创建阶段后 created　和 挂载渲染阶段后 mounted，这哥俩常用
+     -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script> -->
+    <script src="../vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <h1>{{title}}</h1>
+        <h2><button @click="dec">-</button><span>{{counter}}</span><button @click="add">+</button></h2>
+        <em>请在F12控制台内查看对应输出信息</em>
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                title:"一个计数器",
+                counter:100
+            },
+            methods:{
+                add(){
+                    this.counter++;
+                },
+                dec(){
+                    this.counter--;
+                }
+            },
+
+        //1. 创建阶段
+        beforeCreate(){
+            console.log(`beforeCreate 现在是创建阶段前,现在访问counter数据为"${this.counter}"`);
+        },
+        created(){ 
+            console.log(`created 现在是创建阶段后,现在访问counter数据为"${this.counter}"`);
+            //这里就可以进行"数据初始化"的操作
+        },
+
+        //2. 挂载阶段
+        beforeMount(){
+            console.log(`beforeMount现在是模版渲染挂载前, title的值为"${document.querySelector('h1').innerHTML}"`);
+        },
+        mounted(){
+            console.log(`mounted现在是模版渲染挂载后,title的值为"${document.querySelector('h1').innerHTML}"`);
+            //这里就可以开始"操作dom"(即刻改变视图数据)了
+        },
+
+        //3. 更新阶段 (修改数据时才会触发)
+        beforeUpdate(){
+            console.log(`beforeUpdate 现在是"更新阶段"前, 此刻"页面视图中"的counter数据为(仍未被更改)"${document.querySelector('span').innerHTML}"`);
+        },
+        updated(){ 
+            console.log(`updated 现在是"更新阶段"后,现在"页面视图"更新后 的counter数据为(已经被更改)"${document.querySelector('span').innerHTML}"`);
+            //这里就可以进行"数据初始化"的操作
+        },
+
+        //4. 卸载阶段 (卸载Vue实例语法: Vue实例名.$destory() ) 【控制台去用指令卸载】
+        //Tips: 在Vue对象被删除之后，虽然视图层的能看到元素都还在，但是所有的"操作" 此刻都已经失效了(毕竟Vue实例带着methods一起被爆破了)
+        //注意"destroy"不要打错字了OAO!!!
+        beforeDestory(){
+            console.log(`现在是 beforeDestroy 实例被卸载前发出的消息`);
+            //因为该Vue实例就要被摧毁了，此刻我们可以在这里清楚一些它的"资源占用"(如定时器，延时器等...)
+        },
+        destroyed(){
+            console.log(`现在是 destroyed, 该Vue实例已经被彻底的删除了owo...`);
+        }
+
+        })
+    </script>
+</body>
+</html>
