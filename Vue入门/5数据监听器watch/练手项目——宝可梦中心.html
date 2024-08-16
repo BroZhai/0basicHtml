@@ -46,10 +46,10 @@
 
             <tfoot> <!--底部全选 和计算页-->
                 <tr>
-                   <td colspan="2" ><input type="checkbox" v-model="selectAll">全选</td>　
+                   <td colspan="2" @click="allcheck"><input type="checkbox" v-model="selectAll">全选</td>　
                    <!--注意，上方的selectAll是一个 "计算属性"变量(computed)，这里是在"获取"它的值，对应的就是它get方法的返回值-->
                    <td colspan="3">当前总价:{{totalPrice}}</td>
-                   <td style="text-align: center;"><button>结算({{totalItems}})</button></td>
+                   <td style="text-align: center;"><button @click="submit">结算({{totalItems}})</button></td>
                 </tr>
             </tfoot>
         </table>
@@ -71,7 +71,6 @@
                     {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
                     {id:6,name:'活力块',num:1,price:9,isChecked:true},
                 ],
-                checkall:false,
             },
 
             methods:{
@@ -94,12 +93,18 @@
                 singlecheck(itemIndex){
                     this.shoplist[itemIndex].isChecked=!this.shoplist[itemIndex].isChecked;
                 },
-                // allcheck(){
-                //     this.checkall=!this.checkall;
-                // },
+                allcheck(){　//Tips: 在methods内原来还能 直接调用
+                    this.selectAll = !this.selectAll;
+                },
 
                 submit(){
-
+                    if(this.shoplist.length===0 || this.totalItems===0){
+                        alert("0元购...嗯??你买啥了OAO??");
+                    }
+                    else{
+                        alert("哦呀，感谢进店惠顾，这单我请了^^");
+                    }
+                    
                 }
             },
 
@@ -109,24 +114,24 @@
                     return totalValue;
                 },
                 selectAll:{ //这里用一个完整的get set写法，因为"全选"的按钮值 肯定在未来还会被改变
-                //get用来正向判断 "所有的选项有没有没选中"
-                get(){
-                    let judge=this.shoplist.every(shopitem => shopitem.isChecked===true); //看看每个shopitem是否都被勾选
-                    /*.every()函数: 检查数组中所有的元素 是否都满足 给定的测试函数
-                        用法: 数组.every(数组单个元素变量 => 条件表达式);
-                    */ 
-                   return judge;
-                },
-                
-                // set用来反向控制 所有商品的选中与否
-                set(incomingValue){ //记得传一个形参，来存储接收外部来的"变化值"
-                    // console.log(incomingValue);
-                    this.shoplist.forEach(shopitem => shopitem.isChecked=incomingValue);
-                    /* .forEach()函数: 针对数组中的"每个元素"都要做的操作
-                        用法: 数组.forEach(数组单个元素变量 => 要做的操作)
-                    */
-                }
-                },
+                    //get用来正向判断 "所有的选项有没有没选中" (对selectAll的访问 就对应这里)
+                    get(){
+                        let judge=this.shoplist.every(shopitem => shopitem.isChecked===true); //看看每个shopitem是否都被勾选
+                        /*.every()函数: 检查数组中所有的元素 是否都满足 给定的测试函数
+                            用法: 数组.every(数组单个元素变量 => 条件表达式);
+                        */ 
+                       return judge;
+                    },
+
+                    // set用来反向控制 所有商品的选中与否 (对selectAll的修改 就会跳到这里)
+                    set(incomingValue){ //记得传一个形参，来存储接收外部来的"变化值"
+                        // console.log(incomingValue);
+                        this.shoplist.forEach(shopitem => shopitem.isChecked=incomingValue);
+                        /* .forEach()函数: 针对数组中的"每个元素"都要做的操作
+                            用法: 数组.forEach(数组单个元素变量 => 要做的操作)
+                        */
+                    }
+                    },
 
                 //以下两个方法用于统计计算 "选中的个数" 和 "只计算选中的价格"
                 totalItems(){
@@ -150,7 +155,16 @@
                 }
 
             },
+
+            watch:{ //搞一个"本地数据持久化"，缓存用户每次操作后的值，而不是一刷新又全部重置了
+            //对于这个项目来说，我们要"监视"的对象就是一整个"shoplist"数组对象，为"复杂"数据类型
+
+
+            }
         })
+
+        console.log(app);
+        
     </script>
 </body>
 </html>
