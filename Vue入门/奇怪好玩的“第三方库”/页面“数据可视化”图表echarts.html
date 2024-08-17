@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据可视化之echarts库</title>
+    <!-- 这个库就是用来给页面加个"数据图"用的，来玩玩
+        重点是要学会去看"开发文档"，之后去玩别的库也是一样的
+        https://echarts.apache.org/handbook/zh/get-started/
+    -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script> -->
+    <script src="../vue.js"></script>
+    <script src="../奇怪好玩的“第三方库”/echarts.js"></script> <!--导入echarts的js包-->
+
+    <div id="app"> <!--宝可梦中心-->
+        <h2 style="position: relative; margin-left: 55px;">Pancake先生的特价宝可梦商店</h2>
+         <div class="table">
+            <table border="1px" style="width: 450px;">
+        <thead>  <!--展示表格标题-->
+                <tr style="text-align: center;">
+                    <td>是否选中</td>
+                    <td>商品名称</td>
+                    <td>购买个数</td>
+                    <td>单价</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            
+            <tbody v-if="shoplist.length>0"> <!--展示商品信息-->
+               <tr style="text-align: center;" v-for="(item,index) in shoplist" :key="item.id">
+                <td @click="singlecheck(index)"><input type="checkbox" v-model="item.isChecked"></td>
+                <td>{{item.name}}</td>
+                <td><button @click="decrease(index)">-</button>&nbsp&nbsp{{item.num}}&nbsp&nbsp<button @click="increase(index)">+</button></td>
+                <td>{{item.price}}</td>
+                <td>{{item.num * item.price}}</td> <!--这里直接对应computed中 单个商品的计算方法"的返回值"-->
+                <td><button @click="del(item.id)">删除该项</button></td>
+               </tr>
+            </tbody>
+
+            <tbody v-else> <!--显示"暂无数据"(没有任何信息)-->
+                <tr>
+                    <td colspan="6" style="text-align: center;">目前没有道具商品了哦_(:з」∠)_...</td>
+                </tr>
+            </tbody>
+
+            <tfoot> <!--底部全选 和计算页-->
+                <tr>
+                   <td colspan="2" @click="allcheck"><input type="checkbox" v-model="selectAll">全选</td>　
+                   <!--注意，上方的selectAll是一个 "计算属性"变量(computed)，这里是在"获取"它的值，对应的就是它get方法的返回值-->
+                   <td>当前总价:{{totalPrice}}</td>
+                   <td colspan='2' style="text-align: center;"><button @click="reset">重置购物列表</button></td>
+                   <td style="text-align: center;"><button @click="submit">结算({{totalItems}})</button></td>
+                </tr>
+            </tfoot>
+        </table>
+
+         </div>
+       
+    </div>
+
+    <!-- 对于echarts的"展示区"来说，所要容纳它的DOM 必须要有 宽 高 属性 -->
+    <div id="chart" style="width: 800px; height:600px;"> 
+        <!-- echarts展示区 -->
+    </div>
+
+
+
+    <script>
+        
+
+
+        // 一个Vue实例(注意Vue实例不能指向和echarts一样的DOM，不然会爆)
+        // Vue脚本相关
+        const defaultList=[ //设置一个默认的购物车列表，到时用于　数据持久化的 "恢复"默认页面
+                    {id:1,name:'解麻药',num:1,price:2,isChecked:false},
+                    {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
+                    {id:3,name:'万灵药',num:1,price:2,isChecked:false},
+                    {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
+                    {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
+                    {id:6,name:'活力块',num:1,price:9,isChecked:true},
+                ];
+
+        const app=new Vue({
+            el:"#app",
+            data:{
+                // shoplist:[
+                //     {id:1,name:'解麻药',num:1,price:2,isChecked:false},
+                //     {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
+                //     {id:3,name:'万灵药',num:1,price:2,isChecked:false},
+                //     {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
+                //     {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
+                //     {id:6,name:'活力块',num:1,price:9,isChecked:true},
+                // ],
+                /*数据持久化相关: 从上一次用户"操作后"的缓存中读取shoplist，避免刷新之后"操作记录消失"
+                    因为存到缓存中的值被提前转成了"json键值对对象"
+                    我们便要用JSON.parse()去解析从"localStorage中"get到的json对象
+                    如果这个 缓存的json对象都无了 (用户连"缓存"中的[]都删了)，则恢复(设置)为提前"备份"好的defalutList
+                    (使用下面的代码时要 先将上面原有的shoplist注释掉owo)
+                */
+                shoplist: JSON.parse(localStorage.getItem("modifiedShoplist")) || defaultList,
+            },
+
+            methods:{
+                increase(index){
+                    this.shoplist[index].num++;
+                },
+                decrease(index){
+                    if(this.shoplist[index].num>0){
+                        this.shoplist[index].num--;
+                    }
+                    else{
+                        alert("嗯? 想让我给你倒贴钱?没门！！")
+                    }
+                },
+                del(itemIndex){
+                    this.shoplist=this.shoplist.filter(shopitem => shopitem.id!=itemIndex); //"shopitem"单个对象
+                },
+
+                //以下两个方法纯纯是为了"点框框"也能选中
+                singlecheck(itemIndex){
+                    this.shoplist[itemIndex].isChecked=!this.shoplist[itemIndex].isChecked;
+                },
+                allcheck(){　//Tips: 在methods内原来还能 直接调用 computed！
+                    this.selectAll = !this.selectAll; //跳到selectAll 的set()区域应用更改！
+                },
+
+                reset(){
+                    this.shoplist=defaultList;
+                },
+
+                submit(){ //这里的this.totalItems同上Tips
+                    if(this.shoplist.length===0 || this.totalItems===0){
+                        alert("0元购...嗯??你买啥了OAO??");
+                    }
+                    else{
+                        alert(`哦呀，感谢进店惠顾，您将要支付${this.totalPrice}块钱，但这单我请了^^`);
+                    }
+                    
+                }
+            },
+
+            computed:{ 
+                sum(){
+                    let totalValue=this.shoplist.reduce((result,singleshopitem) => result+singleshopitem.num*singleshopitem.price,0);
+                    return totalValue;
+                },
+                selectAll:{ //这里用一个完整的get set写法，因为"全选"的按钮值 肯定在未来还会被改变
+                    //get用来正向判断 "所有的选项有没有没选中" (对selectAll的访问 就对应这里)
+                    get(){
+                        let judge=this.shoplist.every(shopitem => shopitem.isChecked===true); //看看每个shopitem是否都被勾选
+                        /*.every()函数: 检查数组中所有的元素 是否都满足 给定的测试函数
+                            用法: 数组.every(数组单个元素变量 => 条件表达式);
+                        */ 
+                       return judge;
+                    },
+
+                    // set用来反向控制 所有商品的选中与否 (对selectAll的修改 就会跳到这里)
+                    set(incomingValue){ //记得传一个形参，来存储接收外部来的"变化值"
+                        // console.log(incomingValue);
+                        this.shoplist.forEach(shopitem => shopitem.isChecked=incomingValue);
+                        /* .forEach()函数: 针对数组中的"每个元素"都要做的操作
+                            用法: 数组.forEach(数组单个元素变量 => 要做的操作)
+                        */
+                    }
+                    },
+
+                //以下两个方法用于统计计算 "选中的个数" 和 "只计算选中的价格"
+                totalItems(){
+                    return this.shoplist.reduce((numbers,shopitem)=>{
+                        if(shopitem.isChecked===true){
+                            return numbers+shopitem.num;
+                        }else{ //reduce函数在内部"每次迭代执行时" 都需要return一个值，不然就会炸OAO
+                            return numbers; //对于"没打钩的值"，我们直接pass回number值 继续下一个轮回迭代
+                        }
+                    },0)    
+                },
+
+                totalPrice(){
+                    return this.shoplist.reduce((money,shopitem)=>{
+                        if(shopitem.isChecked){ //偷懒了，反正直接就是布尔
+                            return money+shopitem.num * shopitem.price;
+                        }else{
+                            return money;
+                        }
+                    },0)
+                }
+
+            },
+
+            watch:{ //搞一个"本地数据持久化"，缓存用户每次操作后的值，而不是一刷新又全部重置了
+            /*对于这个项目来说，我们要"监视"的对象就是一整个"shoplist"数组对象，为"复杂"数据类型
+                也就是说，这个shoplist内的任何一点"风吹草动"都会引起"watch的注意"
+                这里的原理就是 将用户操作的数据"缓存"到浏览器中，用到了localStorage
+            */
+            shoplist:{
+                deep:true,
+                handler(newValue){ 
+                    //将用户"操作后"的购物车 转成json对象(JSON.stringift(复杂数据对象))，另起名后"建立一个本地缓存Item"
+                    localStorage.setItem("modifiedShoplist",JSON.stringify(newValue));
+                    
+                }
+            }
+
+            },
+        
+        mounted(){ //在页面数据完成渲染后，是时候直接生成启用对应的图表了！
+            
+            this.myChart=echarts.init(document.getElementById('chart'));
+
+             // 指定图表的配置项和数据
+            let option = {
+              tooltip: {
+                trigger: 'item'
+              },
+              legend: {
+                top: '5%',
+                left: 'center'
+              },
+              series: [
+                {
+                  name: '宝可梦商店购物清单',
+                  type: 'pie',
+                  radius: ['40%', '70%'],
+                  avoidLabelOverlap: false,
+                  itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                  },
+                  label: {
+                    show: false,
+                    position: 'center'
+                  },
+                  emphasis: {
+                    label: {
+                      show: true,
+                      fontSize: 40,
+                      fontWeight: 'bold'
+                    }
+                  },
+                  labelLine: {
+                    show: false
+                  },
+                //   下面是初始化创建的数据，可以直接注释掉，后面可以再去Vue实例中写入我们所需的数据对象(重置)【但要注意这里存的"数据格式"，之后要重新map对象来"完全对应"】
+                  data: [
+                    { value: 1048, name: 'Search Engine' },
+                    { value: 735, name: 'Direct' },
+                    { value: 580, name: 'Email' },
+                    { value: 484, name: 'Union Ads' },
+                    { value: 300, name: 'Video Ads' }
+                  ]
+                }
+              ]
+            };
+
+            //将上面的"设置"应用在我们的"echarts"对象上，让它"直接"完成渲染 (这里是 Vue实例挂载完后"应用一个'初始值'")
+            this.myChart.setOption(option);
+
+
+        },
+
+        updated(){ //当发现页面视图有更新时，通过"变动options"的内容，重新渲染图表
+            let newOption={ //设置"只需要变更的数据项"，
+                series:[{
+                    data:[
+                        { value: 580, name: 'baka' },
+                        { value: 484, name: 'sus' },
+                    ]
+                  }
+                ]
+            }
+            this.myChart.setOption(newOption);
+        }
+
+        })
+    </script>
+</body>
+</html>
