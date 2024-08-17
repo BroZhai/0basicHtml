@@ -6,6 +6,7 @@
     <!-- 这个库就是用来给页面加个"数据图"用的，来玩玩
         重点是要学会去看"开发文档"，之后去玩别的库也是一样的
         https://echarts.apache.org/handbook/zh/get-started/
+        让我们来给"宝可梦中心"加上可视化数据图！
     -->
     <link rel="icon" href="data:," />
 </head>
@@ -61,16 +62,12 @@
        
     </div>
 
+    <!-- echarts展示区 -->
     <!-- 对于echarts的"展示区"来说，所要容纳它的DOM 必须要有 宽 高 属性 -->
-    <div id="chart" style="width: 800px; height:600px;"> 
-        <!-- echarts展示区 -->
-    </div>
-
+    <div id="chart" style="width: 500px; height:500px;"></div>
 
 
     <script>
-        
-
 
         // 一个Vue实例(注意Vue实例不能指向和echarts一样的DOM，不然会爆)
         // Vue脚本相关
@@ -183,28 +180,14 @@
                 }
 
             },
-
-            watch:{ //搞一个"本地数据持久化"，缓存用户每次操作后的值，而不是一刷新又全部重置了
-            /*对于这个项目来说，我们要"监视"的对象就是一整个"shoplist"数组对象，为"复杂"数据类型
-                也就是说，这个shoplist内的任何一点"风吹草动"都会引起"watch的注意"
-                这里的原理就是 将用户操作的数据"缓存"到浏览器中，用到了localStorage
-            */
-            shoplist:{
-                deep:true,
-                handler(newValue){ 
-                    //将用户"操作后"的购物车 转成json对象(JSON.stringift(复杂数据对象))，另起名后"建立一个本地缓存Item"
-                    localStorage.setItem("modifiedShoplist",JSON.stringify(newValue));
-                    
-                }
-            }
-
-            },
         
+        /*这里开始才是"图表"的重头戏！*/
         mounted(){ //在页面数据完成渲染后，是时候直接生成启用对应的图表了！
             
+            //直接给当前的对象 直接通过".xxx"　追加一个新的属性，而这个属性对应的就是"初始化图表"
             this.myChart=echarts.init(document.getElementById('chart'));
 
-             // 指定图表的配置项和数据
+             // 指定图表的配置项和数据 (这里为一个初始的'模版')
             let option = {
               tooltip: {
                 trigger: 'item'
@@ -240,11 +223,11 @@
                   },
                 //   下面是初始化创建的数据，可以直接注释掉，后面可以再去Vue实例中写入我们所需的数据对象(重置)【但要注意这里存的"数据格式"，之后要重新map对象来"完全对应"】
                   data: [
-                    { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
+                    { value: 1048, name: '这是' },
+                    { value: 735, name: '一个' },
+                    { value: 580, name: '初始化' },
+                    { value: 484, name: '的' },
+                    { value: 300, name: '图表' }
                   ]
                 }
               ]
@@ -264,14 +247,22 @@
             } )
         */ 
         let newData=this.shoplist.map( currentItem => {
-            let updatedObj={value:currentItem.num * currentItem.price, name:currentItem.name};
-            return updatedObj; //存到一个"返回数组"中去
+            //建立一个"格式"对象 {value:xxx, name:xxx}，后面的"xxx"对应我们要定的值
+            if(currentItem.isChecked){//检查对象是否"打钩选中"
+                let updatedObj={value:currentItem.num * currentItem.price, name:currentItem.name};
+                return updatedObj; //存到一个"返回数组"中去
+            }
+            else{
+                return;
+            }
+            
         })
 
 
             let newOption={ //设置"只需要变更的数据项"，
                 series:[{
-                    data:newData,
+                    data:newData, //对应上面.map()返回的特定数组对象[{value:currentItem.num, name:currentItem.name}, ...更多类似数据]
+                    //直接对原有的"默认Data"进行"覆写"
                   }
                 ]
             }
@@ -279,6 +270,9 @@
         }
 
         })
+
+        console.log(app.shoplist);
+
     </script>
 </body>
 </html>
