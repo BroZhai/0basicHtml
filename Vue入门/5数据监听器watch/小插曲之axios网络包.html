@@ -11,6 +11,8 @@
         基础使用语法: (axios为一个对象) 
         Get请求:
         axios.get('地址').then(function(服务成功响应的对象'形参'){}, function(失败对象'形参'){})
+            注: 后面的".then(...)"如果不急着"立即处理"的话就可以先不写，用一个对象对象将axios.get()返回"数据对象"先存起来，之后再做后续处理
+
         其中, '地址'中可以用?'key'=value...来向服务器传递请求参数
         如果有多个"?"请求，则可以用"&"把这些请求一一连起来(/joke?token=xxx & num=xxx...)
 
@@ -58,6 +60,16 @@
                         /*这个返回的json结构有点难蚌，嵌套了两层data
                             详细请看"axios返回的json对象结构.txt"
                         */
+
+                    /*查了一下相关的文档后发现，上面的写法有点"过于直接了"，“请求参数”一旦多了就容易炸((
+                        更好的写法: axios.get("url"，{
+                            params:{ //这里直接写"键值对"的 请求参数 和 值
+                                (请求参数名: 对应值)
+                                token: this.mytoken,
+                                num: this.jokeNum,
+                            }
+                        }) 【不急着".then()立即处理"】
+                    */
                        console.log(reponseObj.data);
                        if(reponseObj.data.data.length>1){
                             for(i=0;i<reponseObj.data.data.length;i++){
