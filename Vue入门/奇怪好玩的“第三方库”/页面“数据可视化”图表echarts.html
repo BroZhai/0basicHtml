@@ -74,6 +74,15 @@
 
         // 一个Vue实例(注意Vue实例不能指向和echarts一样的DOM，不然会爆)
         // Vue脚本相关
+        const defaultList=[ //设置一个默认的购物车列表，到时用于　数据持久化的 "恢复"默认页面
+                {id:1,name:'解麻药',num:1,price:2,isChecked:false},
+                {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
+                {id:3,name:'万灵药',num:1,price:2,isChecked:false},
+                {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
+                {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
+                {id:6,name:'活力块',num:1,price:9,isChecked:true},
+            ];
+
 
         const app=new Vue({
             el:"#app",
@@ -248,16 +257,25 @@
         },
 
         updated(){ //当发现页面"视图有更新"时，通过"变动options"的内容，动态重新渲染图表
+        /* 由于要符合饼图data的"数据规范"，我们则需要用map()函数 去原对象数组shoplist中 取出每个商品对象的"关键值"
+             map()函数则会"根据需求(条件)" 创建一个新的数组，而不影响原来的
+            语法: 数组.map( 当前遍历的值 => {
+                要进行的操作，不要忘记return!
+            } )
+        */ 
+        let newData=this.shoplist.map( currentItem => {
+            let updatedObj={value:currentItem.num * currentItem.price, name:currentItem.name};
+            return updatedObj; //存到一个"返回数组"中去
+        })
+
+
             let newOption={ //设置"只需要变更的数据项"，
                 series:[{
-                    data:[
-                        { value: 580, name: 'baka' },
-                        { value: 484, name: 'sus' },
-                    ]
+                    data:newData,
                   }
                 ]
             }
-            this.myChart.setOption(newOption); //一定要记得去应用
+            this.myChart.setOption(newOption); //一定要记得去"应用", 图表才会变动生效
         }
 
         })
