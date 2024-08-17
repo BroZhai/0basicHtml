@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>钩子函数小练习</title>
+    <!-- 思路: 在页面"成功完成渲染" mounted 后，自动"聚焦"(选中)输入框 -->
+    <link rel="icon" href="data:," />
+</head>
+<body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script> -->
+    <script src="../vue.js"></script>
+
+    <div id="app"> <!--设定"作用域"-->
+        <h2>页面渲染完成后"自锁定"focus输入框</h2>
+        <input type="text" v-model="searchContent">&nbsp&nbsp&nbsp&nbsp<button>搜索一下</button>
+        <br>
+        <em>进入页面 或 刷新时，上面的输入框就会被"自动选中"(对焦focus)</em>
+        <br>
+        <em>F12控制台中还有妙妙信息~~</em>
+
+    </div>
+
+    <script>
+        // Vue脚本相关
+        const app=new Vue({
+            el:"#app",
+            data:{
+                searchContent:'',
+            },
+            beforeMount(){
+                let rawLable=document.querySelector('input');
+                console.log(`现在是挂载前，input的标签为:${rawLable.outerHTML}`);
+                console.log();
+            },
+            mounted(){
+                let rawLable=document.querySelector('input');
+                console.log(`现在是挂载后的状态，input的标签为:${rawLable.outerHTML}`);
+                console.log(`此时我们会发现"v-model=xxx"已经消失不见了，说明此时该Vue实例已经完成了挂载，上面的"模版信息"就给丢掉了`);
+                rawLable.focus(); //用".focus()"对找到的"标签对象"进行 自动选中
+            }
+        })
+    </script>
+</body>
+</html>
