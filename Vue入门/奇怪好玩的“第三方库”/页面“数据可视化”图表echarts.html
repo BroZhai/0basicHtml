@@ -74,33 +74,18 @@
 
         // 一个Vue实例(注意Vue实例不能指向和echarts一样的DOM，不然会爆)
         // Vue脚本相关
-        const defaultList=[ //设置一个默认的购物车列表，到时用于　数据持久化的 "恢复"默认页面
+
+        const app=new Vue({
+            el:"#app",
+            data:{
+                shoplist:[
                     {id:1,name:'解麻药',num:1,price:2,isChecked:false},
                     {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
                     {id:3,name:'万灵药',num:1,price:2,isChecked:false},
                     {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
                     {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
                     {id:6,name:'活力块',num:1,price:9,isChecked:true},
-                ];
-
-        const app=new Vue({
-            el:"#app",
-            data:{
-                // shoplist:[
-                //     {id:1,name:'解麻药',num:1,price:2,isChecked:false},
-                //     {id:2,name:'PP单项小补剂',num:1,price:3,isChecked:true},
-                //     {id:3,name:'万灵药',num:1,price:2,isChecked:false},
-                //     {id:4,name:'灼烧药',num:1,price:4,isChecked:false},
-                //     {id:5,name:'厉害伤药',num:1,price:5,isChecked:false},
-                //     {id:6,name:'活力块',num:1,price:9,isChecked:true},
-                // ],
-                /*数据持久化相关: 从上一次用户"操作后"的缓存中读取shoplist，避免刷新之后"操作记录消失"
-                    因为存到缓存中的值被提前转成了"json键值对对象"
-                    我们便要用JSON.parse()去解析从"localStorage中"get到的json对象
-                    如果这个 缓存的json对象都无了 (用户连"缓存"中的[]都删了)，则恢复(设置)为提前"备份"好的defalutList
-                    (使用下面的代码时要 先将上面原有的shoplist注释掉owo)
-                */
-                shoplist: JSON.parse(localStorage.getItem("modifiedShoplist")) || defaultList,
+                ],
             },
 
             methods:{
@@ -262,7 +247,7 @@
 
         },
 
-        updated(){ //当发现页面视图有更新时，通过"变动options"的内容，重新渲染图表
+        updated(){ //当发现页面"视图有更新"时，通过"变动options"的内容，动态重新渲染图表
             let newOption={ //设置"只需要变更的数据项"，
                 series:[{
                     data:[
@@ -272,7 +257,7 @@
                   }
                 ]
             }
-            this.myChart.setOption(newOption);
+            this.myChart.setOption(newOption); //一定要记得去应用
         }
 
         })
