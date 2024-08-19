@@ -1,6 +1,7 @@
 <template>
     <div class="header" @click="headerAlert">
         我是components中的"PageHeader.vue" ^^
+        <GlobalButton class="btnpos"></GlobalButton>
     </div>
 </template>
 <script>
@@ -15,7 +16,7 @@ export default { //export 这里就意味着"向外导出"该包，到时候就�
 <style>
     .header{
         height:100px;
-        line-height: 100px;
+        line-height: 60px;
         text-align: center;
         font-size: 18px;
         background-color: #af22f5;

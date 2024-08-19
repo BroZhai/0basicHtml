@@ -42,7 +42,7 @@ export default {
 <style>
   /* 设置一下根组件(底板)的样式 */
   .App{
-    width: 400px;
+    width: 600px;
     height: 540px;
     background-color: cyan;
     margin: 40px auto;

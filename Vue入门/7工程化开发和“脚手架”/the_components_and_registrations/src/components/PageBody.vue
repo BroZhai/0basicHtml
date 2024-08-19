@@ -1,6 +1,7 @@
 <template>
     <div class="body" @click="bodyAlert">
         Hello~ 我是"PageBody.vue" ٩(๑òωó๑)۶
+        <GlobalButton></GlobalButton>
     </div>
 </template>
 <script>
@@ -15,7 +16,7 @@ export default {
 <style>
     .body{
         height:300px;
-        line-height: 300px;
+        line-height: 150px;
         text-align: center;
         font-size: 18px;
         background-color: #eb7317;

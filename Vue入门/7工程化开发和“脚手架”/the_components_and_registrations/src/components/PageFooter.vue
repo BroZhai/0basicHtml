@@ -5,6 +5,7 @@
     -->
     <div class="footer" @click="footerAlert">
         那么，我就是"PageFooter.vue"啦ʕ•̀ω•́ʔ✧
+        <GlobalButton class="btnpos"></GlobalButton>
     </div>
 </template>
 <script>
@@ -19,7 +20,7 @@ export default {
 <style>
     .footer{
         height:100px;
-        line-height: 100px;
+        line-height: 60px;
         text-align: center;
         font-size: 18px;
         background-color: #3eeb17;
@@ -28,5 +29,10 @@ export default {
     }
     .footer:hover{
         border: 6px solid white;
+    }
+    .btnpos{
+        position: relative;
+        top:-20px;
+        margin: 0px auto;
     }
 </style>
