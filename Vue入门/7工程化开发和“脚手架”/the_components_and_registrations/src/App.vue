@@ -23,7 +23,7 @@
 
 <script>
 /* 局部注册: 在这里导入我们"在外部"写好的vue小包(在写命名时，必须使用"大驼峰"命名法!)
-  语法: import 包名 from '路径'
+  语法: import 导入名(之后被当做对象) from '路径'
   ('导入'的包一定要去 '声明'和 '使用'！不然会报错[严格模式])
 */
 import PageHeader from './components/PageHeader.vue';
@@ -31,7 +31,7 @@ import PageBody from './components/PageBody.vue';
 import PageFooter from './components/PageFooter.vue';
 
 export default {
-  components:{ //将上面导入的"小vue包"在这里components中'声明'一下(直接写导入名就好，用","隔开)
+  components:{ //将上面导入的"小vue包对象"在这里components中'声明'一下(直接写'导入名'就好，用","隔开)
     PageHeader,
     PageBody,
     PageFooter,
