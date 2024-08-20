@@ -31,10 +31,10 @@ export default {
     }
   },
   methods:{
-    okLetsChange(paraFromChild){
+    okLetsChange(paraFromChild){  //这里记得写一个"形参"来接收 子组件的"请求修改参数"
       console.log(`接收到子组件传过来的'changeSexPls'请求, 已将this.ismale修改为: ${paraFromChild}`);
-      
-      this.ismale=paraFromChild;
+      this.ismale=paraFromChild; //应用子组件的"请求修改参数"到 父组件对应data上
+      // (paraFromChild="!this.ismale")
     }
   }
 }
