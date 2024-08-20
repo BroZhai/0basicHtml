@@ -11,7 +11,7 @@
 export default {
     methods:{
         buttonHit(){
-            alert("全局通用按钮被点击啦！！");
+            alert("全局通用按钮被点击啦！！并且用了@click.stop阻止了'向外冒泡owo'");
         }
     }
 }

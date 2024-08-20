@@ -17,7 +17,16 @@
         <PageHeader></PageHeader>
         <PageBody></PageBody>
         <PageFooter></PageFooter>
-
+        <hr>
+        <h2>以下为data()的展示</h2>
+        <h4>在不同的"组件"中，为了维护数据的"独立性"，data现在必须写成一种"函数()"的形式，并进行return;
+          <br>
+          而不再像以前一样直接写data:{对象}惹...(会报错)
+        </h4>
+        <strong>可以看到以下三个数据对象是"独立的"owo</strong>
+        <TheData></TheData>
+        <TheData></TheData>
+        <TheData></TheData>
   </div>
 </template>
 
@@ -29,12 +38,14 @@
 import PageHeader from './components/PageHeader.vue';
 import PageBody from './components/PageBody.vue';
 import PageFooter from './components/PageFooter.vue';
+import TheData from './components/TheData.vue';
 
 export default {
   components:{ //将上面导入的"小vue包对象"在这里components中'声明'一下(直接写'导入名'就好，用","隔开)
     PageHeader,
     PageBody,
     PageFooter,
+    TheData,
   }
 }
 </script>
