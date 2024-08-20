@@ -3,7 +3,7 @@
         比如说下面这个footer的class, 它就还可以直接引用到PageHeader里面的".header"样式
         (前提是这两组件必须 在"同一根组件"中！)
     -->
-    <div class="footer" @click="footerAlert">
+    <div class="header" @click="footerAlert">
         那么，我就是"PageFooter.vue"啦ʕ•̀ω•́ʔ✧
         <GlobalButton class="btnpos"></GlobalButton>
     </div>
