@@ -6,7 +6,8 @@
     :pokemon="sylveon"
     :lv="lv"
     :skills="skills"
-    :ismale="male"
+    :ismale="ismale"
+    @changeSexPls="okLetsChange"
     ></ChildPart>
   </div>
 </template>
@@ -26,9 +27,16 @@ export default {
         },
       lv:47,
       skills:["Bite","Draining Kiss","Tackle","Swift"],
-      male:false,
+      ismale:false,
     }
   },
+  methods:{
+    okLetsChange(paraFromChild){
+      console.log(`接收到子组件传过来的'changeSexPls'请求, 已将this.ismale修改为: ${paraFromChild}`);
+      
+      this.ismale=paraFromChild;
+    }
+  }
 }
 </script>
 <style>
