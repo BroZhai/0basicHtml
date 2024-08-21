@@ -9,15 +9,28 @@
     :ismale="ismale"
     @changeSexPls="okLetsChange"
     ></ChildPart>
+    <hr>
+    <!-- 在以下的部分，我们尝试去实现"妙妙记事本"的组件化 -->
+    <!-- 头部组件，包含 标题 和 输入框 -->
+    <PageHeader></PageHeader>
+    <PageBody></PageBody>
+    <PageFooter></PageFooter>
+    
   </div>
 </template>
 <script>
 
 import ChildPart from './components/ChildPart.vue';
+import PageHeader from './components/PageHeader.vue';
+import PageBody from './components/PageBody.vue';
+import PageFooter from './components/PageFooter.vue';
 
 export default {
   components:{
     ChildPart,
+    PageHeader,
+    PageBody,
+    PageFooter
   },
   data(){
     return{ //父组件要传递的数据可以是任意数据类型 (对象，数值，布尔，字符串...)
