@@ -29,24 +29,35 @@
 
     @sendClrReq="footRequestClr"
     ></PageFooter>
-
-    <hr>
     
+    <hr>
+    <h2>接下来，让我们来看看"事件总线"eventbus是个啥?</h2>
+    <SenderComponent></SenderComponent>
+    <ReceiverComponent></ReceiverComponent>
+
   </div>
 </template>
 <script>
 
 import ChildPart from './components/ChildPart.vue';
+
 import PageHeader from './components/PageHeader.vue';
 import PageBody from './components/PageBody.vue';
 import PageFooter from './components/PageFooter.vue';
 
+import SenderComponent from './components/SenderComponent.vue';
+import ReceiverComponent from './components/ReceiverComponent.vue';
+
 export default {
   components:{
     ChildPart,
+
     PageHeader,
     PageBody,
-    PageFooter
+    PageFooter,
+
+    SenderComponent,
+    ReceiverComponent,
   },
   data(){
     return{ //父组件要传递的数据可以是任意数据类型 (对象，数值，布尔，字符串...)
