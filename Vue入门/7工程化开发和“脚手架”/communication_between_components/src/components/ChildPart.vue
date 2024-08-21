@@ -16,6 +16,7 @@ export default {
   //下面的 "props:[]" 为一种最简单的"仅展示"写法
   props:['pokemon','lv','skills','ismale'],
 
+
   //除了"仅展示"的写法外，我们还能对 父组件"传入的值" 进行校验(类型 是否必填[非空] 设定默认值 自定义判断...)
   //这就涉及到props的复杂写法了(写成对象props:{数据:{...},...})
   /*
@@ -40,6 +41,7 @@ export default {
     }
   },
 }
+
 </script>
 <style scoped>
   .App{
