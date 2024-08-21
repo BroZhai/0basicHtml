@@ -17,6 +17,7 @@
     <!-- 身体组件，主要就为 任务列表的展示 -->
     <PageBody 
     :tasklist="tasklist"
+    @sendDelReq="childRequestDel"
     ></PageBody>
 
     <!-- 底部组件，显示 合计任务 和 一键清除功能-->
@@ -71,10 +72,12 @@ export default {
       this.addtask=''; /*补上提交后"清除输入框"的功能*/
     },
 
-    childRequestDel(paraFromChild){ //孩子传"任务id"过来进行删除
+    childRequestDel(listIdFromChild){ //孩子传"任务id"过来进行删除
       this.tasklist=this.tasklist.filter( task => {
-        return task.id!=paraFromChild;
+        return task.id!=listIdFromChild;
       })
+      console.log(`接收到子组件传过来的'sendDelReq'请求, 要删除的任务id为: ${listIdFromChild}`);
+      
     }
   },
 

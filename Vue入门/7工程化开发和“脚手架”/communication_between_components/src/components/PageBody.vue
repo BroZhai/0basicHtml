@@ -3,7 +3,7 @@
         <ul>
             <li v-for="(item,index) in tasklist" :key="item.id">
                 {{ index+1 }}. {{ item.name }} <span v-html="'&nbsp;&nbsp;'"></span>
-                <button>删除此项</button>
+                <button @click="sendDelReq(item.id)">删除此项</button>
             </li>
         </ul>
     </div>
@@ -11,7 +11,13 @@
 
 <script>
 export default {
-    props:['tasklist']
+    props:['tasklist'],
+
+    methods:{
+        sendDelReq(listId){
+            this.$emit("sendDelReq",listId);
+        }
+    }
 }
 </script>
 
