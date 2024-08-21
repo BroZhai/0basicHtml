@@ -12,12 +12,15 @@
     <hr>
     <!-- 在以下的部分，我们尝试去实现"妙妙记事本"的组件化 -->
     <!-- 头部组件，包含 标题 和 输入框 -->
-    <PageHeader></PageHeader>
+    <PageHeader
+    
+    @sendAddReq="headRequestAdd"
+    ></PageHeader>
 
     <!-- 身体组件，主要就为 任务列表的展示 -->
     <PageBody 
     :tasklist="tasklist"
-    @sendDelReq="childRequestDel"
+    @sendDelReq="bodyRequestDel"
     ></PageBody>
 
     <!-- 底部组件，显示 合计任务 和 一键清除功能-->
@@ -54,7 +57,7 @@ export default {
         {id:1, name:"劲爆敲代码"},
         {id:2, name:"爽爽玩游戏"}
       ],
-      addtask:"", //提前设置一个"代加"任务项
+
     }
   },
   methods:{
@@ -64,19 +67,19 @@ export default {
       // (paraFromChild="!this.ismale")
     },
 
-    childRequestAdd(paraFromChild){
+    headRequestAdd(paraFromChild){
       this.tasklist.push({
-        id: +new Date(),
+        id: +new Date(), //仅作为'唯一标识符'，index会更根据不同的:key 自动确定index
         name: paraFromChild,
       })
-      this.addtask=''; /*补上提交后"清除输入框"的功能*/
+
     },
 
-    childRequestDel(listIdFromChild){ //孩子传"任务id"过来进行删除
+    bodyRequestDel(listIdFromChild){ //孩子传"任务id"过来进行删除
       this.tasklist=this.tasklist.filter( task => {
         return task.id!=listIdFromChild;
       })
-      console.log(`接收到子组件传过来的'sendDelReq'请求, 要删除的任务id为: ${listIdFromChild}`);
+      console.log(`接收到子组件传过来的'sendDelReq'请求, 要删除的任务id‘唯一标识符’为: ${listIdFromChild}`);
       
     }
   },

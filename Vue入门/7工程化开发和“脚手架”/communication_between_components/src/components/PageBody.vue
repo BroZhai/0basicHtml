@@ -16,7 +16,7 @@ export default {
     methods:{
         sendDelReq(listId){
             this.$emit("sendDelReq",listId);
-        }
+        },
     }
 }
 </script>
