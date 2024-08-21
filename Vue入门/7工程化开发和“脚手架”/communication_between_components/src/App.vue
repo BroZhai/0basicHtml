@@ -29,6 +29,8 @@
 
     @sendClrReq="footRequestClr"
     ></PageFooter>
+
+    <hr>
     
   </div>
 </template>
