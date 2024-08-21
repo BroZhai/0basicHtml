@@ -24,7 +24,11 @@
     ></PageBody>
 
     <!-- 底部组件，显示 合计任务 和 一键清除功能-->
-    <PageFooter></PageFooter>
+    <PageFooter
+    :tasklist="tasklist"
+
+    @sendClrReq="footRequestClr"
+    ></PageFooter>
     
   </div>
 </template>
@@ -68,6 +72,10 @@ export default {
     },
 
     headRequestAdd(paraFromChild){
+      if(paraFromChild===''){
+        alert('你传了个甚owo?');
+        return;
+      }
       this.tasklist.push({
         id: +new Date(), //仅作为'唯一标识符'，index会更根据不同的:key 自动确定index
         name: paraFromChild,
@@ -84,7 +92,7 @@ export default {
     }
   },
 
-  childRequestClr(){
+  footRequestClr(){
     this.tasklist=[];
   }
 }

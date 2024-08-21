@@ -22,8 +22,10 @@ export default {
 </script>
 
 <style>
+    .common{
+        text-align: center;
+    }
     .common li{
         list-style: none;
-        text-align: center;
     }
 </style>
