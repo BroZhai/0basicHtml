@@ -80,7 +80,8 @@ export default {
         id: +new Date(), //仅作为'唯一标识符'，index会更根据不同的:key 自动确定index
         name: paraFromChild,
       })
-
+      console.log(`接收到子组件传过来的'sendAddReq'请求,传过来的任务名为: ${paraFromChild}`);
+      
     },
 
     bodyRequestDel(listIdFromChild){ //孩子传"任务id"过来进行删除
@@ -89,12 +90,15 @@ export default {
       })
       console.log(`接收到子组件传过来的'sendDelReq'请求, 要删除的任务id‘唯一标识符’为: ${listIdFromChild}`);
       
-    }
+    },
+
+    footRequestClr(){
+      this.tasklist=[];
+      console.log(`接收到子组件传过来的'sendClrReq'请求, 已经任务列表设置为'空'`);
+    },
   },
 
-  footRequestClr(){
-    this.tasklist=[];
-  }
+
 }
 </script>
 <style>

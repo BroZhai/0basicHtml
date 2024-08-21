@@ -11,7 +11,7 @@ export default {
 
     methods:{
         sendClrReq(){
-
+            this.$emit("sendClrReq","");
         },
     }
 }
