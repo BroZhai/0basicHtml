@@ -1,6 +1,6 @@
 <template>
     <div id="Header">
-        <h1>妙妙记事本</h1>
+        <h1>用“组件”拆分重构+模块通信 の 妙妙记事本</h1>
             <div id="interact">
                 <input type="text" placeholder="来输入你的计划活动?" v-model="listname" @keyup.enter="sendAddReq">
                 <span v-html="'&nbsp;&nbsp;'"></span><!--在Vue中，'&nbsp'不再可用，我们得另寻方法'塞空格'-->

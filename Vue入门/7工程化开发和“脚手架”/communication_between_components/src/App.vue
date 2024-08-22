@@ -35,6 +35,12 @@
     <SenderComponent></SenderComponent>
     <ReceiverComponent></ReceiverComponent>
 
+    <hr>
+    <h2 id="h2text">然后"provide"和"inject"的话，和上面是差不多的，但它可以直接用一个"虚拟全局数据域"</h2>
+    <GlobalProvider></GlobalProvider>
+    <!-- <OuterReceiver></OuterReceiver>
+    <InnerReceiver></InnerReceiver> -->
+
   </div>
 </template>
 <script>
@@ -48,6 +54,10 @@ import PageFooter from './components/PageFooter.vue';
 import SenderComponent from './components/SenderComponent.vue';
 import ReceiverComponent from './components/ReceiverComponent.vue';
 
+import GlobalProvider from './components/GlobalProvider.vue';
+// import OuterReceiver from './components/OuterReceiver.vue';
+// import InnerReceiver from './components/InnerReceiver.vue';
+
 export default {
   components:{
     ChildPart,
@@ -58,6 +68,10 @@ export default {
 
     SenderComponent,
     ReceiverComponent,
+
+    GlobalProvider,
+    // OuterReceiver,
+    // InnerReceiver,
   },
   data(){
     return{ //父组件要传递的数据可以是任意数据类型 (对象，数值，布尔，字符串...)
@@ -115,5 +129,8 @@ export default {
 }
 </script>
 <style>
+  #h2text{
+    text-align: center;
+  }
 
 </style>
