@@ -37,9 +37,14 @@
 
     <hr>
     <h2 id="h2text">然后"provide"和"inject"的话，和上面是差不多的，但它可以直接用一个"虚拟全局数据域"</h2>
-    <GlobalProvider></GlobalProvider>
-    <!-- <OuterReceiver></OuterReceiver>
-    <InnerReceiver></InnerReceiver> -->
+    <GlobalProvider>
+    <!-- 这样"直接嵌套"不行，需要自己一步步手动来 -->
+    <!--<OuterReceiver>
+          <InnerReceiver></InnerReceiver>
+        </OuterReceiver>
+     -->
+    </GlobalProvider>
+   
 
   </div>
 </template>
@@ -54,6 +59,7 @@ import PageFooter from './components/PageFooter.vue';
 import SenderComponent from './components/SenderComponent.vue';
 import ReceiverComponent from './components/ReceiverComponent.vue';
 
+// 注意，在想要实现"嵌套层级"的情况下，"组件"得自己'从外到内'手动一步一步套
 import GlobalProvider from './components/GlobalProvider.vue';
 // import OuterReceiver from './components/OuterReceiver.vue';
 // import InnerReceiver from './components/InnerReceiver.vue';
