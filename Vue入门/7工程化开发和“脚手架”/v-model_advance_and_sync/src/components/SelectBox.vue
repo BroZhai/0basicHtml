@@ -1,6 +1,6 @@
 <template>
     <div>
-        <select :value="selectedId">
+        <select :value="selectedId" @change="ChangeSelection">
             <option value="S1">选项1</option>
             <option value="S2">选项2</option>  
             <option value="S3">父组件定的默认选中选项3</option>  
@@ -12,6 +12,18 @@
 <script>
 export default {
     props:['selectedId'],
+
+    methods:{
+        ChangeSelection($event){
+            // 此时这里要去拿 变动的选项的"value",所以上面别忘了传个"获取事件"的$event参数 ("e"也行)
+            // 然后获取到 这个事件的"对象"，再选择这个"对象"中我们想要的'值'
+            let changedValue=$event.target.value;
+            console.log(`已通过$event.target.value取得的变动值为: ${changedValue}`);
+            
+            // 然后$emit告知父组件进行修改
+            this.$emit("plsChangeSid",changedValue);
+        },
+    }
 }
 </script>
 
