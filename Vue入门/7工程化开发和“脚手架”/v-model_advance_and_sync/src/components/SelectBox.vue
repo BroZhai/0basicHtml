@@ -1,5 +1,8 @@
 <template>
     <div>
+        <!-- 这里不能直接用v-model! 我们得把它拆了
+        主要针对的就是 后面的"改值部分"，将原来的"直接绑定改值" 变成 "发送改值请求 并传修改参数"(给父组件)
+        这里的:value用于绑定接收从父组件传过来的"默认值" -->
         <select :value="selectedId" @change="ChangeSelection">
             <option value="S1">选项1</option>
             <option value="S2">选项2</option>  
