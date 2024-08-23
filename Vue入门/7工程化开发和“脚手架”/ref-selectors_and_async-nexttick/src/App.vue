@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="App">
+    <h2>诶嘿，我是来捣乱的-w-</h2>
+    <div class="confused">
+      <h2>哎呀？捣乱失败了owo...</h2>
+      <!--这是外部(最'上'层)的class名，是刻意用来误导querySelector的-->
+    </div>
+    <AnEchart></AnEchart>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import AnEchart from './components/AnEchart.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    AnEchart,
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .confused{
+    width: 600px;
+    height: 100px;
+    margin: 20px auto;
+    border: 2px solid black;
+  }
+  
 </style>
