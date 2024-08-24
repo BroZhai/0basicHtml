@@ -16,7 +16,7 @@ export default {
             account:{
                 username:"",
                 password:""
-            },        
+            },
         }
     },
     methods:{

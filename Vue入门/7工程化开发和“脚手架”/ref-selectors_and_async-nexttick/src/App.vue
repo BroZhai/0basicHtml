@@ -8,7 +8,7 @@
     <AnEchart></AnEchart>
     <hr>
     <!-- 现在，我们来试下 给子组件加ref
-      然后看能不能通过$refs选中该组件，并调用其内部的方法()
+      然后看能不能通过$refs选中该组件，并调用其内部的方法() 【可以用内部方法来返回属性】
     -->
     <LoginBox ref="logbox"></LoginBox>
     <p>
@@ -46,8 +46,7 @@ export default {
     loginBoxClr(){
       this.$refs.logbox.clearLogin();
     },
-
-  },
+  }
 }
 
 </script>
