@@ -21,6 +21,10 @@ export default {
     },
     methods:{
         getLoginObj(){
+            if(this.account.username==='' || this.account.password===''){
+                alert('用户名/口令 不能为空！');
+                return;
+            }
             console.log(`子组件的getLoginObj()被执行了`)
             console.log(`获取到的account信息为:
         账号: ${this.account.username}

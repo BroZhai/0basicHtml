@@ -7,12 +7,15 @@
     </div>
     <AnEchart></AnEchart>
     <hr>
-    <!-- 现在，我们来试下 给子组件加ref, 看能不能过 -->
+    <!-- 现在，我们来试下 给子组件加ref
+      然后看能不能通过$refs选中该组件，并调用其内部的方法()
+    -->
     <LoginBox ref="logbox"></LoginBox>
     <p>
         <button class="btn" @click="loginBoxObj">获取登录信息</button> 
         <button class="btn" @click="loginBoxClr">清除输入</button>
     </p>
+    <em>请在F12控制台查看相应输出信息</em>
   </div>
 </template>
 
@@ -30,9 +33,11 @@ export default {
   methods:{
 
     loginBoxObj(){
+      // 定位到LoginBox组件后，调用其内部的getLoginObj()方法
       this.$refs.logbox.getLoginObj();
     },
 
+    // 调用其内部的clearLogin()方法
     loginBoxClr(){
       this.$refs.logbox.clearLogin();
     },
