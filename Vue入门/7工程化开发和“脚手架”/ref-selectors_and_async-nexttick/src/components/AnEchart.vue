@@ -49,7 +49,7 @@ import * as echarts from 'echarts'
             },
             series: [
                 {
-                name: '理想vs显示',
+                name: '理想vs现实',
                 type: 'radar',
                 data: [
                     {
