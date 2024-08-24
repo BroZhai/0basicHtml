@@ -16,6 +16,9 @@
         <button class="btn" @click="loginBoxClr">清除输入</button>
     </p>
     <em>请在F12控制台查看相应输出信息</em>
+    <hr>
+    <!-- Vue的异步更新(等待按序执行): $nextTick (就相当于ES6中的async) -->
+    <AsyncEdit></AsyncEdit>
   </div>
 </template>
 
@@ -23,11 +26,13 @@
 
 import AnEchart from './components/AnEchart.vue';
 import LoginBox from './components/LoginBox.vue';
+import AsyncEdit from './components/AsyncEdit.vue';
 
 export default {
   components:{
     AnEchart,
     LoginBox,
+    AsyncEdit,
   },
 
   methods:{
@@ -44,7 +49,6 @@ export default {
 
   },
 }
-
 
 </script>
 
