@@ -76,6 +76,6 @@ export default {
     height: 39%;
     position: absolute;
     display: block;
-    background: white url(assets/loading.gif) 0px 0px no-repeat;
+    background: white url(assets/loading.gif) no-repeat center;
   }
 </style>
