@@ -7,6 +7,20 @@
       <input type="text" style="width: 20em;" placeholder="我将会因v-focus而被进来时自动选中owo" v-focus>
       <hr>
       <LocalRegistration></LocalRegistration>
+      <hr>
+
+      <div class="dp loading">
+        <p>以下信息将会在2秒后加载出来...</p>
+        <hr>
+        <div>
+          <p>宝可梦名: {{ sylveon.name }}</p>
+          <p>类型: {{ sylveon.species }}</p>
+          <p>当前等级Lv: {{ lv }}</p>
+          <p>可用技能: {{ skills }}</p>
+          <p>性别 {{ ismale? "♂": "♀"}}</p>
+        </div>
+
+      </div>
 
   </div>
 </template>
@@ -16,12 +30,52 @@
 import LocalRegistration from './components/LocalRegistration.vue';
 
 export default {
+  data(){
+    return{
+      sylveon:{
+            name:"",
+            species:"",
+        },
+      lv:"",
+      skills:"",
+      ismale:"",
+    }
+  },
+
   components:{
     LocalRegistration,
-  }
+  },
+
+  created(){
+    setTimeout(() => {
+      this.sylveon.name="仙布";
+      this.sylveon.species="Fairy",
+      this.lv=47,
+      this.skills=["Bite","Draining Kiss","Tackle","Swift"],
+      this.ismale=true;
+    },2000);
+  },
 }
 </script>
 
 <style>
+  .dp{
+    width: 600px;
+    height: 400px;
+    border: 4px solid black;
+    margin: 0px auto;
+    padding: 20px;
+    font-size: 24px;
+  }
   
+  .loading::before{
+    content: '';
+    top: 78%;
+    left: 18%;
+    width: 63%;
+    height: 39%;
+    position: absolute;
+    display: block;
+    background: white url(assets/loading.gif) 0px 0px no-repeat;
+  }
 </style>
