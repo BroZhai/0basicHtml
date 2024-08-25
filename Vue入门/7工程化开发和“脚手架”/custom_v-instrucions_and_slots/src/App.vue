@@ -5,13 +5,20 @@
     -->
       <h2>自定义指令v-focus</h2>
       <input type="text" style="width: 20em;" placeholder="我将会因v-focus而被进来时自动选中owo" v-focus>
+      <hr>
+      <LocalRegistration></LocalRegistration>
+
   </div>
 </template>
 
 <script>
 
+import LocalRegistration from './components/LocalRegistration.vue';
+
 export default {
-  
+  components:{
+    LocalRegistration,
+  }
 }
 </script>
 
