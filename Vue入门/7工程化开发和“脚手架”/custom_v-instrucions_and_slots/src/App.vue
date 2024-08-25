@@ -8,9 +8,9 @@
       <hr>
       <LocalRegistration></LocalRegistration>
       <hr>
-
+      <!-- 接下来我们来尝试实现一下"伪信息加载" -->
       <div class="dp" v-loading="isLoading">
-        <p>以下信息将会在2秒后加载出来...</p>
+        <p>以下的信息将会在3秒后加载出来...</p>
         <hr>
         <div>
           <p>宝可梦名: {{ sylveon.name }}</p>
@@ -39,7 +39,7 @@ export default {
       lv:"",
       skills:"",
       ismale:"",
-      isLoading:true,
+      isLoading:true, //调试inserted用
     }
   },
 
@@ -48,28 +48,39 @@ export default {
   },
 
   created(){
+    // 实现"数据加载延迟"，在完成数据更新(加载后), dom中的"loading" class就会被移除掉owo
+    // 对应下面directives中的update(){里面的操作}
     setTimeout(() => {
       this.sylveon.name="仙布";
       this.sylveon.species="Fairy",
       this.lv=47,
       this.skills=["Bite","Draining Kiss","Tackle","Swift"],
       this.ismale=true;
-    },2000);
+    },3000);
   },
 
   directives:{
     loading:{
       inserted(el,binding){
+        // 调试用，去data中手动设置'isLoading'来"直接控制"这里 初始加载页面 的显示与否
         if(binding.value===true){
+          // .classList，可直接通过一些方法, 对其标签内的class进行操作
+          // 如add("其他class"), remove("已有的某个class") 【没错多个class可以一起叠着用】
           el.classList.add('loading');
+          console.log(`初始化加载页面 已启用`);
+          
         }
         else{
           el.classList.remove('loading');
+          console.log(`已禁用 初始化加载页面 `);
         }
       },
 
+      // 当数据完成'加载后'，去掉用于遮挡的 ‘加载页面’，展示数据
       update(el){
           el.classList.remove('loading');
+          console.log(`DOM中数据发生了更新，判定为‘数据完成了加载’，现在隐藏了 "加载页面"...`);
+          
       },
     }
   }
@@ -87,7 +98,10 @@ export default {
   }
   
   .loading::before{
-    /* 这里content的作用是"占厕所"，为了能让下面的'加载图片'显示出来的 “衬托” */
+    /* ::before伪类: 在dom被创建之前就被'优先应用'的样式 */
+    /* 这里content的作用是"占厕所"，为了能让下面的'加载图片'显示出来的 “衬托”
+      但是这儿的样式设置的...好怪异...算了能用就行ｘｗｘ...
+    */
     content: '';
     top: 91%;
     left: -1%;
