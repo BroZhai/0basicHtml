@@ -1,6 +1,7 @@
 <template>
     <div>
         <h2>你好，这里是局部注册的v-color"指定内容颜色"，修改即刻更新响应</h2>
+        <em><b>请在F12控制台查看输出信息</b></em>
         <div v-color="Acolor">
             我是内容A uwu
         </div>
