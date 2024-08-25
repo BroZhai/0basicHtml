@@ -9,7 +9,7 @@
       <LocalRegistration></LocalRegistration>
       <hr>
 
-      <div class="dp loading">
+      <div class="dp" v-loading="isLoading">
         <p>以下信息将会在2秒后加载出来...</p>
         <hr>
         <div>
@@ -39,6 +39,7 @@ export default {
       lv:"",
       skills:"",
       ismale:"",
+      isLoading:true,
     }
   },
 
@@ -55,6 +56,23 @@ export default {
       this.ismale=true;
     },2000);
   },
+
+  directives:{
+    loading:{
+      inserted(el,binding){
+        if(binding.value===true){
+          el.classList.add('loading');
+        }
+        else{
+          el.classList.remove('loading');
+        }
+      },
+
+      update(el){
+          el.classList.remove('loading');
+      },
+    }
+  }
 }
 </script>
 
@@ -69,12 +87,14 @@ export default {
   }
   
   .loading::before{
+    /* 这里content的作用是"占厕所"，为了能让下面的'加载图片'显示出来的 “衬托” */
     content: '';
-    top: 78%;
-    left: 18%;
-    width: 63%;
-    height: 39%;
-    position: absolute;
+    top: 91%;
+    left: -1%;
+    width: 98%;
+    height: 66%;
+    margin-top: -214px;
+    position: relative;
     display: block;
     background: white url(assets/loading.gif) no-repeat center;
   }
