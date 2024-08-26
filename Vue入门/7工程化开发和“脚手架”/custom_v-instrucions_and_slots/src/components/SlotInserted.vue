@@ -26,11 +26,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .slot{
         width: 400px;
         height: 150px;
         margin: 0px auto;
         border: 3px solid black;
+        margin-top: 10px;
     }
 </style>

@@ -36,8 +36,26 @@
         <SlotInserted>
           <!-- 这次我们不传内容，slot里面写的默认内容就会出来 -->
         </SlotInserted>
-
       </div>
+
+      <hr>
+      <!-- 具名插槽，正常的组件中，slot的地方不可能'只有一个'
+        这个时候，我们就要'给不同的slot起名'
+        在根组件中用'整体<template v-slot:slot名>的形式'给不同的slot指定传值
+      -->
+      <MultipleSlots>
+        <template v-slot:title>
+          吼吼吼，我是v-slot传给'title'的值
+        </template>
+
+        <template v-slot:contentA>
+          我是给'contentA'的值
+        </template>
+
+        <template v-slot:contentB>
+          那我就是给'contentB'的咯~~
+        </template>
+      </MultipleSlots>
 
   </div>
 </template>
@@ -46,8 +64,16 @@
 
 import LocalRegistration from './components/LocalRegistration.vue';
 import SlotInserted from './components/SlotInserted.vue';
+import MultipleSlots from './components/MultipleSlots.vue';
 
 export default {
+
+  components:{
+    LocalRegistration,
+    SlotInserted,
+    MultipleSlots,
+  },
+
   data(){
     return{
       sylveon:{
@@ -61,10 +87,7 @@ export default {
     }
   },
 
-  components:{
-    LocalRegistration,
-    SlotInserted,
-  },
+
 
   created(){
     // 实现"数据加载延迟"，在完成数据更新(加载后), dom中的"loading" class就会被移除掉owo
