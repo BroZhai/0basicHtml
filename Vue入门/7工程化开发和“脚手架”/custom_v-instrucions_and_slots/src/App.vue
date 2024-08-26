@@ -28,9 +28,15 @@
         <SlotInserted>
           嗷嗷，我是第一个从外部动态传进去的值哟
         </SlotInserted>
+
         <SlotInserted>
           这是另一个传个slot显示的东西捏awa
         </SlotInserted>
+
+        <SlotInserted>
+          <!-- 这次我们不传内容，slot里面写的默认内容就会出来 -->
+        </SlotInserted>
+
       </div>
 
   </div>

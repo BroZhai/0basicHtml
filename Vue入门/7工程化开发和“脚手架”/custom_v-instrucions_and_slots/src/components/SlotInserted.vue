@@ -6,7 +6,9 @@
     <div class="slot">
         <h3>你好，这里是Slot组件awa</h3>
         <p>此次从组件外部'动态传进来'的内容为: <br>
-            <b style="text-indent: 2em; display: block;"><slot></slot></b>
+            <b style="text-indent: 2em; display: block;">
+                <slot>【默认没有传东西就会显示"我"哦】</slot>
+            </b>
         </p>
 
 
