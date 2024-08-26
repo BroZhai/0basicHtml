@@ -21,9 +21,16 @@
         </div>
 
       </div>
+
       <hr>
       <div>
-        
+        <!-- 研究一下slot的基本引用，这里直接往<组件> 中传值 </组件>-->
+        <SlotInserted>
+          嗷嗷，我是第一个从外部动态传进去的值哟
+        </SlotInserted>
+        <SlotInserted>
+          这是另一个传个slot显示的东西捏awa
+        </SlotInserted>
       </div>
 
   </div>
@@ -32,6 +39,7 @@
 <script>
 
 import LocalRegistration from './components/LocalRegistration.vue';
+import SlotInserted from './components/SlotInserted.vue';
 
 export default {
   data(){
@@ -49,6 +57,7 @@ export default {
 
   components:{
     LocalRegistration,
+    SlotInserted,
   },
 
   created(){
