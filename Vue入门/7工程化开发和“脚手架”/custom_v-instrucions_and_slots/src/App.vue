@@ -62,10 +62,17 @@
 
     <hr>
 
-    <TableSlots>
-      
+    <TableSlots
+    :listA="listA"
+    >
+      aaa
     </TableSlots>
-    
+    <br><br>
+    <TableSlots
+    :listB="listB"
+    >
+      bbb
+    </TableSlots>
     
   </div>
 </template>
@@ -96,6 +103,18 @@ export default {
       skills:"",
       ismale:"",
       isLoading:true, //调试inserted用
+
+      listA:[
+        {id:1,name:"火伊布",lv:47},
+        {id:2,name:"太阳伊布",lv:53},
+        {id:3,name:"月伊布",lv:51},
+      ],
+
+      listB:[
+        {id:1,name:"水伊布",lv:67},
+        {id:2,name:"仙子伊布",lv:23},
+        {id:3,name:"叶伊布",lv:31},
+      ],
     }
   },
 
