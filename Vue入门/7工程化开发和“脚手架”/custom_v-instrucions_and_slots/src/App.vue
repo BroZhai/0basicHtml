@@ -63,13 +63,13 @@
     <hr>
 
     <TableSlots
-    :listA="listA"
+    :list="listA"
     >
       aaa
     </TableSlots>
     <br><br>
     <TableSlots
-    :listB="listB"
+    :list="listB"
     >
       bbb
     </TableSlots>

@@ -11,10 +11,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr v-for="(item,index) in list" :key="item.id">
+                    <td>{{ index+1 }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.lv }}</td>
                     <!-- 这里最后一列"操作"不写，因为要自订结构 -->
                 </tr>
             </tbody>
@@ -26,12 +26,14 @@
 
 
 export default {
-    
+    props:['list'],
 }
 </script>
 
 <style scope>
     .table{
         margin: 0px auto;
+        text-align: center
     }
+
 </style>
