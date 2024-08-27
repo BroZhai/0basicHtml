@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h4 style="display: block; text-align: center;"><slot name=title>你好像忘记 给v-slot:title 传值了</slot></h4>
+        <h4 style="display: block; text-align: center;">
+            <slot name=title>你好像忘记 给v-slot:title 传值了</slot>
+        </h4>
         <table class="table" border="1px">
             <thead>
                 <tr>
@@ -15,7 +17,21 @@
                     <td>{{ index+1 }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.lv }}</td>
-                    <!-- 这里最后一列"操作"不写，因为要自订结构 -->
+                    <!-- 这里最后一列"操作"在外面写，因为要自订'结构' 
+                        同时，我们要尝试把"当前行"的数据 往父组件传，
+                        让"操作"取得操作 返回的'行对象' 后再进行不同的操作
+                        注:返回的信息会是一个整体的‘对象’，在父组件中用#slot名后 右边再多个="自动obj名"来接收'返回的对象'
+                        【v-slot: / #slot名="自订名 接收'返回对象'"】
+                        (如下面的就是)
+                        {
+                            row:{id:xxx,name:"xxx",lv:xx},
+                            msg:"我是传回来的额外的附加信息"
+                        }
+                    -->
+                    <td>
+                        <slot name="btn" :row="item" msg="我是传回来的额外的附加信息"></slot>
+                    </td>
+                    
                 </tr>
             </tbody>
         </table>

@@ -7,6 +7,7 @@
       <input type="text" style="width: 20em;" placeholder="我将会因v-focus而被进来时自动选中owo" v-focus>
       <hr>
       <LocalRegistration></LocalRegistration>
+<!-- --------------------------------------- -->
       <hr>
       <!-- 接下来我们来尝试实现一下"伪信息加载" -->
       <div class="dp" v-loading="isLoading">
@@ -21,7 +22,7 @@
         </div>
 
       </div>
-
+<!-- --------------------------------------- -->
       <hr>
       <div>
         <!-- 研究一下slot的基本引用，这里直接往<组件> 中传值 </组件>-->
@@ -38,6 +39,7 @@
         </SlotInserted>
       </div>
 
+<!-- --------------------------------------- -->
       <hr>
       <!-- 具名插槽，正常的组件中，slot的地方不可能'只有一个'
         这个时候，我们就要'给不同的slot起名'
@@ -59,19 +61,40 @@
         </template>
       </MultipleSlots>
     </div>
-
+<!-- --------------------------------------- -->
     <hr>
+    <!-- 接下来，我们来看看 作用域插槽
+      说白了就是在父组件中进行某些"操作"时，接收从子组件slot传来的参数(对象)
+      来确定"操作对象"
+    -->
 
     <TableSlots
     :list="listA"
     >
-      aaa
+      <!-- 不论是给子组件传slot值 还是 接收从子组件slot过来的值
+        都要在<template>的整体中进行！
+      -->
+        <template #title>
+          这儿是listA的表
+        </template>
+
+        <template #btn="incomingObj">
+          <button @click="del(incomingObj)">放生</button>
+        </template>
+
     </TableSlots>
     <br><br>
     <TableSlots
     :list="listB"
     >
-      bbb
+      <template #title>
+        而这里则是另外一个表listB
+      </template>
+
+      <template #btn>
+        <button>查看</button>
+      </template>
+
     </TableSlots>
     
   </div>
@@ -116,6 +139,22 @@ export default {
         {id:3,name:"叶伊布",lv:31},
       ],
     }
+  },
+
+  methods:{
+    del(obj){
+      //console.log(obj); //想直接打印“整个返回的obj”看看
+      
+      console.log(`拿到了A表要放生的id: ${obj.row.id},在listA中放生了"${obj.row.name}"`);
+      console.log(`诶?怎么还有个'额外信息'?: "${obj.msg}"`)
+      this.listA=this.listA.filter( (filterItem) =>{
+        return filterItem.id!=obj.row.id;
+      })
+    },
+
+    // view(obj){
+
+    // },
   },
 
 
