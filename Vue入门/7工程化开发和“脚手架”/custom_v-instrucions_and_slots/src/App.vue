@@ -82,9 +82,9 @@
         <!-- 这里接收子组件 名为"btn"的slot 传回来的"对象包"
           并重命名为incomingObj后 再进行后续的调用
         -->
-        <template #btn="incomingObj">
+        <template #btn="incomingZipObj">
           <!-- A表"放生按钮"实现 -->
-          <button @click="del(incomingObj)">放生</button>
+          <button @click="del(incomingZipObj)">放生</button>
         </template>
 
     </TableSlots>
@@ -93,12 +93,13 @@
     :list="listB"
     >
       <template #title>
+        <!-- B表标题slot -->
         而这里则是另外一个表listB
       </template>
 
-      <!-- 同上，这里也是同理 -->
-      <template #btn>
-        <button>查看</button>
+      <!-- 同上通理，这里实现下另一个按钮 “查看” -->
+      <template #btn="incomingZipObj">
+        <button @click="view(incomingZipObj)">查看</button>
       </template>
 
     </TableSlots>
@@ -148,19 +149,32 @@ export default {
   },
 
   methods:{
+    //  “放生”方法
     del(obj){
       //console.log(obj); //想直接打印“整个返回的obj”看看
       
-      console.log(`拿到了A表要放生的id: ${obj.row.id},在listA中放生了"${obj.row.name}"`);
+      alert(`拿到了A表要放生的id: ${obj.row.id}, 你在在listA中放生了"${obj.row.name}" 
+      (控制台还有'额外消息')`);
       console.log(`诶?怎么还有个'额外信息'?: "${obj.msg}"`)
       this.listA=this.listA.filter( (filterItem) =>{
         return filterItem.id!=obj.row.id;
       })
     },
 
-    // view(obj){
-
-    // },
+    // “查看”方法
+    view(obj){
+      let act="";
+      if(obj.row.name==="仙子伊布"){
+        act="它用缎带把你五花大绑之后亲了你一口♡"
+      }
+      else if(obj.row.name==="水伊布"){
+        act="它像你发射了低压水枪, 但命中了要害！"
+      }
+      else if(obj.row.name==="叶伊布"){
+        act="它好像要请你炫叶子(?"
+      }
+      alert(`你查看了 "${obj.row.name}", 它的等级为: ${obj.row.lv}, ${act}`);
+    },
   },
 
 
