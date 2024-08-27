@@ -43,20 +43,30 @@
         这个时候，我们就要'给不同的slot起名'
         在根组件中用'整体<template v-slot:slot名>的形式'给不同的slot指定传值
       -->
+      <div>
       <MultipleSlots>
         <template v-slot:title>
           吼吼吼，我是v-slot传给'title'的值
         </template>
 
-        <template v-slot:contentA>
+        <!-- 注: v-slot:xxx 可以直接简写成 "#xxx" -->
+        <template #contentA>
           我是给'contentA'的值
         </template>
 
-        <template v-slot:contentB>
+        <template #contentB>
           那我就是给'contentB'的咯~~
         </template>
       </MultipleSlots>
+    </div>
 
+    <hr>
+
+    <TableSlots>
+      
+    </TableSlots>
+    
+    
   </div>
 </template>
 
@@ -65,6 +75,7 @@
 import LocalRegistration from './components/LocalRegistration.vue';
 import SlotInserted from './components/SlotInserted.vue';
 import MultipleSlots from './components/MultipleSlots.vue';
+import TableSlots from './components/TableSlots.vue';
 
 export default {
 
@@ -72,6 +83,7 @@ export default {
     LocalRegistration,
     SlotInserted,
     MultipleSlots,
+    TableSlots,
   },
 
   data(){
