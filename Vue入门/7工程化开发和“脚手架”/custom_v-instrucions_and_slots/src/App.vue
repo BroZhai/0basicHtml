@@ -64,7 +64,7 @@
 <!-- --------------------------------------- -->
     <hr>
     <!-- 接下来，我们来看看 作用域插槽
-      说白了就是在父组件中进行某些"操作"时，接收从子组件slot传来的参数(对象)
+      说白了就是在父组件中进行某些"操作"时，在#template中 接收从子组件slot传来的参数(对象)
       来确定"操作对象"
     -->
 
@@ -75,10 +75,15 @@
         都要在<template>的整体中进行！
       -->
         <template #title>
+          <!-- A表标题slot -->
           这儿是listA的表
         </template>
 
+        <!-- 这里接收子组件 名为"btn"的slot 传回来的"对象包"
+          并重命名为incomingObj后 再进行后续的调用
+        -->
         <template #btn="incomingObj">
+          <!-- A表"放生按钮"实现 -->
           <button @click="del(incomingObj)">放生</button>
         </template>
 
@@ -91,6 +96,7 @@
         而这里则是另外一个表listB
       </template>
 
+      <!-- 同上，这里也是同理 -->
       <template #btn>
         <button>查看</button>
       </template>
