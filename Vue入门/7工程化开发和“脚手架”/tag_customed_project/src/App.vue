@@ -15,9 +15,12 @@
                 <td>{{ index+1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.lv }}</td>
+                <!-- 我草，这里item还可以这么用?!! -->
                 <MyTag
+                :item="item"
                 :editStatus="isEditing"
                 :pokeList="pokeList"
+                @clickChange="handleClick"
                 >
 
                 </MyTag>        
@@ -54,7 +57,10 @@ export default {
   },
 
   methods:{
-      
+      handleClick(paraFromTag){
+        console.log(`根组件已收到“双击tag”操作，已[在子组件中]改成了显示输入框`);
+        this.isEditing=paraFromTag;
+      },
   },
 }
 </script>
