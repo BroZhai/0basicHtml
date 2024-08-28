@@ -21,6 +21,7 @@
                 :editStatus="isEditing"
                 :pokeList="pokeList"
                 @clickChange="handleClick"
+                @valueChange="handleValue"
                 >
 
                 </MyTag>        
@@ -61,6 +62,31 @@ export default {
         console.log(`根组件已收到“双击tag”操作，已[在子组件中]改成了显示输入框`);
         this.isEditing=paraFromTag;
       },
+      handleValue(paraFromTag){        
+        console.log(`检测到id:${paraFromTag.pokeID} 的修改备注请求, 修改已生效！`);
+        // 此时，我们需要在本地的pokeList中
+        // 根据paraFromTag传过来的id用".find()"找值
+        // 而不是直接“根据已有数据'拼出表达式'”来XD (偷懒偷过头了owo)
+        /* 
+          数组的.find()方法: 在数组中找到 "符合条件" 的第一个值，并返回这个"值"【结束】
+          如果这个"符合条件"被嵌在某个对象中，那么则会返回这个"整体的对象"! (关键)
+          找不到符合条件的就会返回一个undefined
+          语法: 数组对象.find(每个'临时'单项名 => "符合条件")
+        */
+        let targetPokemon=this.pokeList.find( curPokemon => curPokemon.id===paraFromTag.pokeID);
+        if(targetPokemon){
+          if(paraFromTag.changedNote!=="")
+          targetPokemon.defaultMsg=paraFromTag.changedNote;
+          else{
+            alert(`输入的备注不能为空哦~~`);
+            return;
+          }
+        }else{
+          alert(`未找到该宝可梦id QAQ...`);
+          return;
+        }
+        
+      }
   },
 }
 </script>

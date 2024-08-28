@@ -1,10 +1,15 @@
 <template>
-    <div v-if="isLocalDisplay">
+    <div v-if="LocalDisplay">
         <input 
         type="text" 
         placeholder="请输入要更改的备注" 
-        ref="noteBox" 
-        v-focus>
+        ref="noteBox"
+        @blur="endChange"
+        v-focus
+        @keyup.enter="endChange">
+        <!-- @blur : 元素失去焦点时 触发的监听 
+            注意，按enter会触发"二次提交"XD，因为上面两个监听事件都触发了owo
+        -->
     </div>
 
     <div v-else class="msgDisplay" @dblclick="clickChange">
@@ -33,7 +38,7 @@ export default {
 
     data(){
         return{
-            isLocalDisplay:false,
+            LocalDisplay:false,
         }
     },
 
@@ -41,7 +46,7 @@ export default {
         clickChange(){
             // this.$emit("clickChange",true);
             //用本地变量 控制每个单项的显示与否
-            this.isLocalDisplay=true; 
+            this.LocalDisplay=true; 
             
             // 由于Vue的"异步性"，接下来的"自动聚焦 闪现输入框"需要用到$nextTick
             // (当然，我们也可以把以下这块 到main.js中去封装成一个 "全局v-指令")
@@ -55,7 +60,16 @@ export default {
         },
 
         endChange(){
+            let changedContent=this.$refs.noteBox.value;
+            this.$emit('valueChange',{pokeID:this.item.id, changedNote:changedContent})
 
+            // 这里的"异步"很关键！不加异步大概率就会"先执行下面"，此时整个输入框元素就先消失啦！
+            // 然后上面你还抓个毛线的value xwx，所以必须要确定"抓完value后"，再去执行"隐藏"!
+            // (捏麻麻的查了我一个多小时，这下真长记性了...)
+            this.$nextTick( ()=>{
+                this.LocalDisplay=false;
+            })
+            
         }
     }
 
