@@ -15,22 +15,17 @@
                 <td>{{ index+1 }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.lv }}</td>
-                <td v-if="isEditing">
-                  <MyTag></MyTag>
-                </td>
-                <td v-else>
-                    {{ item.defaultMsg }}
-                </td>           
+                <MyTag
+                :editStatus="isEditing"
+                :pokeList="pokeList"
+                >
+
+                </MyTag>        
             </tr>
         </tbody>
     </table>
 
-      
-    <!-- <MyTag
-    :pokeList="pokeList"
-    >
-      content
-    </MyTag> -->
+
   </div>
 </template>
 
