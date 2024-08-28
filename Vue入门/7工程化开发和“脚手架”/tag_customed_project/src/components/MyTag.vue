@@ -1,5 +1,5 @@
 <template>
-    <div v-if="editStatus">
+    <div v-if="isLocalDisplay">
         <input type="text" placeholder="请输入要更改的备注">
     </div>
 
@@ -14,9 +14,11 @@
 export default {
 
     props:{
-        editStatus:{
-            type: Boolean
-        },
+        // editStatus:{
+        //     type: Boolean
+        // }, 不要依赖父组件传进来的Status, 
+        // 要自己在本地单独写个变量 来控制 "每个单项"双击时 的显示与否
+        // 这才是 “子组件” 所要控制的嘛XDDD
         pokeList:{
             type: Array
         },
@@ -27,13 +29,14 @@ export default {
 
     data(){
         return{
-
+            isLocalDisplay:false,
         }
     },
 
     methods:{
         clickChange(){
-            this.$emit("clickChange",true);
+            // this.$emit("clickChange",true);
+            this.isLocalDisplay=true; //用本地变量 控制每个单项的显示与否
         }
     }
 
