@@ -1,6 +1,10 @@
 <template>
     <div v-if="isLocalDisplay">
-        <input type="text" placeholder="请输入要更改的备注" ref="noteBox">
+        <input 
+        type="text" 
+        placeholder="请输入要更改的备注" 
+        ref="noteBox" 
+        v-focus>
     </div>
 
     <div v-else class="msgDisplay" @dblclick="clickChange">
@@ -40,13 +44,19 @@ export default {
             this.isLocalDisplay=true; 
             
             // 由于Vue的"异步性"，接下来的"自动聚焦 闪现输入框"需要用到$nextTick
+            // (当然，我们也可以把以下这块 到main.js中去封装成一个 "全局v-指令")
+
+            /*
             this.$nextTick( ()=>{
                 // 异步之后 用$refs找到 闪现输入框的dom，调用其focus()即可 自动完成聚焦
                 this.$refs.noteBox.focus();
             })
-
+            */
         },
 
+        endChange(){
+
+        }
     }
 
 }
