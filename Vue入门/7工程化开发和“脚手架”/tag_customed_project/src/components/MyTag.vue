@@ -44,7 +44,6 @@ export default {
 
     methods:{
         clickChange(){
-            // this.$emit("clickChange",true);
             //用本地变量 控制每个单项的显示与否
             this.LocalDisplay=true; 
             
