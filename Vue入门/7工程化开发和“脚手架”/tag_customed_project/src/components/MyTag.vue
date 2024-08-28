@@ -23,7 +23,7 @@
 export default {
 
     props:{
-        // editStatus:{
+        // editStatus:{  原本有传:editStatus="isEditing"进来，但最后删了(要单独控制)
         //     type: Boolean
         // }, 不要依赖父组件传进来的Status, 
         // 要自己在本地单独写个变量 来控制 "每个单项"双击时 的显示与否
@@ -60,6 +60,7 @@ export default {
         },
 
         endChange(){
+            // 注意，输入框的值是value，不是values!! 不然也会抓不到...哈哈
             let changedContent=this.$refs.noteBox.value;
             this.$emit('valueChange',{pokeID:this.item.id, changedNote:changedContent})
 

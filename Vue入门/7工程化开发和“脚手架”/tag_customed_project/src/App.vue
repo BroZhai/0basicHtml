@@ -18,18 +18,16 @@
                 <!-- 我草，这里item还可以这么用?!! -->
                 <MyTag
                 :item="item"
-                :editStatus="isEditing"
                 :pokeList="pokeList"
                 @clickChange="handleClick"
                 @valueChange="handleValue"
                 >
 
-                </MyTag>        
+                </MyTag>   
             </tr>
         </tbody>
     </table>
-
-
+    <button id="reset" @click="resetAllNotes">重置所有备注</button>
   </div>
 </template>
 
@@ -52,8 +50,16 @@ export default {
         {id:5,name:"仙子伊布",lv:23,defaultMsg:"这家伙，经常会调戏训练家"},
         {id:6,name:"叶伊布",lv:31,defaultMsg:"身上一股草木的香味"},
       ],
-      isEditing:false,
-      editedValue:"",
+      // 备份"重置时"用
+      backupList:[
+        {id:1,name:"火伊布",lv:47,defaultMsg:"听说抱着Ta能把人烤熟OAO"},
+        {id:2,name:"太阳伊布",lv:53,defaultMsg:"优雅，但又怕生"},
+        {id:3,name:"月伊布",lv:51,defaultMsg:"喜欢干坏事"},
+        {id:4,name:"水伊布",lv:67,defaultMsg:"可以随时随地当滋水枪~~"},
+        {id:5,name:"仙子伊布",lv:23,defaultMsg:"这家伙，经常会调戏训练家"},
+        {id:6,name:"叶伊布",lv:31,defaultMsg:"身上一股草木的香味"},
+      ],
+      // isEditing:false, 不用了(MyTag去单独控制每一项)
     }
   },
 
@@ -62,6 +68,7 @@ export default {
         console.log(`根组件已收到“双击tag”操作，已[在子组件中]改成了显示输入框`);
         this.isEditing=paraFromTag;
       },
+
       handleValue(paraFromTag){        
         console.log(`检测到id:${paraFromTag.pokeID} 的修改备注请求, 修改已生效！`);
         // 此时，我们需要在本地的pokeList中
@@ -85,9 +92,14 @@ export default {
           alert(`未找到该宝可梦id QAQ...`);
           return;
         }
-        
+      },
+
+      resetAllNotes(){
+        this.pokeList=this.backupList;
       }
-  },
+    },
+
+    
 }
 </script>
 
@@ -104,6 +116,11 @@ export default {
 
     #note{
         width: 28em;
+    }
+    
+    #reset{
+      display: block;
+      margin: 20px auto;
     }
 
 </style>
