@@ -17,6 +17,8 @@ Vue.use(VueRouter)
 const router=new VueRouter({
   // 之后就是往里面写routes: [ {path: 路径, component: 从views文件夹导入的路由组件}, {...}]
   routes:[
+    // 这里就像是 绑定 “组件文件” 和 "自定访问url映射"
+    // (这里"捕获path请求")
     {path:"/message",component:MessageBox},
     {path:"/contacts",component:ContactMembers},
     {path:"/moments",component:MomentPosts},
