@@ -4,12 +4,24 @@ import App from './App.vue'
 // npm install好后引包
 import VueRouter from 'vue-router'
 
+//在main.js中导入其他的"路由组件"
+import ContactMembers from './views/ContactMembers.vue'
+import MessageBox from './views/MessageBox.vue'
+import MomentPosts from './views/MomentPosts.vue'
+
 Vue.config.productionTip = false
 // 用Vue的"官方安装".use()方式装官方包
 Vue.use(VueRouter)
 
 // 创建一个路由对象
-const router=new VueRouter({})
+const router=new VueRouter({
+  // 之后就是往里面写routes: [ {path: 路径, component: 从views文件夹导入的路由组件}, {...}]
+  routes:[
+    {path:"/message",component:MessageBox},
+    {path:"/contacts",component:ContactMembers},
+    {path:"/moments",component:MomentPosts},
+  ]
+})
 
 new Vue({
   render: h => h(App),
