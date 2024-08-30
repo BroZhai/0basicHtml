@@ -4,6 +4,7 @@
         在template中用 $route.query.传进来的参数名 获取 "?参数名" 的值
         在script中则要多一个 "this."$route.query.传进来的参数名
         -->
+        <!--<p>你搜索了: {{ $route.query.key }}</p>-->
         <p>你搜索了: {{ searchedKey }}</p>
         <ul>
             <li>......</li>
