@@ -8,7 +8,12 @@
                 猜你想搜:
                 <router-link to="/resultPage?key=色图" class="sug">色图</router-link>
                 <router-link to="/resultPage?key=查的寄屁替4" class="sug">查的寄屁替4</router-link>
-                <router-link to="/resultPage?key=炫酷笔电外设" class="sug">炫酷笔电外设</router-link>
+
+                <!-- 下面这个route-link我们来用"动态路由"实现awa...
+                    不需要再用"?"了，重点在"路由对象"path里面设置一个"参数诱捕器"
+                    ("下面RoutePassingResultPage/ "后面的内容"，即对应"诱捕器的格式"(:words) 传给它的对应参数)
+                -->
+                <router-link to="/RoutePassingResultPage/炫酷笔电外设" class="sug">炫酷笔电外设</router-link>
             </p>
         </div>
     </div>
