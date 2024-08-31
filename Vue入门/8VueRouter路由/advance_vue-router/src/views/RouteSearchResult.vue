@@ -25,6 +25,7 @@ export default {
             searchedKey: this.$route.params.words,
         }
     },
+    
 }
 </script>
 
