@@ -2,8 +2,9 @@
     <div>
         <div class="searchBox">
             <h3>我是一个搜索框</h3>
-            <input type="text" placeholder="请输入查询内容(暂时无用)">
-            &nbsp;&nbsp;<button>搜索一下</button>
+            <input type="text" placeholder="请输入查询内容" v-model="searchInput">
+            &nbsp;&nbsp;
+            <button @click="letsSearch">搜索一下</button>
             <p><!-- 接下来，我们来玩转一下跳转传参, 下面首先是"查询参数?名=值" ，主要就是这个"?"-->
                 猜你想搜:
                 <router-link to="/resultPage?key=色图" class="sug">色图</router-link>
@@ -23,12 +24,18 @@
 export default {
     data(){
         return{
-
+            searchInput:""
         }
     },
 
     methods:{
-        
+        letsSearch(){
+            /* 简单写法，注意这里的操作对象是$route"r",先来看看"?请求传参"
+            (巧用模版字符串的反引号``读本地存的参数)
+            push()里面直接写上要访问的路由 ( ?参数名= +对应的"本地data参数")
+            */ 
+            this.$router.push(`/resultPage?key=${this.searchInput}`);
+        }
     },
 }
 </script>
