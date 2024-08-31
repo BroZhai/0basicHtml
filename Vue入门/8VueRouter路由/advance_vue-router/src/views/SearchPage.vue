@@ -41,11 +41,12 @@ export default {
             */ 
             // this.$router.push(`/resultPage?key=${this.searchInput}`);
 
-            /* "?请求传参"的 完整写法
+            /* 完整写法
                 (写成一个{对象})，用query"一个对象" 来传  ?参数名=值
+                其中，"query"内传的值可以是多个~~
             */
             this.$router.push({
-                path:"/resultPage",
+                path:"/resultPage", //或name="自己给某个路由组件另起的名字"
                 query:{
                     key:this.searchInput,
                     //这里可以有多个要传递的参数...
@@ -57,8 +58,19 @@ export default {
             /*":诱捕器传参"的 简单写法
                 和上面"?"的简单写法类似，直接拼接即可
             */
-            this.$router.push(`/RoutePassingResultPage/${this.searchInput}`);
-        }
+            // this.$router.push(`/RoutePassingResultPage/${this.searchInput}`);
+
+            /*完整写法 
+            (基本和上面的完整写法类似，就"传参关键字" params 不一样,我们在这里用name试一下owo)
+            */
+            this.$router.push({
+                name:"customRoute",
+                params:{
+                    //这里的参数名(words)一定要和 路由组件定义的 ":诱捕器参数名" 一致！(/:words)
+                    words:this.searchInput,
+                }
+            })
+        },
 
     }
 }

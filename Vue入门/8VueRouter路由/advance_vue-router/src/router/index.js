@@ -23,7 +23,7 @@ const router=new VueRouter({
         {path:"/resultPage",component:SearchResult},
 
         // 这个是"设置诱捕器"的 动态路由传参 (用":"设置'诱捕名')
-        {path:"/RoutePassingResultPage/:words?",component:RouteSearchResult},
+        {path:"/RoutePassingResultPage/:words?",name:"customRoute",component:RouteSearchResult},
         // Tips：最后面跟着的"?"表示 不传值时也可以访问该组件
 
         // 追加一个"根页面"重定向redirect，自动跳转到"消息"路由组件
