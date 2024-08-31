@@ -27,7 +27,9 @@ const router=new VueRouter({
             ...
             ]来继续配置该一级路由下的二级路由*/ 
             children:[
-                {path:"/contacts/pancakeInfo",component:AboutPancakes},
+                {
+                    path:"/contacts/pancakeInfo",
+                    component:AboutPancakes},
             ],
         },
         {path:"/moments",component:MomentPosts},

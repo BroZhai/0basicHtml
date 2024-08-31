@@ -1,11 +1,6 @@
 <template>
     <div>
         <div class="nav">
-        <!-- 
-        <a class="box" href="#/message">消息</a>
-        <a class="box" href="#/contacts">联系人</a>
-        <a class="box" href="#/moments">动态</a> 
-        -->
         <router-link to="/message" class="box">消息</router-link>
         <router-link to="/contacts" class="box">联系人</router-link>
         <router-link to="/moments" class="box">动态</router-link>
@@ -15,8 +10,7 @@
         <em>注意上方的"路由地址"后面也在变</em>
     </div>
     <!-- 别忘了要用<router-view> 对 "路由组件"的内容 进行展示！ -->
-    <router-view></router-view>
-    <hr>
+    <!-- <router-view></router-view> -->
 </div>
 </template>
 <script>
@@ -24,7 +18,7 @@ export default {
     
 }
 </script>
-<style>
+<style scoped>
     .nav{
     border: 3px solid black;
     text-align: center;
