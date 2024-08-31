@@ -5,7 +5,7 @@
         在script中则要多一个 "this."$route.query.传进来的参数名
         -->
         <!--<p>你搜索了: {{ $route.query.key }}</p>-->
-        <p>你搜索了: {{ searchedKey }}</p>
+        <p>你用"?传参"搜索了: {{ searchedKey }}</p>
         <ul>
             <li>......</li>
             <li>......</li>

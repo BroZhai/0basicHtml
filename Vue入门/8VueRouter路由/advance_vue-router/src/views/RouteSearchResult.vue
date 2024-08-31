@@ -7,7 +7,7 @@
             script中也是多个"this."就行~~
         -->
         <!-- <p>你搜索了: {{ $route.params.words }}</p> -->
-        <p>你搜索了: {{ searchedKey }}</p>
+        <p>你用"路由传参"搜索了: {{ searchedKey }}</p>
         <ul>
             <li>......</li>
             <li>......</li>

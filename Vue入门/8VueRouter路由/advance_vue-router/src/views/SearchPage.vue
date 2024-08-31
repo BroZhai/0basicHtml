@@ -53,8 +53,12 @@ export default {
             })
         },
 
-
-        
+        letsSearchRoute(){
+            /*":诱捕器传参"的 简单写法
+                和上面"?"的简单写法类似，直接拼接即可
+            */
+            this.$router.push(`/RoutePassingResultPage/${this.searchInput}`);
+        }
 
     }
 }
