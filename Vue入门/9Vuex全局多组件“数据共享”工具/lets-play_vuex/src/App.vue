@@ -18,6 +18,10 @@ export default {
   components: {
     SonComp1,
     SonComp2
+  },
+
+  created () {
+    console.log(this.$store)
   }
 }
 </script>
