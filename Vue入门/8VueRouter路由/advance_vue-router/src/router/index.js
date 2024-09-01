@@ -28,8 +28,12 @@ const router=new VueRouter({
             ]来继续配置该一级路由下的二级路由*/ 
             children:[
                 {
-                    path:"/contacts/pancakeInfo",
-                    component:AboutPancakes},
+                    // 这里的完整路径path"理想中"应该是/contacts/pancakeInfo
+                    // 但在Vue中，我们"直接追加"后面的"剩余路由路径"部分就好啦~
+                    // (当然，想要全写也ok!)
+                    path:"pancakeInfo",
+                    component:AboutPancakes
+                },
             ],
         },
         {path:"/moments",component:MomentPosts},
