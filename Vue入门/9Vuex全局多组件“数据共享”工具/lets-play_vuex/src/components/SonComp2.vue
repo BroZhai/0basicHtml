@@ -5,7 +5,7 @@
             <p>我从vuex中获取到的值为: {{ publicCount }}</p>
             <em>{{ addInfo }}</em>
             <br>
-            <button>值 - 1</button>
+            <button @click="sub">值 - 1</button>
         </div>
     </div>
 </template>
@@ -22,6 +22,11 @@ export default {
     // "..."为 展开运算符，用了之后，()里面获取到的所有'xxx'数据名可以直接在上面使用
     // 并且这样还能预留空间给"其他computed方法"，而不是让mapStore()独占整个computed
     ...mapState(['publicCount', 'addInfo'])
+  },
+  methods: {
+    sub () {
+      // 传给store的"请求修改"
+    }
   }
 }
 </script>
