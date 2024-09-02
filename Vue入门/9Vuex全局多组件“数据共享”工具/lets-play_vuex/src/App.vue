@@ -2,6 +2,8 @@
   <div>
     <div class="larger-border">
       <h3>啊哈！我是最外面的根组件AwA！</h3>
+      <!-- 在模版template中可以直接通过 $store.state 访问到存在state中的数据 -->
+      <p>我从vuex中获取到的值为: {{ $store.state.publicCount }}</p>
       <input type="text">
       <SonComp1></SonComp1>
       <hr>
@@ -29,7 +31,7 @@ export default {
 <style scoped>
   .larger-border{
     width: 600px;
-    height: 440px;
+    height: 460px;
     border: 4px solid grey;
   }
 </style>

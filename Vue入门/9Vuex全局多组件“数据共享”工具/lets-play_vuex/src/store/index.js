@@ -5,7 +5,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // 创建一个"空仓库" 用来存放数据 [Vuex.Store()实例]
-const store = new Vuex.Store()
+const store = new Vuex.Store({
+  // 这里的state就相当于一个"共享数据中心"，类似于组件内部的data(){}
+  state: {
+    publicCount: 100
+  }
+})
 
 // 导出给main.js使用
 export default store
