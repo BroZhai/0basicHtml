@@ -22,7 +22,7 @@ export default {
 <style>
     .border{
         width: 500px;
-        height: 150px;
+        height: 160px;
         border: 2px solid grey;
         margin: 5px auto;
     }

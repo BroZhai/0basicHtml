@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // 这里的state就相当于一个"共享数据中心"，类似于组件内部的data(){}
   state: {
-    publicCount: 100
+    publicCount: 100,
+    addInfo: '我是一个额外信息'
   }
 })
 

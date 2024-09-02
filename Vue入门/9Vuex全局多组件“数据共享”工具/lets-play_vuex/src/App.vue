@@ -33,7 +33,7 @@ export default {
 <style scoped>
   .larger-border{
     width: 600px;
-    height: 460px;
+    height: 480px;
     border: 4px solid grey;
   }
 </style>
