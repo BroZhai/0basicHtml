@@ -8,6 +8,8 @@
       <SonComp1></SonComp1>
       <hr>
       <SonComp2></SonComp2>
+      <br>
+      <em>请在F12控制台查看更多信息 </em>
     </div>
   </div>
 </template>

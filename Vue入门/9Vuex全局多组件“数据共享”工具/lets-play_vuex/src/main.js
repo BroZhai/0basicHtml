@@ -4,6 +4,8 @@ import App from './App.vue'
 import store from './store'
 
 Vue.config.productionTip = false
+// 在main.(js)中访问store时 不再需要"$""
+console.log(`在main.js中首次访问到的publicCount值为:${store.state.publicCount}`)
 
 new Vue({
   render: h => h(App),
