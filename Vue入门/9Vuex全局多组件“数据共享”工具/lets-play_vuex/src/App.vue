@@ -45,6 +45,7 @@ export default {
     passChange () {
       // 接下来，我们一下给commit带个(自定义)参数"传参"
       // (注意，对应的mutation方法后面 要有个"接受形参")
+      // Tips: commit默认只能带一个参数传递，如果想要传递多个参数，可以考虑用下对象{}awa
       this.$store.commit('directChange', this.inputValue)
     }
   }

@@ -14,12 +14,14 @@ const store = new Vuex.Store({
   mutations: {
     // 在mutations中写"修改全局store数据"的方法
     addinStore (state) {
+      // 传入"state"参数，这里就不用再this了，直接用state即可
       state.publicCount++
     },
     subinStore (state) {
       state.publicCount--
     },
     directChange (state, incomingValue) {
+      // 多出来一个incomingValue形参，用于接收传过来的参数
       state.publicCount = incomingValue
     }
   }
