@@ -11,6 +11,7 @@
       v-model="inputValue"
       @keyup.enter="directChange(inputValue)"
       > <!--上面的direcrChange(传参)和下面的...mapMutations(['xxx']对应，且成功调用！)-->
+      <!-- 顺带提醒一下，在template中访问本地data不需要this，不然会报错OAO -->
       &nbsp;&nbsp;
       <button @click="passChange">直接变动！</button>
       <SonComp1></SonComp1>
