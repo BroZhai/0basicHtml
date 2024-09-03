@@ -10,6 +10,15 @@ const store = new Vuex.Store({
   state: {
     publicCount: 100,
     addInfo: '我是一个额外信息'
+  },
+  mutations: {
+    // 在mutations中写"修改全局store数据"的方法
+    addinStore (state) {
+      state.publicCount++
+    },
+    subinStore (state) {
+      state.publicCount--
+    }
   }
 })
 
