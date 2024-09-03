@@ -18,6 +18,9 @@ const store = new Vuex.Store({
     },
     subinStore (state) {
       state.publicCount--
+    },
+    directChange (state, incomingValue) {
+      state.publicCount = incomingValue
     }
   }
 })

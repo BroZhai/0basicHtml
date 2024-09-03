@@ -4,7 +4,15 @@
       <h3>啊哈！我是最外面的根组件AwA！</h3>
       <!-- 在模版template中可以直接通过 $store.state 访问到存在state中的数据 -->
       <p>我从vuex中获取到的值为: {{ $store.state.publicCount }}</p>
-      <input type="text">
+      <input
+      type="text"
+      placeholder="请在这里输入要直接变动的值..."
+      style="width: 15em;"
+      v-model="inputValue"
+      @keyup.enter="passChange"
+      >
+      &nbsp;&nbsp;
+      <button @click="passChange">直接变动！</button>
       <SonComp1></SonComp1>
       <hr>
       <SonComp2></SonComp2>
@@ -19,6 +27,11 @@ import SonComp1 from './components/SonComp1.vue'
 import SonComp2 from './components/SonComp2.vue'
 
 export default {
+  data () {
+    return {
+      inputValue: ''
+    }
+  },
   components: {
     SonComp1,
     SonComp2
@@ -26,6 +39,14 @@ export default {
 
   created () {
     console.log(this.$store)
+  },
+
+  methods: {
+    passChange () {
+      // 接下来，我们一下给commit带个(自定义)参数"传参"
+      // (注意，对应的mutation方法后面 要有个"接受形参")
+      this.$store.commit('directChange', this.inputValue)
+    }
   }
 }
 </script>

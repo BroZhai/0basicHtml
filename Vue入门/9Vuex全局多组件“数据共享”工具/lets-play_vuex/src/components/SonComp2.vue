@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     sub () {
-      // 类似的，这里用commit调用mutations中的"减方法"
+      // 类似的，这里用commit调用 仓库mutations中的"减方法"
       this.$store.commit('subinStore')
     }
   }
