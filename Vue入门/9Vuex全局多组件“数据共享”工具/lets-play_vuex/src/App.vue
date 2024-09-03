@@ -9,8 +9,8 @@
       placeholder="请在这里输入要直接变动的值..."
       style="width: 15em;"
       v-model="inputValue"
-      @keyup.enter="passChange"
-      >
+      @keyup.enter="directChange(inputValue)"
+      > <!--上面的direcrChange(传参)和下面的...mapMutations(['xxx']对应，且成功调用！)-->
       &nbsp;&nbsp;
       <button @click="passChange">直接变动！</button>
       <SonComp1></SonComp1>
@@ -25,6 +25,9 @@
 <script>
 import SonComp1 from './components/SonComp1.vue'
 import SonComp2 from './components/SonComp2.vue'
+
+// 接下来我们来看看辅助函数mapMutation，就是映射仓库的方法到子组件这里来
+import { mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -42,8 +45,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['directChange']),
     passChange () {
-      // 接下来，我们一下给commit带个(自定义)参数"传参"
+      // 接下来，我们试一下给commit带个(自定义)参数"传参"
       // (注意，对应的mutation方法后面 要有个"接受形参")
       // Tips: commit默认只能带一个参数传递，如果想要传递多个参数，可以考虑用下对象{}awa
       this.$store.commit('directChange', this.inputValue)
