@@ -7,6 +7,7 @@
             <br>
             <button @click="sub">值 - 1</button>
             &nbsp;
+            <!-- 仓库"异步方法"的封装'直接调用' -->
             <button @click="delaySet(666)">延迟1s，设置值为666</button>
         </div>
     </div>

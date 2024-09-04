@@ -5,7 +5,12 @@
             <p>我从vuex中获取到的值为: {{ publicValue }}</p>
             <button @click="add">值 + 1</button>
             &nbsp;
+            <!-- 仓库“异步方法”的mapActions -->
             <button @click="delayChange(888)">延迟1s，设置值为888</button>
+            <hr>
+            <!-- 仓库"计算操作getters"的'直接调用'展示 -->
+            <p>list在getters过滤前的值为: {{ $store.state.list }}</p>
+            <p>getters过滤之后: {{ $store.getters.filterList }}</p>
         </div>
     </div>
 </template>
@@ -34,7 +39,6 @@ export default {
 <style>
     .border{
         width: 500px;
-        height: 160px;
         border: 2px solid grey;
         margin: 5px auto;
     }

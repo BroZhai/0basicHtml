@@ -9,10 +9,11 @@ const store = new Vuex.Store({
   // 这里的state就相当于一个"共享数据中心"，类似于组件内部的data(){}
   state: {
     publicCount: 100,
-    addInfo: '我是一个额外信息'
+    addInfo: '我是一个额外信息',
+    list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   },
+  // 在mutations中写"修改全局store数据"的方法
   mutations: {
-    // 在mutations中写"修改全局store数据"的方法
     addinStore (state) {
       // 传入"state"参数，这里就不用再this了，直接用state即可
       state.publicCount++
@@ -37,6 +38,20 @@ const store = new Vuex.Store({
         context.commit('directChange', incomingValue)
         console.log('publicCount现已被改变！')
       }, 1000)
+    }
+  },
+  // getters就相当于子组件里的computed, 在这里面就可以直接"操作计算"state中已有的变量
+  /* 两个注意点:
+  1. getters中的"计算方法"第一个形参必须是"state"
+  2. "计算方法"一定要return提供一个返回值 (针对state中某个数据对象操作后的返回值)
+  */
+  // Tips: getters也有个辅助函数"mapGetters(['xxx'])"，用法和前面所有的辅助函数一致
+  getters: {
+    filterList (state) {
+      const filteredList = state.list.filter((curItem) => {
+        return curItem >= 5
+      })
+      return filteredList
     }
   }
 })
