@@ -27,7 +27,17 @@ const store = new Vuex.Store({
     // Note: 对于mutations来说，里面的任何操作都是即刻的，所以不能再里面实现"异步操作"
   },
   // 要想实现"异步操作"，就不得不用到actions啦owo
-  actions:{
+  // actions的本质原理其实还是"commit请求"mutations里面的方法，像是一种"外部封装"，不过能用"处理异步"了
+  // 但是在组件中调用时，调用的是actions里面的"封装方法"，用关键字dispatch
+  actions: {
+    delayChange (context, incomingValue) {
+      // 我们在里面用setTimeout()函数来"模拟异步"操作
+      // 上面的"context"形参即为"state对象"(这里state中的数据未"模块化"分类)
+      setTimeout(() => {
+        context.commit('directChange', incomingValue)
+        console.log('publicCount现已被改变！')
+      }, 1000)
+    }
   }
 })
 
