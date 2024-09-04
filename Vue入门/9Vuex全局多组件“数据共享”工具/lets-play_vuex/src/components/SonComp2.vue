@@ -9,6 +9,7 @@
             &nbsp;
             <!-- 仓库"异步方法"的封装'直接调用' -->
             <button @click="delaySet(666)">延迟1s，设置值为666</button>
+            <hr>
             <p>使用mapGetters()得到的值: {{ filterList }}</p>
         </div>
     </div>
@@ -34,11 +35,11 @@ export default {
   },
   methods: {
     sub () {
-      // 类似的，这里用commit调用 仓库mutations中的"减方法"
+      // 这里用commit调用 仓库mutations中的"减方法"
       this.$store.commit('subinStore')
     },
     delaySet (passValue) {
-      // 这里，我们来"直接调用"一下actions中'异步方法'
+      // 我们来"直接调用"一下actions中'异步方法'
       this.$store.dispatch('delayChange', passValue)
     }
   }

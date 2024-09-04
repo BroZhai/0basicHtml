@@ -48,6 +48,7 @@ const store = new Vuex.Store({
   // Tips: getters也有个辅助函数"mapGetters(['xxx'])"，用法和前面所有的辅助函数一致
   getters: {
     filterList (state) {
+      // 将数组list中">5"的值过滤计算出来，并返回
       const filteredList = state.list.filter((curItem) => {
         return curItem >= 5
       })

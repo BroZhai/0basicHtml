@@ -27,7 +27,7 @@
 import SonComp1 from './components/SonComp1.vue'
 import SonComp2 from './components/SonComp2.vue'
 
-// 接下来我们来看看mapMutation辅助函数，就是映射仓库的方法到子组件这里来
+// 接下来我们来看看mapMutation辅助函数，导个包先，在methods中'拆包'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -46,6 +46,7 @@ export default {
   },
 
   methods: {
+    // methods中对应mapMutations拆仓库"方法包"
     ...mapMutations(['directChange']),
     passChange () {
       // 接下来，我们试一下给commit带个(自定义)参数"传参"
