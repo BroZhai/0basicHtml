@@ -27,7 +27,7 @@
 import SonComp1 from './components/SonComp1.vue'
 import SonComp2 from './components/SonComp2.vue'
 
-// 接下来我们来看看辅助函数mapMutation，就是映射仓库的方法到子组件这里来
+// 接下来我们来看看mapMutation辅助函数，就是映射仓库的方法到子组件这里来
 import { mapMutations } from 'vuex'
 
 export default {
