@@ -24,6 +24,10 @@ const store = new Vuex.Store({
       // 多出来一个incomingValue形参，用于接收传过来的参数
       state.publicCount = incomingValue
     }
+    // Note: 对于mutations来说，里面的任何操作都是即刻的，所以不能再里面实现"异步操作"
+  },
+  // 要想实现"异步操作"，就不得不用到actions啦owo
+  actions:{
   }
 })
 
