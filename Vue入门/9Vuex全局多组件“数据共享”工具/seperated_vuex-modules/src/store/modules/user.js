@@ -5,9 +5,9 @@ const state = {
   userInfo: {
     name:"Pancake",
     age:"0x15",
-    magicItems:["刀锋F2掌上移动PDA","idx调试手台","宝峰800GSM移动寻呼机","万能C-USB输入设备"],
-    currency: 200,
-  }
+  },
+  magicItems: ["刀锋F2掌上移动PDA","idx调试手台","宝峰800GSM移动寻呼机","万能C-USB输入设备"],
+  currency: 200,
 }
 
 // user数据的变动方法

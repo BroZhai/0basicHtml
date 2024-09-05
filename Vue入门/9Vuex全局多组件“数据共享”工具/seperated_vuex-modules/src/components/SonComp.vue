@@ -10,7 +10,7 @@ export default {
 </script>
 <style>
   .inner{
-    height: 400px;
+    height: 200px;
     border: 2px solid grey;
     margin: 50px;
   }
