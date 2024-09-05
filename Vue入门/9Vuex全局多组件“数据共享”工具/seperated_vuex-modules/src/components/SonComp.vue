@@ -9,6 +9,7 @@
         <em>{{ user.magicItems }} 和 {{ user.currency }}</em>
       </p>
       <hr>
+
   </div>
 </template>
 <script>
@@ -29,6 +30,11 @@ export default {
     */
     ...mapState('user',['userInfo']), //namespaced原理
     ...mapState(['user']), //直接挂载
+
+    //接下来看下mapGetters，它的"小仓库"语法有点不太一样
+    /* 
+    
+    */
     ...mapGetters(),
 
   }

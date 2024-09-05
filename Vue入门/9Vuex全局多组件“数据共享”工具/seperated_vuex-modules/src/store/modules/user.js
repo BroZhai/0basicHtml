@@ -12,15 +12,23 @@ const state = {
 
 // user数据的变动方法
 const mutations = {
-  taticalAct () {
-    // console.log(`${store.state.userInfo.name} 使用了 ${store.state.userInfo.magicItems[2]} 进行了通讯`);
-    
-  }
+  resetUserInfo (state,incomingValue) {
+    // 记得incomingValue要是个"{对象}"
+    state.userInfo=incomingValue;
+  },
 }
 
 // user数据的"异步"变动方法
 const actions = {
-
+  delayReset (context,incomingValue){
+    // 注意，因为是在'小仓库'中，此处的context指的就是"本小仓库"的对象
+    // 经典commit自己调自己XD
+    setTimeout(() => {
+      // 延迟1秒后更新用户数据
+      context.commit('resetUserInfo',incomingValue)
+    }, 1000)
+    
+  }
 }
 
 // user数据的"计算方法"
