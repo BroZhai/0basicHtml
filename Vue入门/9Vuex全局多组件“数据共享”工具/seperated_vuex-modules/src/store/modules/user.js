@@ -30,7 +30,9 @@ const getters = {
 
 // !!最后别忘了要将 上面所有数据"导出"，给总store当modules awa!!
 export default {
-  // namespaced: true,
+  // 命名空间namespaced: 用于外部用'文件名'定位到这个 小仓库中，一般写成true
+  namespaced: true,
+
   state,
   mutations,
   actions,
