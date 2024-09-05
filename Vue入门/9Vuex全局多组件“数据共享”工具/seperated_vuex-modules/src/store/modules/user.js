@@ -12,7 +12,10 @@ const state = {
 
 // user数据的变动方法
 const mutations = {
-
+  taticalAct () {
+    // console.log(`${store.state.userInfo.name} 使用了 ${store.state.userInfo.magicItems[2]} 进行了通讯`);
+    
+  }
 }
 
 // user数据的"异步"变动方法
@@ -27,7 +30,7 @@ const getters = {
 
 // !!最后别忘了要将 上面所有数据"导出"，给总store当modules awa!!
 export default {
-  // namespace: true,
+  // namespaced: true,
   state,
   mutations,
   actions,
