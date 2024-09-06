@@ -24,7 +24,7 @@ const actions = {
     // 注意，因为是在'小仓库'中，此处的context指的就是"本小仓库"的对象
     // 经典commit自己调自己XD
     setTimeout(() => {
-      // 延迟1秒后更新用户数据
+      // 延迟1秒后更新用户数据 (commit调用本地的mutations)
       context.commit('resetUserInfo',incomingValue)
     }, 1000)
     

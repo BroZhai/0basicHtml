@@ -16,12 +16,15 @@
       <p>"namespaced"原理得到的大写名字getters为: {{ upperName }}</p>
       <!-- <p>"直接挂载"得到的大写名字为: {{ user.upperName}}</p> -->
       <hr>
-      <!-- mapMutations 辅函用法 -->
-      <h5>mapMutations():</h5>
+      <!-- mapMutations 和 mapActions 辅函用法 -->
+      <h5>mapMutations() & mapActions:</h5>
+      <p> >> 来修改一下user信息</p>
+      <em>(传整个"user对象",注意内部'属性名'要对应！ [才会覆盖])</em>
+      <br>
       <input 
         type="text" 
         v-model="userObj.name"
-        placeholder="请输入要更改的username"
+        placeholder="请输入要更改的name"
         class="inp"
       > <br>
       <input 
@@ -34,6 +37,10 @@
       style="margin-left: 8px; margin-top: 4px;"
       @click="resetUserInfo(userObj)"
       >立即提交更改</button>
+      <button 
+      style="margin-left: 8px; margin-top: 4px;"
+      @click="delayReset(userObj)"
+      >1s后提交</button>
   </div>
 </template>
 <script>
@@ -72,7 +79,9 @@ export default {
   methods: {
     //然后是mapMutations()，这里开始就只用"namespaced"
     ...mapMutations('user',['resetUserInfo']),
-    ...mapActions(),
+
+    // mapActions()，调用delayReset'延迟提交'
+    ...mapActions('user',['delayReset']),
   },
 }
 </script>
