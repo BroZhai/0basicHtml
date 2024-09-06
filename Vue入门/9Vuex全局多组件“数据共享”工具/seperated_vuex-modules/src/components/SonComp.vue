@@ -11,10 +11,29 @@
         <em>{{ user.magicItems }} 和 {{ user.currency }}</em>
       </p>
       <hr>
-      <!-- mapGetters辅函俩用法 -->
+      <!-- mapGetters辅函用法 -->
       <h5>mapGetters():</h5>
       <p>"namespaced"原理得到的大写名字getters为: {{ upperName }}</p>
       <!-- <p>"直接挂载"得到的大写名字为: {{ user.upperName}}</p> -->
+      <hr>
+      <!-- mapMutations 辅函用法 -->
+      <h5>mapMutations():</h5>
+      <input 
+        type="text" 
+        v-model="userObj.name"
+        placeholder="请输入要更改的username"
+        class="inp"
+      > <br>
+      <input 
+        type="text" 
+        v-model="userObj.age"
+        placeholder="请输入要更改的age"
+        class="inp"
+      > <br>
+      <button 
+      style="margin-left: 8px; margin-top: 4px;"
+      @click="resetUserInfo(userObj)"
+      >立即提交更改</button>
   </div>
 </template>
 <script>
@@ -22,9 +41,13 @@
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 
 export default {
-  methods: {
-    ...mapMutations(),
-    ...mapActions(),
+  data(){
+    return{
+      userObj:{
+        name:"",
+        age:"",
+      },
+    }
   },
 
   computed: {
@@ -44,13 +67,22 @@ export default {
     ...mapGetters('user',['upperName']), // namespaced原理，只导入upperName()的getters
     // ...mapGetters(['user']) //直接挂载，导入了user小仓库getters中的所有东西 (还需手动'进一步选择')
     // 上面的"直接挂载"不知道怎么搞定，炸了，算了，只记 namespaced通用方法就够了xwx
+  },
 
-  }
+  methods: {
+    //然后是mapMutations()，这里开始就只用"namespaced"
+    ...mapMutations('user',['resetUserInfo']),
+    ...mapActions(),
+  },
 }
 </script>
 <style>
   .inner{
     border: 2px solid grey;
     margin: 50px;
+  }
+  .inp{
+    margin-left: 8px;
+    margin-top: 5px;
   }
 </style>

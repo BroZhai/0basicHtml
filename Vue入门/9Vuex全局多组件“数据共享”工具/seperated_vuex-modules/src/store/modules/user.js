@@ -36,8 +36,7 @@ const actions = {
 const getters = {
   // 让用户的名字变为全大写的"计算操作"方法
   upperName (state) {
-    let upperName = state.userInfo.name.toUpperCase()
-    return upperName
+    return state.userInfo.name.toUpperCase()
   }
 }
 
