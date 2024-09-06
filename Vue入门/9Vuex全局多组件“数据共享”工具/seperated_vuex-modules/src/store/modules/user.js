@@ -31,9 +31,14 @@ const actions = {
   }
 }
 
-// user数据的"计算方法"
+// user数据的"计算操作"方法
+// 别忘了"必须要return'操作结果'"awa
 const getters = {
-
+  // 让用户的名字变为全大写的"计算操作"方法
+  upperName (state) {
+    let upperName = state.userInfo.name.toUpperCase()
+    return upperName
+  }
 }
 
 // !!最后别忘了要将 上面所有数据"导出"，给总store当modules awa!!
