@@ -6,7 +6,9 @@
     <p id="itemName">这里是一个商品(名字)</p>
     <p id="price">￥ xxx</p>
     <p id="num">
-      <button> - </button> <b>商品数量</b> <button> + </button>
+      <button> - </button> 
+      <b>商品数量</b> 
+      <button> + </button>
     </p>
   </div>
 </template>
