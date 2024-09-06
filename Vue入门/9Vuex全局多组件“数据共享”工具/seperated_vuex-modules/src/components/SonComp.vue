@@ -23,13 +23,13 @@ export default {
   },
 
   computed: {
-    // 我们来试一下mapState整一下小仓库的state
+    // 我们来试一下mapState整一下小仓库的state (state数据属于‘直接数据’，因此放到computed中)
     /* 共两种方式:
       1. 根据"直接挂载"原理，直接quote(['state挂载名'])
       2. 根据"namespaced: true"，用mapState('小仓库文件名', ['里面的state数据',...])进行导入
     */
-    ...mapState('user',['userInfo']), //namespaced原理
-    ...mapState(['user']), //直接挂载
+    ...mapState('user',['userInfo']), //namespaced原理, 导入user.js小仓库state中的userInfo数据
+    ...mapState(['user']), //直接挂载 (整个user小仓库)
 
     //接下来看下mapGetters，它的"小仓库"语法有点不太一样
     /* 
