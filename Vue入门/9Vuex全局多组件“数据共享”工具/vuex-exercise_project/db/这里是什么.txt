@@ -1,0 +1,16 @@
+诶?这怎么多了一个"db"文件夹?来看看下面
+
+我们在这个项目中去尝试用一个叫"json-server"的东西
+这玩意说白了就是一个"后端模拟服务器"，里面存json格式的"数据"
+然后你就可以尝试在前端发请求 给这个'模拟器'，'模拟器'会返回相应信息，去测试我们前端里面要写的'增删改查'的功能啦
+
+全局安装: npm i json-server -g
+
+启用服务(需提前建好json文件)
+在对应目录下cmd或powershell: json-server --watch [你的json文件.json]
+
+Tips: json中所有的"字符"都要用双引号("")!!
+
+Endpoints:
+http://localhost:3000/cart
+http://localhost:3000/selfTest

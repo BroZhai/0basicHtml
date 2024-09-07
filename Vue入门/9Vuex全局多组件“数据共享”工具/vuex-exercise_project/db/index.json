@@ -1,0 +1,44 @@
+{
+  "cart":[
+    {
+      "id": 10001,
+      "name": "普通精灵球",
+      "price": 100,
+      "count": 1,
+      "imgSrc": "../src/assets/nBall.jpg"
+    },
+    {
+      "id": 10002,
+      "name": "大师球",
+      "price": 500,
+      "count": 1,
+      "imgSrc": "../src/assets/mBall.jpg"
+    },
+    {
+      "id": 10003,
+      "name": "外来科技球",
+      "price": 1000,
+      "count": 1,
+      "imgSrc": "../src/assets/strange.jpg"
+    },
+    {
+      "id": 10004,
+      "name": "厉害伤药",
+      "price": 800,
+      "count": 1,
+      "imgSrc": "../src/assets/sPotion.jpg"
+    }
+  ],
+  "selfTest":[
+    {
+      "pid": 603495,
+      "name": "Pancake",
+      "abiliy": "sleep"
+    },
+    {
+      "pid": 278522,
+      "name": "Cirno",
+      "ability": "ice sprinkler"
+    }
+  ]
+}
