@@ -25,7 +25,13 @@ export default {
     TopNav,
     CartItem,
     BottomArea
-  }
+  },
+
+  created(){
+    // 使用dispatch调用cart小仓库的某个特定actions(getList)
+    this.$store.dispatch('cart/getList') //F12看看，发现成功啦！取得的数据也被赋值到了vuex 小仓库cart中
+    // 通过vue开发工具查看
+  },
 }
 </script>
 
