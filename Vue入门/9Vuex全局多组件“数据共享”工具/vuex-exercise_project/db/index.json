@@ -5,28 +5,28 @@
       "name": "普通精灵球",
       "price": 100,
       "count": 1,
-      "imgSrc": "../src/assets/nBall.jpg"
+      "imgSrc": "https://mall.iopenmall.tw/website/uploads_product/website_22336/P2233602788286_4_25239160.jpg?hash=71108"
     },
     {
       "id": 10002,
       "name": "大师球",
       "price": 500,
       "count": 1,
-      "imgSrc": "../src/assets/mBall.jpg"
+      "imgSrc": "https://media.karousell.com/media/photos/products/2020/01/12/pokemon__1578782739_c7e2331f_progressive.jpg"
     },
     {
       "id": 10003,
       "name": "外来科技球",
       "price": 1000,
       "count": 1,
-      "imgSrc": "../src/assets/strange.jpg"
+      "imgSrc": "https://inertproducts.com/wp-content/uploads/2020/05/M67_Grenade_Stenciled_OTA-M67NH-copy.jpg"
     },
     {
       "id": 10004,
       "name": "厉害伤药",
       "price": 800,
       "count": 1,
-      "imgSrc": "../src/assets/sPotion.jpg"
+      "imgSrc": "https://www.serebii.net/itemdex/sprites/sv/hyperpotion.png"
     }
   ],
   "selfTest":[
