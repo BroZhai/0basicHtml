@@ -6,6 +6,8 @@ import axios from "axios"
 const state = { 
   // 对象数组itemList，里面一个对象就是一个CartItem商品数据
   itemList: [
+    // 我们将这里初始化为空
+    // 因为数据一会儿会从'后台'获取更新到这里来
     {},
   ],
 
@@ -24,7 +26,7 @@ const actions = {
     // 这里axios的get地址即为我们"后台模拟器"的地址 (别忘了'异步'await等待！不然这段代码就没意义啦owo)
     let listGet= await axios.get("http://localhost:3000/cart")
     // 拿到数据后，用commit调用+传参 上面mutations里面的updateList()
-    context.commit('updateList',listGet)
+    context.commit('updateList',listGet.data) //咱只要成功返回数据中的.data
     console.log(listGet) // F12打印一下get到的数据成没成功
 
     // 接下来去根组件的created中直接调用一下这里，看会不会有东西
