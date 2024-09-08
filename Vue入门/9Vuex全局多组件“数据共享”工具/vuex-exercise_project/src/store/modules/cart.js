@@ -61,7 +61,23 @@ const actions = {
     context.commit('updateItemCount',itemObj)
   }
  }
-const getters = { }
+const getters = { 
+  // cart的"计算属性"，我们将用来计算"商品总数" 和 "价格总数" 并进行返回输出给 底部的BottomArea组件渲染用
+
+  // 统计总商品数 并 返回输出
+  totalCount(context){
+    return context.itemList.reduce((sum,curItem) => {
+      return sum += curItem.count;
+    }, 0) // 从0开始
+  },
+
+  // 统计总价格 并 返回输出
+  totalPrice(context){
+    return context.itemList.reduce((sum,curItem) => {
+      return sum += curItem.price * curItem.count;
+    }, 0) //同上
+  }
+}
 
 export default {
   namespaced: true,
