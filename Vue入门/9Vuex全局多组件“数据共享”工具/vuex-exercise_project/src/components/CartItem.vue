@@ -6,9 +6,10 @@
       <p id="itemName"> {{ singleItem.name }} </p>
       <p id="price">￥ {{ singleItem.price }}</p>
       <p id="num">
-        <button> - </button> 
+        <!-- 按钮的点击事件用个'巧办法',复用一个函数，传不同的参awa -->
+        <button @click="changeCount(-1)"> - </button> 
         <b> {{ singleItem.count }} </b> 
-        <button> + </button>
+        <button @click="changeCount(1)"> + </button>
       </p>
     </div>
 </div>
@@ -22,6 +23,15 @@ export default {
   data () {
     return {
 
+    }
+  },
+  methods: {
+    changeCount (amount) {
+      // 调用cart小仓库的 异步更新count 方法 ，传个 '对象'
+      this.$store.dispatch('cart/delayUpdate', {
+        itemId: this.singleItem.id,
+        newCount: this.singleItem.count + amount
+      })
     }
   }
 }

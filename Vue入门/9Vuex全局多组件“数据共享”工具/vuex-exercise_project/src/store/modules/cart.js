@@ -22,7 +22,7 @@ const mutations = {
  }
 const actions = {
   // 因为是网络请求，这里的"异步"肯定是不能少的
-  async getList(context){
+  async getList (context) {
     // 这里axios的get地址即为我们"后台模拟器"的地址 (别忘了'异步'await等待！不然这段代码就没意义啦owo)
     let listGet= await axios.get("http://localhost:3000/cart")
     // 拿到数据后，用commit调用+传参 上面mutations里面的updateList()
@@ -30,6 +30,17 @@ const actions = {
     console.log(listGet) // F12打印一下get到的数据成没成功
 
     // 接下来去根组件的created中直接调用一下这里，看会不会有东西
+  },
+
+  // 再来一个后续的"异步count更新"，等待后台数据更新后，再来尝试变动vuex中的数据
+  async delayUpdate (context,itemObj) {
+    console.log(itemObj);
+
+    // 先尝试变动一下后端的数据，卡个点
+    let result = axios.patch(`http://localhost:3000/cart/${itemObj.itemId}`,{
+      count: itemObj.newCount
+    })
+    console.log(result);
   }
  }
 const getters = { }
