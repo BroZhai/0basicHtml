@@ -18,7 +18,15 @@ const mutations = {
   // (可应用于： 页面首次created后，请求json-server中的所有cart数据awa)
     updateList(context,newList){
       context.itemList=newList
-    }
+    },
+
+    // 修改单个Item
+    updateItemCount (context,itemObj) {
+      // itemObj:{itemId: ID号，newCount: 变动的数值}
+      const tagertID = itemObj.itemId
+      let locatedItem = context.itemList.find( currentItem => currentItem.id === tagertID)
+      locatedItem.count = itemObj.newCount
+    },
  }
 const actions = {
   // 因为是网络请求，这里的"异步"肯定是不能少的
@@ -43,7 +51,9 @@ const actions = {
     let result = axios.patch(`http://localhost:3000/cart/${itemObj.itemId}`,{
       count: itemObj.newCount
     })
+    console.log(`后台修改操作的返回结果为(展开Promise看[[PromiseState]]):`)
     console.log(result);
+    context.commit('updateItemCount',itemObj)
   }
  }
 const getters = { }
