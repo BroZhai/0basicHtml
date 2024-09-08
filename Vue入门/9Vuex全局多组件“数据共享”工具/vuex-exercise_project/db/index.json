@@ -4,7 +4,7 @@
       "id": 10001,
       "name": "普通精灵球",
       "price": 100,
-      "count": 5,
+      "count": 2,
       "imgSrc": "https://mall.iopenmall.tw/website/uploads_product/website_22336/P2233602788286_4_25239160.jpg?hash=71108",
       "localSrc": "img/nBall.68852c2b.jpg"
     },
@@ -12,7 +12,7 @@
       "id": 10002,
       "name": "大师球",
       "price": 500,
-      "count": 1,
+      "count": 2,
       "imgSrc": "https://media.karousell.com/media/photos/products/2020/01/12/pokemon__1578782739_c7e2331f_progressive.jpg",
       "localSrc": "img/mBall.6eeb30b5.jpg"
     },
