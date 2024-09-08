@@ -34,9 +34,12 @@ const actions = {
 
   // 再来一个后续的"异步count更新"，等待后台数据更新后，再来尝试变动vuex中的数据
   async delayUpdate (context,itemObj) {
+    console.log(`请求修改的数据为:`);
     console.log(itemObj);
 
     // 先尝试变动一下后端的数据，卡个点
+    // 注: 这里url的api访问原理是 json-server内置的，知道可以这么用就好啦awa
+    // (api 奇妙方式: 数据对象/内部任一'属性' )
     let result = axios.patch(`http://localhost:3000/cart/${itemObj.itemId}`,{
       count: itemObj.newCount
     })
