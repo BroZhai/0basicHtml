@@ -4,8 +4,12 @@
     <TopNav></TopNav>
 
     <!-- 商品展示区 -->
+    <!-- 重新构建了下逻辑，想着是这里的'根'用v-for
+        主要是每个'项'对应的'操作方法'得是 互相独立的
+    -->
     <CartItem
-    :itemList="itemList"
+    v-for="item in itemList" :key="item.id"
+    :singleItem="item"
     ></CartItem>
 
     <hr>

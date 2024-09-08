@@ -1,13 +1,13 @@
 <template>
   <div> <!--一个商品Item，这里是'根'，在下面用v-for渲染多个-->
-    <div class="outer" v-for="item in itemList" :key="item.id">
+    <div class="outer">
         <!-- 这里的'图片地址'要以'当前文件'为基准，而不是index.json的位置XD -->
-        <img :src="item.imgSrc" id="img" alt="加载失败了">
-      <p id="itemName"> {{ item.name }} </p>
-      <p id="price">￥ {{ item.price }}</p>
+        <img :src="singleItem.imgSrc" id="img" alt="加载失败了">
+      <p id="itemName"> {{ singleItem.name }} </p>
+      <p id="price">￥ {{ singleItem.price }}</p>
       <p id="num">
         <button> - </button> 
-        <b> {{ item.count }} </b> 
+        <b> {{ singleItem.count }} </b> 
         <button> + </button>
       </p>
     </div>
@@ -18,7 +18,7 @@
 
 export default {
   // 取得根组件传来的"购物车数据"
-  props: ['itemList']
+  props: ['singleItem']
 }
 </script>
 
