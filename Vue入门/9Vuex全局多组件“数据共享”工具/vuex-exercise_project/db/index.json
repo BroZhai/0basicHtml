@@ -4,7 +4,7 @@
       "id": 10001,
       "name": "普通精灵球",
       "price": 110,
-      "count": 1,
+      "count": 5,
       "imgSrc": "https://mall.iopenmall.tw/website/uploads_product/website_22336/P2233602788286_4_25239160.jpg?hash=71108",
       "localSrc": "img/nBall.68852c2b.jpg"
     },
@@ -20,7 +20,7 @@
       "id": 10003,
       "name": "外来科技球",
       "price": 1399,
-      "count": 1,
+      "count": 3,
       "imgSrc": "https://inertproducts.com/wp-content/uploads/2020/05/M67_Grenade_Stenciled_OTA-M67NH-copy.jpg",
       "localSrc": "img/strange.7c1e1cb9.jpg"
     },
