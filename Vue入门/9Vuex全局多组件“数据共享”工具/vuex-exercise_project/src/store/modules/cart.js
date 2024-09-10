@@ -10,7 +10,6 @@ const state = {
     // 因为数据一会儿会从'后台'获取更新到这里来
     {},
   ],
-
 }
 // 只要是想要操作state里面的数据，那就必然少不了"经过mutations"这一步
 const mutations = {
