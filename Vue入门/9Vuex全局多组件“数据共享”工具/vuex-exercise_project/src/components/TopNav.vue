@@ -5,7 +5,7 @@
 </template>
 
 <script>
-//  啊啊啊，今天又整理学科笔记去了，事情开始多起来了...
+//  failed to commit xwx
 export default {
   
 }
