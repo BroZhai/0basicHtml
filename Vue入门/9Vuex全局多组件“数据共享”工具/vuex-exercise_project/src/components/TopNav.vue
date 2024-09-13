@@ -5,7 +5,7 @@
 </template>
 
 <script>
-//  failed to commit xwx
+//  终于熬到周五啦！
 export default {
   
 }
