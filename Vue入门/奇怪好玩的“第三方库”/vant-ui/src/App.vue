@@ -6,11 +6,9 @@
         <div class="LoginBox">
           <h3>劲爆登录Site</h3>
           <!-- 下面就是vant-ui里面的"预制输入框"了awa  -->
-          <van-cell-group>
             <van-field v-model="username" label="你的新劲爆id:" placeholder="请输入用户名" />
             <van-field v-model="password" type="password" label="绕绕的口令: " placeholder="密码呢"/>
-
-          </van-cell-group>
+            <van-field label="不要管我uwu" value="我只是一个被禁用的输入框owo" disabled></van-field>
           <div class="btn">
             <!-- 注意，按钮本身就已经"内置样式"了,
               直接在van-button内再写class将不再生效，要想额外设置它，咱给它单独用个div套起来awa
@@ -22,7 +20,7 @@
           </div> 
         </div>
         <hr>
-        
+
   </div>
 </template>
 <script>
@@ -35,6 +33,10 @@ export default {
   },
   methods:{
     login(){
+      if(this.username === "" | this.password === ""){
+        alert('请填写完整哦owo')
+        return
+      }
       alert(`登录成功，获取到的用户名为: ${this.username}, 口令为: ${this.password}`)
     },
 
