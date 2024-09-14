@@ -20,7 +20,13 @@
           </div> 
         </div>
         <hr>
-
+        <!-- 单选框 -->
+        <van-radio-group v-model="type" direction="horizontal">你是: &nbsp;
+          <van-radio name="good">好人</van-radio>
+          <van-radio name="bad">坏人</van-radio>
+          <van-radio name="faq">我去你的你管我是谁</van-radio>
+        </van-radio-group>
+        
   </div>
 </template>
 <script>
@@ -29,6 +35,7 @@ export default {
     return{
       username: "",
       password: "",
+      type:"",
     }
   },
   methods:{
