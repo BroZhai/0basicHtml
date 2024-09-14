@@ -22,11 +22,33 @@
         <hr>
         <!-- 单选框 -->
         <van-radio-group v-model="type" direction="horizontal">你是: &nbsp;
-          <van-radio name="good">好人</van-radio>
+            <van-radio name="good">好人</van-radio>
           <van-radio name="bad">坏人</van-radio>
           <van-radio name="faq">我去你的你管我是谁</van-radio>
         </van-radio-group>
-        
+        <!-- 多选框 -->
+        <van-checkbox-group v-model="attributes" >请选择你的属性: 
+          <van-checkbox name="打工人" shape="square" checked-color="green">打工人</van-checkbox>
+          <van-checkbox name="摆烂人" shape="square" checked-color="green">摆烂人</van-checkbox>
+          <van-checkbox name="动漫人" shape="square" checked-color="green">动漫人</van-checkbox>
+          <van-checkbox name="游戏人" shape="square" checked-color="green">游戏人</van-checkbox>
+          <van-checkbox name="直播人" shape="square" checked-color="green">直播人</van-checkbox>
+          <van-checkbox name="普通人" shape="square" checked-color="green">普通人</van-checkbox>
+          <van-checkbox name="有钱人" shape="square" checked-color="green">有钱人</van-checkbox>
+        </van-checkbox-group>
+        <!-- 一条这是一个来自vant-ui的分割线，中间可带文字展示 -->
+        <van-divider
+        :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+        >
+          这是一个来自vant-ui的分割线awa
+        </van-divider>
+        <!-- 来点tag显示系统，展示上面多选选择的东西
+          用v-for来渲染多选(attributes)里面的信息到tag中qwq
+        -->
+        <h4>以下是你多选的"属性"tag展示awa:</h4>
+        <van-tag round type="primary" size="large"
+        v-for="(item,index) in attributes" :key="index"
+        >{{ item }}</van-tag>
   </div>
 </template>
 <script>
@@ -36,6 +58,7 @@ export default {
       username: "",
       password: "",
       type:"",
+      attributes:[],
     }
   },
   methods:{
