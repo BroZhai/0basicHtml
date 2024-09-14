@@ -46,9 +46,11 @@
           用v-for来渲染多选(attributes)里面的信息到tag中qwq
         -->
         <h4>以下是你多选的"属性"tag展示awa:</h4>
-        <van-tag round type="primary" size="large"
-        v-for="(item,index) in attributes" :key="index"
-        >{{ item }}</van-tag>
+        <div class="tags"
+        v-for="(item,index) in attributes" :key="index">
+          <van-tag round type="primary" size="large"
+          >{{ item }}</van-tag>
+        </div> 
   </div>
 </template>
 <script>
@@ -90,6 +92,11 @@ export default {
     display: inline-block;
     position: relative;
     margin-left: 60px;
+  }
+  .tags{
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
   }
 
 </style>
