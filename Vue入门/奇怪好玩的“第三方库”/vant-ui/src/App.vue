@@ -69,7 +69,8 @@
           <!-- vw: css3的新单位，可根据实际设备屏幕大小 来'动态设置' -->
         </van-divider>
         <div class="viewbox">
-
+          <p>此时我们来缩放这个页面，会发现这个<u>"盒子"的大小始终不变</u></p>
+          <p>因为他在跟着'屏幕大小'的变化 而 动态变化着awa</p>
         </div>
   </div>
 </template>
@@ -124,6 +125,7 @@ export default {
     background-color: pink;
     margin: 0px auto;
     position: relative;
+    text-align: center;
   }
 
 </style>
