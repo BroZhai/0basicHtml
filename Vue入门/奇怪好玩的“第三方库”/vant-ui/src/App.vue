@@ -19,6 +19,15 @@
             <van-button color="grey" @click="resetInputs">重置</van-button>  
           </div> 
           <!-- 接下来，我们来看一下它"提供的layout布局"，据说这个才是核心 -->
+          <van-row>
+            下面是用vant2的layout重新排的俩按钮:
+            <van-col span="8" offset="4">
+              <van-button color="#7232dd" @click="login">提交信息</van-button>
+            </van-col>
+            <van-col span="4">
+              <van-button color="grey" @click="resetInputs">重置</van-button>
+            </van-col>
+          </van-row>
         </div>
         <hr>
         <!-- 单选框 -->
