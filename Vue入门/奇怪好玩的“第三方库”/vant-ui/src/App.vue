@@ -61,6 +61,16 @@
           <van-tag round type="primary" size="large"
           >{{ item }}</van-tag>
         </div> 
+
+        <van-divider
+        :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+        >
+          接下来我们来了解一下viewport
+          <!-- vw: css3的新单位，可根据实际设备屏幕大小 来'动态设置' -->
+        </van-divider>
+        <div class="viewbox">
+
+        </div>
   </div>
 </template>
 <script>
@@ -107,6 +117,13 @@ export default {
     display: inline-block;
     margin-left: 10px;
     margin-top: 5px;
+  }
+  .viewbox{
+    width: 300px;
+    height: 300px;
+    background-color: pink;
+    margin: 0px auto;
+    position: relative;
   }
 
 </style>
