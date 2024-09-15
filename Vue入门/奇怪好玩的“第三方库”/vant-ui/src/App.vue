@@ -18,6 +18,7 @@
           <div class="btn">
             <van-button color="grey" @click="resetInputs">重置</van-button>  
           </div> 
+          <!-- 接下来，我们来看一下它"提供的layout布局"，据说这个才是核心 -->
         </div>
         <hr>
         <!-- 单选框 -->
