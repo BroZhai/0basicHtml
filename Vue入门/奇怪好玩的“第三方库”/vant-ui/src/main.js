@@ -15,7 +15,6 @@ Vue.use(Field)
 [对于以上'按需导入'的代码，我们可以再给它拆成'单独的Js模块'，放在utils文件夹里面]
 */
 
-// 啊..工作日
 
 Vue.config.productionTip = false
 
