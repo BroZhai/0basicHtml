@@ -9,5 +9,5 @@ import { createApp } from 'vue' // 从vue3中导入 "创建Vue实例" createApp(
 import App from './App.vue' // 导入默认的根组件 "App.vue"
 
 // 使用导入的"App.vue"根组件 创建为一个Vue实例， 并挂在到index.html中 id="app"的dom
-// (没错目录下"多了一个index.html"，数据最终会在那里完成渲染！)
+// (没错目录下"多了一个index.html"，数据最终会“挂载”在那里完成渲染！)
 createApp(App).mount('#app')
