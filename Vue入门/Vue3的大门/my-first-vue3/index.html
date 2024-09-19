@@ -1,3 +1,8 @@
+<!-- 诶？这里怎么多出来个"index.html"？
+  哦...原来是Vue3提供的一个 html"入口"文件
+  任何有关Vue组件的东西最终就会 "挂载"到这里的dom内进行渲染
+  (那为啥Vue2没有啊，说是因为开发框架的原因? 唉不管那么多了)
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +13,18 @@
   </head>
   <body>
     <div id="app"></div>
+    <!-- 咱来额外写一个"小盒子"测试一下看页面会不会展示 -->
+    <div style="width: 600px;
+    height: 400px; 
+    margin: 0px auto; 
+    background-color: white;
+    border: 2px solid red;
+    color: red;
+    text-align: center;
+    ">
+      你好，我是测试用的盒子
+    </div>
+    <!-- 成功展示，但是位置有点刁钻XD (好像是默认"响应式布局"的原因?) -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
