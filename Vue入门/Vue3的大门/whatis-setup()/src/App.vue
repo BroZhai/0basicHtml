@@ -1,7 +1,7 @@
 <!-- <script>
 export default {
   setup(){ //注意setup语法糖 不能和任何 "(){}" 并存！
-    
+
     console.log(`哦吼，我比下面的beforeCreated哥们执行的更早耶~~`);
     // 注意，在setup函数中，你是获取不到"this"的 (因为太太太太太早了XDDD)
 
@@ -17,7 +17,6 @@ export default {
       mydata,
       printMydata
     }
-
   },
   beforeCreate(){
     console.log(`来自beforeCreated的消息: wc外挂！`);
@@ -25,7 +24,6 @@ export default {
   // 可以在控制台看到是setup()更先于执行
 }
 </script> -->
-
 
 <script setup>
   // 我们现在来看一下setup语法糖，下面直接开写就好了，不用return咯
@@ -36,6 +34,7 @@ export default {
   // 成啦！
 </script>
 
+<!-- 模版区 -->
 <template>
   <div>
     <button @click="printMydata">点我在打印mydata</button><br>
@@ -44,7 +43,7 @@ export default {
   </div>
 </template>
 
-
+<!-- 样式区 -->
 <style>
   
 </style>
