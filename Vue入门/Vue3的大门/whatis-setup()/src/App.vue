@@ -1,6 +1,6 @@
-<script>
+<!-- <script>
 export default {
-  setup(){ //注意setup语法糖 不能和这个 setup(){}并存！
+  setup(){ //注意setup语法糖 不能和任何 "(){}" 并存！
     
     console.log(`哦吼，我比下面的beforeCreated哥们执行的更早耶~~`);
     // 注意，在setup函数中，你是获取不到"this"的 (因为太太太太太早了XDDD)
@@ -18,14 +18,22 @@ export default {
       printMydata
     }
 
-    // 我们现在来看一下setup语法糖 
-
   },
   beforeCreate(){
     console.log(`来自beforeCreated的消息: wc外挂！`);
   }
   // 可以在控制台看到是setup()更先于执行
 }
+</script> -->
+
+
+<script setup>
+  // 我们现在来看一下setup语法糖，下面直接开写就好了，不用return咯
+  let mydata=919
+  const printMydata= ()=>{
+    console.log(`这里是语法糖setup里面打出来的mydata: ${mydata}`);
+  }
+  // 成啦！
 </script>
 
 <template>
