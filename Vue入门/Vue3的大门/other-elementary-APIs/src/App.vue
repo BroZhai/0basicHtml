@@ -32,12 +32,29 @@ import { computed, reactive,ref } from 'vue';
   
 
   // 接下来我们来看看组合式API的computed()函数
-  // 逻辑很简单，()里面直接写 '回调函数+return'就好啦 (对应特定的'数据块')
+  // 逻辑很简单，()里面直接写 '回调函数'就好啦 (对应特定的'数据块')
   const numlist=ref([1,2,3,4,5,6,7,8,9,10]); //目标: 用computed 过滤出>4的所有数字
   let filtered=computed( ()=>{
     return numlist.value.filter( (curItem)=> curItem>=4 );
   })
 
+  // 别忘了computed还有get set语法 (外部修改computed的'结果值')
+  let changedVal=ref(''); //注: 简单数据也要用".value"才能访问到它的内部数据 xwx
+  let letterList=ref(["T","E","K","O","N"]);
+    // 里面写个{}，里面再写get:... set:...
+  let filGetSet=computed({
+    // 保留"KON"
+    get: ()=>{
+     return letterList.value.filter( (curItem)=> curItem!=="T" && curItem!=="E")
+    },
+    set: (incomingValue) => {
+      letterList.value[letterList.value.length-1]=incomingValue
+      console.log(`已将letterList的最后一项变为: ${incomingValue}`)
+    }
+  })
+  const changeLast=() =>{
+    filGetSet.value=changedVal.value;
+  }
 
 </script>
 
@@ -61,6 +78,11 @@ import { computed, reactive,ref } from 'vue';
     <h3>组合式API的computed</h3>
     <p>原数组: {{ numlist }}</p>
     <p>组合式computed过滤后的: {{ filtered }}</p>
+    <h4>computed{get: , set:}完整写法</h4>
+    <p>当前Computed到的内容: {{ filGetSet }}</p>
+    <input type='text' v-model="changedVal"></input>&nbsp;
+    <button @click="changeLast">修改最后一个值</button>
+    
   </div>
 </template>
 
