@@ -12,13 +12,30 @@ import { reactive,ref } from 'vue';
   //在控制台打印reactive出来的 "活对象"pureObj
   console.log(pureObj);
 
+  // 接下来咱来看看ref(),其实就多了个"简单数据"的支持(省的写对象) 【但通常来说这个用的更多，那就记它了】
+  let simpleData=ref(65)
 
+  // 创建俩变动方法
+  const dec = ()=>{
+    // 注意在脚本中，ref()出来的对象 还要用".value"才能访问到里面的值，但是在模版中就不用了(真奇怪
+    simpleData.value--;
+  }
+  const add = ()=>{
+    simpleData.value++;
+  }
+  
 
 </script>
 
-<template lang="">
+<template>
   <div>
-    {{ pureObj }}
+    <p>pureObj: {{ pureObj }}</p>
+    <!-- 下面放了个输入框，去尝试直接改"活对象"pureObj.name -->
+    <input type='text' v-model="pureObj.name"></input>
+    <p>simpleData当前的值为: {{ simpleData }}</p>
+    <p>
+      <button @click="dec"> -1 </button> <button @click="add"> +1 </button>
+    </p>
   </div>
 </template>
 
