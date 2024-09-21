@@ -5,7 +5,7 @@ import { reactive,ref } from 'vue';
   const testObj={
     name:"Pancake",
     lv:26,
-    skill:["近身搏斗",".45 ACP精准射击","M67范围空炸","EMP电子干扰"]
+    skill:["煎饼冲击","恢复","振奋"]
   }
   
   let pureObj=reactive(testObj)
@@ -13,7 +13,12 @@ import { reactive,ref } from 'vue';
   console.log(pureObj);
 
   // 接下来咱来看看ref(),其实就多了个"简单数据"的支持(省的写对象) 【但通常来说这个用的更多，那就记它了】
-  let simpleData=ref(65)
+  let simpleData=ref(65) //简单数据
+  let pure2=ref({
+    name:"Tekon",
+    lv:43,
+    skill:["近身搏斗",".45 ACP精准射击","M67范围空炸","EMP电子干扰"]
+  })
 
   // 创建俩变动方法
   const dec = ()=>{
@@ -32,10 +37,12 @@ import { reactive,ref } from 'vue';
     <p>pureObj: {{ pureObj }}</p>
     <!-- 下面放了个输入框，去尝试直接改"活对象"pureObj.name -->
     <input type='text' v-model="pureObj.name"></input>
+    <hr>
     <p>simpleData当前的值为: {{ simpleData }}</p>
     <p>
       <button @click="dec"> -1 </button> <button @click="add"> +1 </button>
     </p>
+    <p>pure2: {{ pure2 }}</p>
   </div>
 </template>
 
