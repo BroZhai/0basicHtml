@@ -43,9 +43,9 @@ import { computed, reactive,ref } from 'vue';
   let letterList=ref(["T","E","K","O","N"]);
     // 里面写个{}，里面再写get:... set:...
   let filGetSet=computed({
-    // 保留"KON"
+    // 保留"KON" (现用逻辑: 排除T和E)
     get: ()=>{
-     return letterList.value.filter( (curItem)=> curItem!=="T" && curItem!=="E")
+     return letterList.value.filter( (curItem)=> curItem!=="T" && curItem!=="E") // to do:这里的逻辑看能不能改成用index的位置来判断
     },
     set: (incomingValue) => {
       letterList.value[letterList.value.length-1]=incomingValue
