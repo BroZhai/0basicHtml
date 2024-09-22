@@ -38,6 +38,7 @@ import Computed from './components/Computed.vue';
 
 <template>
   <div>
+    <em>请留意F12控制台输出</em>
     <!-- 演示reactive() 和 ref()创建响应式数据 -->
     <h3>reactive</h3>
     <p>pureObj: {{ pureObj }}</p>
