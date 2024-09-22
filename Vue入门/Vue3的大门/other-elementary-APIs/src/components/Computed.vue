@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>组合式API的computed</h3>
+    <h3>组合式API的computed()</h3>
     <p>原数组: {{ numlist }}</p>
     <p>组合式computed过滤后的: {{ filtered }}</p>
     <h4>computed{get: , set:}完整写法</h4>

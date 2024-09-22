@@ -1,16 +1,22 @@
 <template>
   <div>
+    <h2>组合式watch()</h2>
     <h4>监视单个ref()'对象'</h4>
     <p>simpleCount当前值: {{ simpleCount }}</p>
     <button @click="scAdd">+1</button>
+
     <h4>监视多个ref()'对象'</h4>
     <p>s1当前值: {{ s1 }}; s2当前值: {{ s2 }}</p>
     <button @click="s1Add">s1++</button>&nbsp;&nbsp;<button @click="s2Add">s2++</button>
+
+    <h4>监视'复杂数据'(对象)和deep, immediate的配置</h4>
+    <p>pokemon的当前值: {{ pokemon }}</p>
+    <button @click="changeLv">lv++</button>
   </div>
 </template>
 
 <script setup>
-import {ref,watch} from 'vue'
+import {isMemoSame, ref,watch} from 'vue'
 const simpleCount=ref(66) //要监视的 '简单数据1'
 const scAdd= ()=>{
   simpleCount.value++; //变动'简单数据1'
@@ -39,7 +45,23 @@ watch([s1,s2], (newValue,oldValue) => {
   // 这里的old/newValue都是"数组[]"
 })
 
-
+// 3. 监视一个"复杂数据"(对象)，涉及到deep和immediate(监听全部属性 和 是否一进页面就监听)
+// (我们需要在回调函数后面 ",加多个对象{}" 里面就写deep和immediate的true/false)
+const pokemon=ref({ //创建一个"复杂数据"(对象)
+  name:"Flareon",
+  lv:33,
+  skill:["bite","swift","Fireball"]
+})
+const changeLv= ()=>{
+  pokemon.value.lv++
+}
+watch(pokemon, (newValue,oldValue) => {
+  console.log(`pokemon发生了变化，新值:`);
+  console.log(newValue);
+}, {
+  deep:true, //是否监听该对象的'全部属性'
+  immediate:false //是否'一进页面'就监听
+})
 </script>
 
 <style>

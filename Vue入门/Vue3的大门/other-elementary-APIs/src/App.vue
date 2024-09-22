@@ -40,7 +40,7 @@ import Computed from './components/Computed.vue';
   <div>
     <em>请留意F12控制台输出</em>
     <!-- 演示reactive() 和 ref()创建响应式数据 -->
-    <h3>reactive</h3>
+    <h3>reactive()</h3>
     <p>pureObj: {{ pureObj }}</p>
     <!-- 下面放了个输入框，去尝试直接改"活对象"pureObj.name -->
     <input type='text' v-model="pureObj.name"></input>
