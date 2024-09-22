@@ -12,6 +12,16 @@
     <h4>监视'复杂数据'(对象)和deep, immediate的配置</h4>
     <p>pokemon的当前值: {{ pokemon }}</p>
     <button @click="changeLv">lv++</button>
+
+    <h4>仅监视对象中的"某单一属性"</h4>
+    <p>Tekon的当前值: {{ Tekon }}</p>
+    <p>
+      <input type="text" 
+      v-model="newTitle"
+      placeholder="请输入要更改的title"></input> &nbsp;&nbsp;
+      <button @click="cTitle">更改title</button> (仅这里的变动会在控制台被打印)
+    </p>
+    <button @click="cRate">funkyRating++</button>
   </div>
 </template>
 
@@ -62,6 +72,26 @@ watch(pokemon, (newValue,oldValue) => {
   deep:true, //是否监听该对象的'全部属性'
   immediate:false //是否'一进页面'就监听
 })
+
+// (*新！！*) 4. 仅监视对象中的'某个属性'，而非全部
+// 主要就是在watch的时候 不再是'直接丢整个ref对象'，用 () => ref对象.value."要监视的单一属性"
+
+// 我们这里只监视"title"而不关心funkyRating
+const Tekon=ref({
+  title:"blackCat",
+  funkyRating: 233
+})
+const newTitle=ref('')
+const cTitle = () => {
+  Tekon.value.title=newTitle.value
+}
+const cRate = () => {
+  Tekon.value.funkyRating++
+}
+
+watch( () => Tekon.value.title, (newValue,oldValue)=>{
+  console.log(`Tekon的称号变化为: ${newValue}, 之前是: ${oldValue} (funkyRating的变动I don't care~~)`);
+} )
 </script>
 
 <style>
