@@ -1,7 +1,8 @@
 <script setup>
 import { computed, reactive,ref } from 'vue';
 
-  // 先来演示纯"死对象"转"或对象"的reactive()
+
+  /* 先来演示纯"死对象"转"或对象"的reactive() */
   const testObj={
     name:"Pancake",
     lv:26,
@@ -12,7 +13,7 @@ import { computed, reactive,ref } from 'vue';
   //在控制台打印reactive出来的 "活对象"pureObj
   console.log(pureObj);
 
-  // 接下来咱来看看ref(),其实就多了个"简单数据"的支持(省的写对象) 【但通常来说这个用的更多，那就记它了】
+  /* 接下来咱来看看ref(),其实就多了个"简单数据"的支持(省的写对象) 【但通常来说这个用的更多，那就记它了】 */
   let simpleData=ref(65) //简单数据
   let pure2=ref({
     name:"Tekon",
@@ -31,7 +32,7 @@ import { computed, reactive,ref } from 'vue';
   }
   
 
-  // 接下来我们来看看组合式API的computed()函数
+  /* 接下来我们来看看组合式API的computed()函数 */
   // 逻辑很简单，()里面直接写 '回调函数'就好啦 (对应特定的'数据块')
   const numlist=ref([1,2,3,4,5,6,7,8,9,10]); //目标: 用computed 过滤出>4的所有数字
   let filtered=computed( ()=>{
@@ -59,8 +60,11 @@ import { computed, reactive,ref } from 'vue';
     }
   })
   const changeLast=() =>{
-    filGetSet.value=changedVal.value;
+    filGetSet.value=changedVal.value; //直接强行赋值computed的结果，触发上面的set
   }
+
+
+  /* 接下来是watch()，就是用来监听数据变没变的那个哥们，分 新值 和 老值 */
 
 </script>
 
