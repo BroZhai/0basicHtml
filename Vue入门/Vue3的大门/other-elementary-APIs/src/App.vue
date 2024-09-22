@@ -43,9 +43,15 @@ import { computed, reactive,ref } from 'vue';
   let letterList=ref(["T","E","K","O","N"]);
     // 里面写个{}，里面再写get:... set:...
   let filGetSet=computed({
-    // 保留"KON" (现用逻辑: 排除T和E)
+    // 保留"KON" (现用逻辑: 保留"E"下标之后的所有字母)
     get: ()=>{
-     return letterList.value.filter( (curItem)=> curItem!=="T" && curItem!=="E") // to do:这里的逻辑看能不能改成用index的位置来判断
+     return letterList.value.filter( (curItem,index)=> {
+      if(index>1){
+        return curItem;
+      }
+     }) 
+    //  补充一下filter的用法 .filter( (当前遍历item,该item的index) => {执行的逻辑 + 是否return当前item或其他})
+    // 就不要记什么 奇怪的"简写"啦，务实的给他{条件+return}写全 xwx
     },
     set: (incomingValue) => {
       letterList.value[letterList.value.length-1]=incomingValue
