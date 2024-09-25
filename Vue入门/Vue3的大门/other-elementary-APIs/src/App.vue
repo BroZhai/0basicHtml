@@ -3,8 +3,7 @@ import { reactive,ref } from 'vue';
 import Watch from './components/Watch.vue';
 import Computed from './components/Computed.vue';
   // 根组件App.vue就用来演示reactive()和ref()了，剩下的其他组合式API就单独写成'对应的vue模块'放到components里面去了
-  // 不然这里的script将会是一大坨，极度的不美观((
-  
+  // 不然这里的script将会是一大坨，极度的不美观(
 
   /* 先来演示纯"死对象"转"或对象"的reactive() */
   const testObj={
