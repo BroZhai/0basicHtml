@@ -8,7 +8,7 @@ And most of them have come along with Chinese annotations.<br/>
 Anyways, welcome, and thanks for browsing ^^<br/>
 I hope my journals may help anyone else who also intends to embark on this :3 <br/>
 (Below is the story depicting why this feline creature decided to get claws on this in Chinese)<br/>
-*Tips: MIT license is adopted. Feel free to check and edit yourself, but not for commercial use :3*<br/>
+*Tips: Apache license is adopted. Feel free to check and edit yourself, but not for commercial use :3*<br/>
 *07.18.2024 Mr-Pancake*<br/>
 ***
 ### 小时候给培训班忽悠去断断续续的学了点web服务
