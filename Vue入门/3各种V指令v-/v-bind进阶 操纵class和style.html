@@ -10,8 +10,7 @@
 
     <div id="app">
         <!-- 默认样式即为box -->
-        <div class="box">
-        </div>
+        <div class="box"></div>
         <p>原box样式</p>
         <hr>
         <!-- 现在，我们来用v-bind来对它的class "动点手脚" -->
@@ -42,7 +41,7 @@
     <div id="dpp">
         <!-- 进阶style，内部使用"动态变量" -->
          <div id="out">
-                            <!--这里可直接用data里的变量！(percent),后面'%'特殊符号拼接 -->
+            <!--这里可直接用data里的变量！(percent),后面'%'特殊符号拼接 -->
             <div id="in" :style="{'width':percent+'%'}">
                 <!-- tips: width:百分比% (即为现有的长度*百分比 得值) -->
                 <span>{{percent}}%</span>
