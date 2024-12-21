@@ -89,6 +89,7 @@ const cRate = () => {
   Tekon.value.funkyRating++
 }
 
+// 直接watch对象的‘属性’就好了 XD
 watch( () => Tekon.value.title, (newValue,oldValue)=>{
   console.log(`Tekon的称号变化为: ${newValue}, 之前是: ${oldValue} (funkyRating的变动I don't care~~)`);
 } )
