@@ -11,11 +11,18 @@
       <em>2024/12/21</em>
     </div>
   </div>
+
+  <!-- 下面是子组件，来研究一下 Vue3里面的父子组件通信
+      和之前一样，以'附加属性'的方式把数据传给
+  -->
+  <Child1 :someoneObj="pancake"></Child1>
+
 </template>
 
 
 <script setup>
-  import {onMounted} from 'vue'
+  import {onMounted,ref} from 'vue'
+  import Child1 from '@/components/Child1.vue'
   const setupMsg = () => {
     setTimeout(()=>{
       console.log('啊哈，setup里面的消息被触发了');
@@ -35,6 +42,13 @@
   onMounted(()=>{
     console.log(`我是2号逻辑desu yo`);
   })
+
+  // 构建了一个要发给子组件的对象
+  let pancake=ref({
+      degree:"Junior Baka collage",
+      lv:37,
+      isHappy: true,
+    })
 </script>
 
 
