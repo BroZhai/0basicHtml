@@ -13,9 +13,14 @@
   </div>
 
   <!-- 下面是子组件，来研究一下 Vue3里面的父子组件通信
-      和之前一样，以'附加属性'的方式把数据传给
+      和之前一样，以'附加属性'的方式把数据传给子组件，
+      在这里用 "@xxx" 来监听子组件传过来的 '请求更改' 
   -->
-  <Child1 :someoneObj="pancake"></Child1>
+  <Child1 
+  @inclvReq="levelUp"
+  @declvReq="levelDown"
+  :someoneObj="pancake"
+  ></Child1>
 
 </template>
 
@@ -49,6 +54,19 @@
       lv:37,
       isHappy: true,
     })
+
+// 实现更改 pancake对象里面的'lv'
+  const levelUp = (incomingValue) =>{
+    // 右边的incomingValue形参 自动对应的就是 上面'子组件传过来的值'
+    pancake.value.lv += incomingValue
+    console.log(`已收到子组件传过来的'加lv'请求`);
+  }
+
+  const levelDown = (incomingValue) =>{
+    pancake.value.lv -= incomingValue
+    console.log(`已收到子组件传过来的'减lv'请求`);
+
+  }
 </script>
 
 

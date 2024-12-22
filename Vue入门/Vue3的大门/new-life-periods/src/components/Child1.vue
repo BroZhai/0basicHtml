@@ -9,6 +9,7 @@
             <p>学位: {{props.someoneObj.degree}}</p>
             <p>等级: {{props.someoneObj.lv}}</p>
             <p>对象开心吗: {{props.someoneObj.isHappy}}</p>
+            <p><button @click="lvUp">请求升级</button>&nbsp;&nbsp;&nbsp;<button @click="lvDown">请求降级</button></p>
           </div>
       </div>
     </div>
@@ -26,7 +27,17 @@ const props = defineProps({
 })
 
 // 这里则对应的是'子请求父改'(emit，但是不带$了)
-const emit = defineEmits([])
+// defineEmits宏，和上面的defineProps类似，里面填一个数组[] 用于标识 多个不同的emit操作
+
+const emit = defineEmits(['inclvReq','declvReq'])
+
+const lvUp = () => {
+  emit('inclvReq',1) //请求父组件去'升一级' (一会儿父组件就要用"@" 来抓前面的'emit名')
+}
+
+const lvDown = () => {
+  emit('declvReq',1) //请求父组件去'降一级'
+}
 </script>
 
 <style>
