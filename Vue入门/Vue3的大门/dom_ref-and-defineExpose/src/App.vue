@@ -1,47 +1,19 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <input type="text" placeholder="这里是输入框的默认文字" ref="customizedName">
+    &nbsp;&nbsp;&nbsp; <button>点击聚焦左侧方框</button>
+    <p>获取到的子组件的值为: {{ childValue }} &nbsp;&nbsp;&nbsp; <button>立即获取</button></p>
+  </div>
+  <hr>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import {ref} from 'vue'
+// 建一个'空ref' 虚晃一枪，我们在标签中'只要它的名字'
+const customizedName = ref(null)
+const childValue = ref(0)
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
+<style>
+  
 </style>
