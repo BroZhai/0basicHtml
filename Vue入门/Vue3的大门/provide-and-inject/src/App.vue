@@ -10,8 +10,13 @@
 </template>
 
 <script setup>
+import { provide, ref } from 'vue';
 import MiddleComp from './components/MiddleComp.vue';
 
+// 准备provide一个值 给最里面的 Inner组件使用
+// 语法 provide('键名'，键值[变量])
+let bakaValue = ref(9)
+provide('receiveThis', bakaValue)
 </script>
 
 <style>

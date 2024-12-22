@@ -2,6 +2,7 @@
   <div>
     <div id="middle">
       <h4>我是档在他俩之间的'中间组件'，我只包含了Inner</h4>
+      <p>我只是一个'物理屏障哦'</p>
       <InnerComp></InnerComp>
     </div>
   </div>
