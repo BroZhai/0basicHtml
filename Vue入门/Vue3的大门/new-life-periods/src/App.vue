@@ -48,12 +48,17 @@
     console.log(`我是2号逻辑desu yo`);
   })
 
-  // 构建了一个要发给子组件的对象
-  let pancake=ref({
+  // 构建了一个要发给子组件的对象 (先传个空的，延迟3秒后赋值)
+  let pancake=ref(null)
+  setTimeout(() => {
+    // 注意: 在ref的变量'已经创建'之后，再需要改其值的话，就要用 '变量.value' (符合'响应式特征')
+    pancake.value={
       degree:"Junior Baka collage",
       lv:37,
       isHappy: true,
-    })
+    }
+  },3000)
+
 
 // 实现更改 pancake对象里面的'lv'
   const levelUp = (incomingValue) =>{

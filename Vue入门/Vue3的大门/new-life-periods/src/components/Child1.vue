@@ -4,7 +4,7 @@
       <hr>
       <h3>这里是子组件Child1.vue</h3>
       <div id="box">
-          <h4 v-if="props===null">目前还没有收到父组件传过来的数据，等待中...</h4>
+          <h4 v-if="props.someoneObj===null">目前还没有收到父组件传过来的数据，等待中...</h4>
           <div id="parentData" v-else>
             <p>学位: {{props.someoneObj.degree}}</p>
             <p>等级: {{props.someoneObj.lv}}</p>
