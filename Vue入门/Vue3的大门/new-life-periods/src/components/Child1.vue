@@ -25,6 +25,8 @@ const props = defineProps({
   // 拿到obj的数据后，直接放到上面template里面去渲染
 })
 
+// 这里则对应的是'子请求父改'(emit，但是不带$了)
+const emit = defineEmits([])
 </script>
 
 <style>
