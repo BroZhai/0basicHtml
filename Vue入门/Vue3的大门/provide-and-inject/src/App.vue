@@ -40,6 +40,8 @@ let addValue = () => {
   console.log(`不知道哪个组件(其他组件)，请求的'添加方法+'已响应`);
 }
 
+// 今天休息一天
+
 let decValue = () => {
   bakaValue.value--;
   console.log(`不知道哪个组件(其他组件)，请求的'减小方法-'已响应`);
