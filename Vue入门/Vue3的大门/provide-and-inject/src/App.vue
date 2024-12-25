@@ -40,7 +40,7 @@ let addValue = () => {
   console.log(`不知道哪个组件(其他组件)，请求的'添加方法+'已响应`);
 }
 
-// 今天生病了，休息一天xwx
+
 
 let decValue = () => {
   bakaValue.value--;
