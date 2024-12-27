@@ -20,8 +20,6 @@ import { myStore } from '@/stores/counterStore';
 const myStoreEntity = myStore(); // 调用之后会得到一个'仓库对象'，我们可以直接通过调用该仓库的各种'属性/方法'来实现数据的渲染 / 修改
 // (上面的myStoreEntity.msg就是一个'渲染'的例子)
 
-
-
 </script>
 
 <style>
