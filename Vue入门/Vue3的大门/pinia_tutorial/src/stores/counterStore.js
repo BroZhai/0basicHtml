@@ -1,7 +1,7 @@
 // 现在，我们又回到了'搞数据仓库'的时间
 // 要想使用 Pinia创建仓库，那么就要用到 {defineStore} 这个宏
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 /* defineStore 语法：
   defineStore('仓库名'，{对象}(Vue2写法) 或 () => {回调函数}(Vue3组合式写法))
@@ -26,7 +26,13 @@ export const myStore = defineStore('helloCounter', () => {
     msg.value = ref("count的值已由仓库的'subCount()'方法减小")
     console.log(`count的值已由仓库的'addCount()'减小变动`);
   }
-
+  
+  // 基于'数据计算' 直接产生的新结果 (配置getters [computed属性])
+  // 语法: computed (回调函数)
+  const doubledCount = computed(() => {
+    let dValue = count.value*2;
+    return dValue
+  })
   // 因为里面写的是一个'箭头函数'，我们便要将上面写的 各个变量/函数 return出去，才能用
   return{
     count, 
@@ -34,5 +40,8 @@ export const myStore = defineStore('helloCounter', () => {
     // 俩'变动方法'
     addCount,
     subCount,
+
+    // 一个'计算属性'computed
+    doubledCount,
   }
 })

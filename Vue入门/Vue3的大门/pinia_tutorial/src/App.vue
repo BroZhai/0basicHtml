@@ -4,6 +4,7 @@
     <p v-if="myStoreEntity.msg!==null">{{ myStoreEntity.msg }}</p>
     <ZuJian1></ZuJian1>
     <ZuJian2></ZuJian2>
+    <h4>仓库数据'computed(getters)'计算的两倍的值为: {{ myStoreEntity.doubledCount }}</h4>
   </div>
 </template>
 
