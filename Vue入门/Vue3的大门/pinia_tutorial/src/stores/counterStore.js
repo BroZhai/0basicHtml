@@ -30,8 +30,10 @@ export const myStore = defineStore('helloCounter', () => {
   // 再来一个'异步'的方法
   let hiddenMsg = ref(null);
   const showHiddenMsg = () => {
+    console.log(`showHiddenMsg()方法已触发`);
+    hiddenMsg.value = '请等待3秒owo...'
     setTimeout(() => {
-      hiddenMsg.value = "我是隐藏的异步数据awa~"
+      hiddenMsg.value = "我是隐藏的异步数据awa~，被异步赋值力"
     },3000)
   }
 
@@ -45,6 +47,7 @@ export const myStore = defineStore('helloCounter', () => {
   return{
     count, 
     msg,
+    hiddenMsg,
 
     // 俩'变动方法' (同步)
     addCount,
