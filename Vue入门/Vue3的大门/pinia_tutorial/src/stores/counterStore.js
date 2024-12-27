@@ -27,6 +27,14 @@ export const myStore = defineStore('helloCounter', () => {
     console.log(`count的值已由仓库的'addCount()'减小变动`);
   }
   
+  // 再来一个'异步'的方法
+  let hiddenMsg = ref(null);
+  const showHiddenMsg = () => {
+    setTimeout(() => {
+      hiddenMsg.value = "我是隐藏的异步数据awa~"
+    },3000)
+  }
+
   // 基于'数据计算' 直接产生的新结果 (配置getters [computed属性])
   // 语法: computed (回调函数)
   const doubledCount = computed(() => {
@@ -37,9 +45,13 @@ export const myStore = defineStore('helloCounter', () => {
   return{
     count, 
     msg,
-    // 俩'变动方法'
+
+    // 俩'变动方法' (同步)
     addCount,
     subCount,
+
+    // 展示'隐藏数据'方法 (异步)
+    showHiddenMsg,
 
     // 一个'计算属性'computed
     doubledCount,

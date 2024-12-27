@@ -5,6 +5,7 @@
     <ZuJian1></ZuJian1>
     <ZuJian2></ZuJian2>
     <h4>仓库数据'computed(getters)'计算的两倍的值为: {{ myStoreEntity.doubledCount }}</h4>
+    <button>点我3秒后展示隐藏数据</button>
   </div>
 </template>
 
