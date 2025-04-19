@@ -96,5 +96,29 @@ function testFun(): void{
   }
   sleep('嘻嘻嘻')
 
+/* 枚举类型*/
+  enum Direction {
+    Up, // 0
+    Down, // 1
+    Left, // 2
+    Right, // 3
+  }
 
+  let changeDirection = (way: Direction) => {
+    if (Direction.Down === way){
+      console.log('方向 下 被打印了出来')
+    }
+    else if (Direction.Up === way){
+      console.log('方向 上 被打印了出来')
+    }
+    else if (Direction.Left === way){
+      console.log('方向 左 被打印了出来')
+    }
+    else if (Direction.Right === way){
+      console.log('方向 右 被打印了出来')
+    }
+    
+  }
+  changeDirection(Direction.Down); // 方向 下 被打印了出来
+  console.log('Direction.Down的类型为: '+ typeof(Direction.Down)); // 枚举enum里面会自动给成员变量'赋值', Down对应的就是 number 1
 
