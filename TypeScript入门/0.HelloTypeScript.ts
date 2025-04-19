@@ -14,14 +14,14 @@ function testFun(): void{
   /* 联合类型 */
   let mix_arr: (string|number)[] = ['我既可以字符串','又可以是', 114514];
   let seperate_judge: string[] | number = 1234; // 注意这个byd'()', 这里的意思是: 要么是'字符串数组[]', 要么是'纯数字'
-  console.log(typeof(seperate_judge)) // number
+  console.log("seperate_judage的类型为: "+typeof(seperate_judge)) // number
 
 
   /* 自定义类型 (类型别名)*/
   type MyAny = number | boolean 
   // let myData: MyAny = 'ss' // 错误示范, 数据类型错误
   let myData: MyAny = true 
-  console.log(typeof(myData)); // boolean
+  console.log("myData的类型为"+typeof(myData)); // boolean
 
 
   /* 元组 */
@@ -36,25 +36,65 @@ function testFun(): void{
   /* any */
   let myFavouriteNumber: any = 'seven';
   myFavouriteNumber = 7;
-  console.log(typeof(myFavouriteNumber)) // 这里还是推导了, 是number
+  console.log("My favourite number is " + myFavouriteNumber);
+  console.log('My favourite number的类型为'+ typeof(myFavouriteNumber)) // 这里还是推导了, 是number
+
+
+  /* ts类型推导 */
+  let text = '我应该是字符串'; // TypeScript自行检测到后面的数据类型为 '字符串', 并赋给text
+  console.log("text被自动推断出来的类型为: "+typeof(text)); // string
+
+  console.log("\n------我是一个分割线------\n");
+
+  /* 对象类型 */
+  let zhoux2: {
+    name: string;
+    lv: number;
+    isMale: boolean;
+    skills: string[];
+    act(): void;
+  } = {
+    name:"CyanDog",
+    lv: 20,
+    isMale: true,
+    skills: ["coding","modeling","composing","drawing"],
+    act: () => {
+      console.log(zhoux2.name+' have the skills: '+zhoux2.skills);
+    }
+  }
+  zhoux2.act()
+
 
   /*抽象接口 & 实现*/
   interface Baka{
     Baka_name: string;
     Baka_value: number;
-    Baka_function: any;
+    Baka_function:() => void;
+    Baka_optional?: any; // 可选参数, 非必要实现, 在函数的形参中同理
   }
 
   let Tekon: Baka = {
     Baka_name: 'Baka_Tekon',
     Baka_value: 99,
-    Baka_function: function act(){
-      console.log(this.Baka_name + '使用了冰冻技能!')
+    Baka_function: () => {
+      console.log(Tekon.Baka_name+'使用了冰冻技能');
     }
   }
-  Tekon.Baka_function;
+  Tekon.Baka_function();
 
 
-  /* ts类型推导 */
-  let text = '我应该是字符串'; // TypeScript自行检测到后面的数据类型为 '字符串', 并赋给text
-  console.log(typeof(text)); // string
+  /* 函数类型 */
+  let shout_fun = (msg: string): string => { // 分别指定形参类型, 返回类型
+    console.log("I shouted "+ msg);
+    return("I shouted "+ msg)
+  }
+  shout_fun('我超!原!')
+
+  let sleep:(msg: string) => void  =  (msg) => { // 形参&返回类型 '一口气'指定 (感觉不如上面的)
+    console.log("I said " + msg+ " while sleeping");
+    // return("I said " + msg+ " while sleeping")
+  }
+  sleep('嘻嘻嘻')
+
+
+
