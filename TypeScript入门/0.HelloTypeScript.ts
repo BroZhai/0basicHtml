@@ -38,6 +38,22 @@ function testFun(): void{
   myFavouriteNumber = 7;
   console.log(typeof(myFavouriteNumber)) // 这里还是推导了, 是number
 
+  /*抽象接口 & 实现*/
+  interface Baka{
+    Baka_name: string;
+    Baka_value: number;
+    Baka_function: any;
+  }
+
+  let Tekon: Baka = {
+    Baka_name: 'Baka_Tekon',
+    Baka_value: 99,
+    Baka_function: function act(){
+      console.log(this.Baka_name + '使用了冰冻技能!')
+    }
+  }
+  Tekon.Baka_function;
+
 
   /* ts类型推导 */
   let text = '我应该是字符串'; // TypeScript自行检测到后面的数据类型为 '字符串', 并赋给text
