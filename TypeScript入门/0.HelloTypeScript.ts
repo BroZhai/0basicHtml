@@ -33,13 +33,6 @@ function testFun(): void{
   // tom.push(true); // 报错, 不属于任何的'规定数据类型'
 
 
-  /* any */
-  let myFavouriteNumber: any = 'seven';
-  myFavouriteNumber = 7;
-  console.log("My favourite number is " + myFavouriteNumber);
-  console.log('My favourite number的类型为'+ typeof(myFavouriteNumber)) // 这里还是推导了, 是number
-
-
   /* ts类型推导 */
   let text = '我应该是字符串'; // TypeScript自行检测到后面的数据类型为 '字符串', 并赋给text
   console.log("text被自动推断出来的类型为: "+typeof(text)); // string
@@ -98,7 +91,7 @@ function testFun(): void{
 
 /* 枚举类型*/
   enum Direction {
-    Up, // 0
+    Up, // 0 (数字枚举)
     Down, // 1
     Left, // 2
     Right, // 3
@@ -122,3 +115,12 @@ function testFun(): void{
   changeDirection(Direction.Down); // 方向 下 被打印了出来
   console.log('Direction.Down的类型为: '+ typeof(Direction.Down)); // 枚举enum里面会自动给成员变量'赋值', Down对应的就是 number 1
 
+  enum Season {
+    Spring = '春天',
+    Summer = '夏天',
+    Autumn = '秋天',
+    Winter = '冬天',
+  }
+
+  console.log('现在是 ' + Season.Summer); // 现在是 夏天
+  console.log('Season.Summer的类型为' + typeof(Season.Summer)) // string
