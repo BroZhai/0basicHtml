@@ -97,3 +97,15 @@ type test3 = test1 & test2
 let t3: test3 = { fun: () => {} };
 t3.fun("abc") // OK
 t3.fun(123) // OK
+
+
+/* 泛型 */
+function wow<WoBuzhiDao>(value: WoBuzhiDao): WoBuzhiDao { return value } // 一般函数带泛型
+let sos = <Fanxing>(value: Fanxing) => {return value} // 箭头函数带泛型
+
+wow<string>('丢字符串进去试试'); wow(123); wow(undefined); // 均不报错, 因为用了泛型
+// wow<boolean>('我不是boolean, 所以我必然报错')
+sos('同理, 这里也不会报错'); sos(false); // 同理
+
+// 研究多个泛型 + keyof 关键字
+let key_fun = <Object, Key extends keyof Object>(obj: Object, key:Key) => { return obj[key]}
