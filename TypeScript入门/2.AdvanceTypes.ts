@@ -1,5 +1,4 @@
 // 让我们来看一些高级的东西
-
 /* TypeScript中的 Class */
 class Pokemon{
   name: string; // 没有赋值的属性 要自己声明类型
@@ -33,6 +32,7 @@ class Monster extends Pokemon{
 let miniQ = new Monster('MiniQ',13, 22)
 miniQ.shout() // 我是miniQ, 我的邪恶等级是: 22
 
+
 /* 类型兼容性 */ 
 class Point{x: number; y: number}
 class Point2D{x: number; y: number}
@@ -62,3 +62,38 @@ type F5 = (p: Point3D) => void
 let f4:F4 = () => { console.log("初始化");}
 let f5:F5
 f5 = f4 // OK,  f5(Point3D 3个参数) > f4(Point2D 2个参数), 没毛病
+
+type F6 = () => {ret_int: number} // 返回一个对象, 里面第一个数据为int类型
+type F7 = () => {ret_int: number, ret_str: string}
+
+let f6:F6 = () => { return {ret_int: 123}; }
+// let f6:F6 = () => { return {ret_int: "abc"}; } // 报错
+let f7:F7 = () => { return {ret_int: 234, ret_str: "abc"}}
+
+f6 = f7 // 函数兼容性, 形参少的可以用多的 (多的有'多余'的参)
+
+
+/* 交叉类型 */
+interface person{ name: string }
+interface phone_num{ num: number}
+type personalInfo = person & phone_num
+/*
+  此刻的personalInfo:
+  interface personalInfo{
+    name: string;
+    num: number;
+  }
+*/
+
+// '属性混合'实验
+class test1{ fun: (value: number) => void }
+class test2{ fun: (value: string) => void }
+type test3 = test1 & test2
+/*
+  此刻的test3:
+  value: number | string
+  judge: boolean
+*/
+let t3: test3 = { fun: () => {} };
+t3.fun("abc") // OK
+t3.fun(123) // OK
