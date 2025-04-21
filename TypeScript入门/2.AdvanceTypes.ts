@@ -131,20 +131,25 @@ obj_key('I am a set of String','length')
 
 // 接口带泛型
 interface Weapon<Fx>{ 
-  shoot: (target: Fx) => void // => 右边是'返回类型', 不是返回值!
+  shoot: (target: Fx) => void; // shoot是一个 返回void的抽象方法 (':'不是赋值, 看岔了 XD)
 }
 
-let Fire_arm: Weapon<string> = { // 明确指定泛型是什么类型
-  shoot(target) {
-      console.log(target + ' missed due to the shit accuracy of Fire_arm');
+let Fire_arm: Weapon<string> & {ammo: number} = { // 明确指定泛型是什么类型<string>, Fire_arm是一个属于 Weapon<string> 类型的 对象变量
+  shoot(target) { // '对象'的方法重写
+      console.log(`${target} missed due to the shit accuracy of Fire_arm`);
   },
+  ammo: 10, // 玩点花的, 在上面原有的基础上'混一个新属性&进来' (交叉类型)
 }
-Fire_arm.shoot('Cirno')
 
-class HandGun<Fx> implements Weapon<Fx>{ // 继续沿用泛型
-  shoot = (target: Fx) => {
+Fire_arm.shoot('Cirno')
+console.log(`Fire_arm 中的ammo剩余 ${Fire_arm.ammo}`) // 成功打印
+
+class HandGun<Fx> implements Weapon<Fx>{ // 创建一个类来实现接口
+  shoot = (target: Fx) => { //'类'的方法重写
     console.log(target + " has been hit!");
   }
+  ammo: number = 114514
 }
 let pisto = new HandGun()
 pisto.shoot('Cirno')
+console.log(`pisto 中的ammo数量为 ${pisto.ammo}`);
