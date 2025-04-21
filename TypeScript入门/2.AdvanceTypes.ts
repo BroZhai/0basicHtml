@@ -107,5 +107,44 @@ wow<string>('丢字符串进去试试'); wow(123); wow(undefined); // 均不报�
 // wow<boolean>('我不是boolean, 所以我必然报错')
 sos('同理, 这里也不会报错'); sos(false); // 同理
 
-// 研究多个泛型 + keyof 关键字
-let key_fun = <Object, Key extends keyof Object>(obj: Object, key:Key) => { return obj[key]}
+// 泛型约束 (将泛型'进一步细分'以调用一些的属性)
+let genericity_exp1 = <Type> (arr: Type[]): number => {
+  return arr.length; // 我们具体指定了(arr)Type将会是一个'数组[]', 所以这里能调到arr.length且不报错
+}
+
+interface additional_constraints{
+  // 自定义可以有哪些'属性', 一会儿加到对应的'泛型'上 (extends)
+  length;
+  value;
+  time;
+}
+
+let genericity_exp2 = <Type extends additional_constraints>(arr: Type): void =>{
+  console.log(arr.length, arr.value, arr.time);  // OK
+}
+
+// 研究多个泛型 + keyof 关键字 
+let obj_key = <Object, Key extends keyof Object>(obj: Object, key:Key) => { return obj[key] } // 一个带泛型的箭头函数
+let person = {name: "Cake", age: 114}
+obj_key(person, 'age')
+obj_key('I am a set of String','length')
+
+// 接口带泛型
+interface Weapon<Fx>{ 
+  shoot: (target: Fx) => void // => 右边是'返回类型', 不是返回值!
+}
+
+let Fire_arm: Weapon<string> = { // 明确指定泛型是什么类型
+  shoot(target) {
+      console.log(target + ' missed due to the shit accuracy of Fire_arm');
+  },
+}
+Fire_arm.shoot('Cirno')
+
+class HandGun<Fx> implements Weapon<Fx>{ // 继续沿用泛型
+  shoot = (target: Fx) => {
+    console.log(target + " has been hit!");
+  }
+}
+let pisto = new HandGun()
+pisto.shoot('Cirno')
