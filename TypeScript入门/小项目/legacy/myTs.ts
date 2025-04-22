@@ -1,0 +1,1 @@
+const cat_api = 'https://api.thecatapi.com/v1/images/search' // 返回猫猫图片的api
