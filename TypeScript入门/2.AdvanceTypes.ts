@@ -144,8 +144,8 @@ let Fire_arm: Weapon<string> & {ammo: number} = { // 明确指定泛型是什么
 Fire_arm.shoot('Cirno')
 console.log(`Fire_arm 中的ammo剩余 ${Fire_arm.ammo}`) // 成功打印
 
-class HandGun<Fx> implements Weapon<Fx>{ // 创建一个类来实现接口
-  shoot = (target: Fx) => { //'类'的方法重写
+class HandGun<Fx> implements Weapon<Fx>{ // 创建一个类来实现接口 (泛型类)
+  shoot:(target:Fx) => void = (target) => { //'类'的方法重写 (方法: 类型=> 返回值类型  =  具体实现... )
     console.log(target + " has been hit!");
   }
   ammo: number = 114514
@@ -153,3 +153,9 @@ class HandGun<Fx> implements Weapon<Fx>{ // 创建一个类来实现接口
 let pisto = new HandGun()
 pisto.shoot('Cirno')
 console.log(`pisto 中的ammo数量为 ${pisto.ammo}`);
+
+// Tips: 数组也是一个'泛型'
+const str_arr = ['a', 'b', 'c']
+const num_arr = [1, 2, 3]
+str_arr.forEach // Array<string>
+num_arr.forEach // Array<number>
