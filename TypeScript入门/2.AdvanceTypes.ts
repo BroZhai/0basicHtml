@@ -97,3 +97,29 @@ type test3 = test1 & test2
 let t3: test3 = { fun: () => {} };
 t3.fun("abc") // OK
 t3.fun(123) // OK
+
+/* 类型签名 */
+interface AnyAttribute{
+  [zhanweifu: string]: string; // 接收'任何string名字'的string数据类型 (任意字符键名: string键值)
+}
+let anyObj: AnyAttribute = { wow:'字符串数据类型', meibaobing:'没毛病'} // 键名可以瞎用string随便起, 再往里面塞
+interface MyArray<Type>{
+  [zhanweifu: number]: Type; // 在数组中, 键名就是'数字'(下标), 而键值可以是'任意类型'(泛型)
+}
+let stringArr: MyArray<string> = ['这是','字符串','数组'] // 指定泛型为string
+
+/* 类型索引查询 */
+type mix_type = {a: number, b: string, c: boolean}
+type serached_type = mix_type['c'] // searched_type的类型为 boolean
+type first_two_keys = mix_type['a' | 'b'] // 查询多个类型, first_two_keys为 'number | string'
+type all_keys = mix_type[keyof mix_type] // 查询全部, all_keys为 'number | string | boolean'
+
+/* 映射类型 (不能在接口中这么用)*/
+// 非对象 (Key in ...)
+type oldkeys = 'x' | 'y' | 'z'
+type reuse = { [Key in oldkeys]:string }
+// 等同于 type reuse = { 'x'|'y'|'z' : string }
+
+// 对象 (Key is keyof ...)
+type old_obj_keys = {x: number, y: string, z: boolean}
+type new_obj_keys = {[Key in keyof old_obj_keys]: string} // 获取 old_obj_key'对象'中的所有键名, 统一定成string
