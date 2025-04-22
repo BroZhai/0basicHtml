@@ -1,7 +1,7 @@
 <template>
   <div id="cat_container">
-      <button class="remind" ref="click_me">随机1只喵</button>
-    <table>
+      <button class="remind" ref="click_me" @click="api_respond">随机1只喵</button>
+    <table ref="cat_table">
       <thead>
         <tr>
           <th>图片id</th>
@@ -28,11 +28,40 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import {ref} from 'vue'
 
 const cat_Api:string = 'https://api.thecatapi.com/v1/images/search' // 小猫图片请求Api
-let click_me = ref<HTMLElement | null>(null) // 我靠, 这一步有点费脑细胞了 XD
-const request_btn: HTMLButtonElement = click_me.value as HTMLButtonElement // 断言
+
+let click_me = ref<HTMLElement | null>(null) // 我靠, 这一步有点费脑细胞了 XD (获取大按钮DOM)
+const request_btn: HTMLButtonElement = click_me.value as HTMLButtonElement // 断言为Button(确信
+
+let cat_table = ref<HTMLElement | null>(null) // 获取表格dom
+const my_cat_table: HTMLTableElement = cat_table.value as HTMLTableElement
+
+let api_respond = () => { console.log(axios.get(cat_Api)); }
+
+interface Cat_Type{
+  id: string,
+  url: string,
+  witdth: number,
+  height: number,
+  optional?: boolean,
+}
+
+class MyCat implements Cat_Type{
+  id: string;
+  url: string;
+  witdth: number;
+  height: number;
+  constructor(id: string, url: string, width: number, height: number){
+    this.id = id;
+    this.url = url;
+    this.witdth = width;
+    this.height = height;
+    
+  }
+}
 
 
 </script>
