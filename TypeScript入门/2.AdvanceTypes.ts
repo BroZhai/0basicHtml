@@ -150,7 +150,7 @@ class HandGun<Fx> implements Weapon<Fx>{ // 创建一个类来实现接口 (泛�
   }
   ammo: number = 114514
 }
-let pisto = new HandGun()
+let pisto = new HandGun<string>() // 指定好'泛型类型' (可选)
 pisto.shoot('Cirno')
 console.log(`pisto 中的ammo数量为 ${pisto.ammo}`);
 
@@ -159,3 +159,39 @@ const str_arr = ['a', 'b', 'c']
 const num_arr = [1, 2, 3]
 str_arr.forEach // Array<string>
 num_arr.forEach // Array<number>
+
+// 泛型工具类型
+interface Device{ // 可以看到, 这里的所有属性都是'必要'
+  id: number;
+  name: string;
+  android: boolean;
+}
+type knockoff_device = Partial<Device> // 全参可选
+// let d1: Device = {
+//   id: 1234, // e1报错, 因为提供的'参数不全' (all required)
+// }
+let d2: knockoff_device = {
+  android: false, // 只提供了'一个参', 但OK, 因为所有参数过了Partial后都是可选的
+}
+
+type fixed_device = Readonly<Device> // 全参只读
+let d3: fixed_device = {
+  id:123, // e3里面所有参数都是readonly
+  name: 'GPRS拨号上网机',
+  android: false,
+}
+// d3.android = true; // 报错, 任何属性都不再能更改
+
+type old_device = Pick<Device, 'name' | 'id'>
+let d4: old_device = {
+  name: 'java步话机',
+  id: 101,
+  // android: false // 报错, 因为上面'摘出来'的属性中并没有'andorid'
+}
+
+type modern_device = Record<'Android_ver' | 'Keneral_ver' | 'CPU', string>
+let d5: modern_device = {
+  Android_ver: 'API 31',
+  Keneral_ver: 'UNIX LTS 23.3',
+  CPU: 'BakaDragon 9.9',
+}
