@@ -47,7 +47,7 @@ const cat_Api:string = 'https://api.thecatapi.com/v1/images/search' // 小猫图
 // let cat_table = ref<HTMLElement | null>(null) // 获取表格dom
 // const my_cat_table: HTMLTableElement = cat_table.value as HTMLTableElement
 
-let received_obj:any = {}
+// let received_obj:any = {}
 
 let cat_list = ref<MyCat[]>([])
 
