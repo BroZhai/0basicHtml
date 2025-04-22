@@ -27,7 +27,7 @@
           <td>{{item.height}}</td>
           <td>{{item.witdth}}</td>
           <td>{{item.url }}</td>
-          <td><a href="#">X</a></td>
+          <td><a href="#" @click="drop_cat(item.id)">X</a></td>
         </tr>
       </tbody>
     </table>
@@ -51,12 +51,27 @@ let received_obj:any = {}
 
 let cat_list = ref<MyCat[]>([])
 
+const drop_cat = (id: string) => {
+  console.log(`准备删除id为: ${id} 的猫咪`);
+  cat_list.value =  cat_list.value.filter( item => {
+    return item.id !== id // 忘记return了, debug了半天草, 还有注意"===" 不转类型比较!
+  })
+}
+
 let api_respond = async() => { 
-  received_obj = await axios.get(cat_Api);
-  // console.log(received_obj.data[0]); 
-  let cat_obj = new MyCat(received_obj.data[0].id, received_obj.data[0].url, received_obj.data[0].width, received_obj.data[0].height)
-  cat_list.value.push(cat_obj)
-  console.log(cat_list);
+  axios.get(cat_Api).then( (received_obj) => {
+    // 成功响应区
+    console.log(received_obj);
+    // console.log(received_obj.data[0]); 
+    let cat_obj = new MyCat(received_obj.data[0].id, received_obj.data[0].url, received_obj.data[0].width, received_obj.data[0].height)
+    cat_list.value.push(cat_obj)
+    // console.log(cat_list);
+  }, (received_obj) => {
+    // 失败响应区
+    console.log(`警告! Api请求未成功QAQ...`);
+    console.log(received_obj);
+  });
+
 }
 
 interface Cat_Type{
