@@ -13,12 +13,20 @@
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr>
-          <td>idxxx</td>
-          <td><img src="../assets/bakaCat.jpg" /></td>
-          <td>高度xx</td>
-          <td>宽度xx</td>
-          <td>地址xx</td>
+        <!-- <tr>
+          <td>我是id笨蛋!</td>
+          <td><img src="../assets/bakaCat.jpg"/></td>
+          <td>600</td>
+          <td>600</td>
+          <td>我是本地的图片哦</td>
+          <td><a href="#">X</a></td>
+        </tr> -->
+        <tr v-for="(item, index) in cat_list">
+          <td>{{item.id}}</td>
+          <td><img :src="item.url"/></td>
+          <td>{{item.height}}</td>
+          <td>{{item.witdth}}</td>
+          <td>{{item.url }}</td>
           <td><a href="#">X</a></td>
         </tr>
       </tbody>
@@ -33,13 +41,23 @@ import {ref} from 'vue'
 
 const cat_Api:string = 'https://api.thecatapi.com/v1/images/search' // 小猫图片请求Api
 
-let click_me = ref<HTMLElement | null>(null) // 我靠, 这一步有点费脑细胞了 XD (获取大按钮DOM)
-const request_btn: HTMLButtonElement = click_me.value as HTMLButtonElement // 断言为Button(确信
+// let click_me = ref<HTMLElement | null>(null) // 我靠, 这一步有点费脑细胞了 XD (获取大按钮DOM)
+// const request_btn: HTMLButtonElement = click_me.value as HTMLButtonElement // 断言为Button(确信
 
-let cat_table = ref<HTMLElement | null>(null) // 获取表格dom
-const my_cat_table: HTMLTableElement = cat_table.value as HTMLTableElement
+// let cat_table = ref<HTMLElement | null>(null) // 获取表格dom
+// const my_cat_table: HTMLTableElement = cat_table.value as HTMLTableElement
 
-let api_respond = () => { console.log(axios.get(cat_Api)); }
+let received_obj:any = {}
+
+let cat_list = ref<MyCat[]>([])
+
+let api_respond = async() => { 
+  received_obj = await axios.get(cat_Api);
+  // console.log(received_obj.data[0]); 
+  let cat_obj = new MyCat(received_obj.data[0].id, received_obj.data[0].url, received_obj.data[0].width, received_obj.data[0].height)
+  cat_list.value.push(cat_obj)
+  console.log(cat_list);
+}
 
 interface Cat_Type{
   id: string,
@@ -62,6 +80,7 @@ class MyCat implements Cat_Type{
     
   }
 }
+
 
 
 </script>
