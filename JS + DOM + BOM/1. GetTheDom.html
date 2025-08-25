@@ -6,16 +6,37 @@
 
   <body>
     <p>这是一个普通p标签文本内容, 下面还有另一个p标签</p>
+    <ul>
+      <li>我是中间唐突插入的列表标签owo</li>
+      <li>我也来凑个热闹awa</li>
+    </ul>
+
+    <ol>
+      <li>诶还来了一个有序列表哦</li>
+      <li>balabalabala...</li>
+    </ol>
+
     <p id="replace">想办法把我替换掉!!</p>
   </body>
 
   <!-- js书写区, 让Js配合Dom相关的操作实现真正的'网页效果'
     注: script标签需要在body后, 毕竟要页面加载完了才能拿页面里面的东西嘛 XD -->
   <script>
+    // 用标签的'id' 专门获取唯一的 element对象 进行操作
     console.log("你好, 我是script中js控制输出的打印信息");
     let element_obj = document.getElementById("replace");
-    console.log("获取到id为'replace'的elemenet元素(未更改前): ");
+    console.log("获取到id为'replace'的elemenet元素: ");
     console.log(element_obj);
+    element_obj.innerHTML = "我的原本内容被js替换了捏";
+
+    // 用'标签名'批量获取对应的标签DOM getElementsByTagName(), 可自定义父级
+    let p_lables = document.getElementsByTagName("p");
+    console.log(p_lables);
+    console.log("返回的p_labels的element对象数组中的内容依次为: ");
+    for(i=0; i< p_lables.length; i++){
+      console.log(p_lables[i].innerHTML);
+    }
+    
   </script>
 
 </html>
