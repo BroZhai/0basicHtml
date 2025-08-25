@@ -64,6 +64,20 @@
     for(const cur_lab of red_p_labels){
       console.log(cur_lab.innerHTML);
     }
+    console.log("");
+
+    // id / class 通用查找 -- querySelector("CSS查找语法")
+    // querySelector() 只查符合条件的第一个元素
+    let first_red_p_label = document.querySelector(".red_p");
+    console.log("使用querySelector选择的第一个红色P标签的内容为: " + first_red_p_label.innerHTML );
+    console.log("");
+    
+    // querySelectorAll() 查所有符合的元素, 返回element元素对象数组[]
+    let all_red_p_lables = document.querySelectorAll(".red_p");
+    console.log("使用querySelectorAll查到的内容: ");
+    for(const cur_lab of red_p_labels){
+      console.log(cur_lab.innerHTML);
+    }
     
   </script>
 
