@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>认识&获取DOM</title>
+  </head>
+
+  <body>
+    <p>这是一个普通p标签文本内容, 下面还有另一个p标签</p>
+    <p id="replace">想办法把我替换掉!!</p>
+  </body>
+
+  <!-- js书写区, 让Js配合Dom相关的操作实现真正的'网页效果'
+    注: script标签需要在body后, 毕竟要页面加载完了才能拿页面里面的东西嘛 XD -->
+  <script>
+    console.log("你好, 我是script中js控制输出的打印信息");
+    let element_obj = document.getElementById("replace");
+    console.log("获取到id为'replace'的elemenet元素(未更改前): ");
+    console.log(element_obj);
+  </script>
+
+</html>
