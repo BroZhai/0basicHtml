@@ -21,7 +21,7 @@ let go_btn = document.querySelector("#pop");
 let display_area = document.querySelector("#display_area");
 
 go_btn.onclick = ()=> {
-  display_area.innerHTML = "你输入了: " + textbox.value;
+  display_area.innerHTML = "你输入了: " + textbox.value; // 注意, 对于表单元素而言, 获取的是它的'值' value
 }
 
 // 测试innerHTML 和 innerText的区别
