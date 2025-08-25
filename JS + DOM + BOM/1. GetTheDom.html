@@ -2,6 +2,15 @@
 <html>
   <head>
     <title>认识&获取DOM</title>
+
+    <!-- style样式写在头部中, 引用外部css也是 -->
+    <style>
+        .red_p{
+          color: red;
+          font-weight: bold;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="css/我是外部样式表.css"> -->
   </head>
 
   <body>
@@ -11,12 +20,14 @@
       <li>我也来凑个热闹awa</li>
     </ul>
 
-    <ol>
+    <ol id="ol_parent">
       <li>诶还来了一个有序列表哦</li>
       <li>balabalabala...</li>
     </ol>
 
     <p id="replace">想办法把我替换掉!!</p>
+    <p class="red_p">诶? 我怎么是红色的?</p>
+    <p class="red_p">那是因为你和我都穿着同一个class的样式啊awa</p>
   </body>
 
   <!-- js书写区, 让Js配合Dom相关的操作实现真正的'网页效果'
@@ -30,11 +41,28 @@
     element_obj.innerHTML = "我的原本内容被js替换了捏";
 
     // 用'标签名'批量获取对应的标签DOM getElementsByTagName(), 可自定义父级
-    let p_lables = document.getElementsByTagName("p");
+    let p_lables = document.getElementsByTagName("p"); // 返回的是一个'element元素数组[]', 查不到也会返回一个空数组
     console.log(p_lables);
     console.log("返回的p_labels的element对象数组中的内容依次为: ");
-    for(i=0; i< p_lables.length; i++){
+    for(i=0; i< p_lables.length; i++){ // 用for循环遍历返回的element元素数组
       console.log(p_lables[i].innerHTML);
+    }
+    console.log("");
+    // 指定父级element, 缩小'查找范围'
+    let ol_parent = document.getElementById("ol_parent");
+    let li_in_parent = ol_parent.getElementsByTagName("li");
+    console.log("取得ol_parent中的子集li的内容依次为: ");
+    for(const current_li_obj of li_in_parent){ // js的特有'高级for循环' for ... of (类似for each, of = :)
+      console.log(current_li_obj.innerHTML);
+    }
+    console.log("");
+
+    // 以下为HTML5后的新方法, IE9+支持 , 但往前的IE老版本不支持
+    // 通过标签的class批量选择对应的element, getElementesByClassName()
+    let red_p_labels = document.getElementsByClassName("red_p"); //  这里直接书写'class名就好了'
+    console.log("取得的red_p_lables的内容依次为: ");
+    for(const cur_lab of red_p_labels){
+      console.log(cur_lab.innerHTML);
     }
     
   </script>
