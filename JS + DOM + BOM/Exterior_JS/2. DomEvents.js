@@ -38,9 +38,9 @@ let next_btn = document.querySelector("#next");
 let img_show = document.querySelector("img"); // 直接选中仅有的img标签
 
 const range_detect = (index) =>{
-  if(index === 0){
+  if(index === 0){ // 第一张图片
     previous_btn.disabled = true;
-  } else if(index === 3){
+  } else if(index === img_src_list.length-1){ // 最后一张图片
     next_btn.disabled = true;
   }else{
     previous_btn.disabled = false
@@ -52,6 +52,10 @@ range_detect(list_counter);
 
 previous_btn.onclick = ()=>{
     list_counter--;
+    if(list_counter <= 0){
+      this.disabled = true;
+    }else{
+
     range_detect(list_counter);
     img_show.src = img_src_list[list_counter];
     console.log("已切换为上一张图片, list_counter = " + list_counter);
