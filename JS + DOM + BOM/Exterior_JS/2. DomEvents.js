@@ -30,3 +30,39 @@ console.log("second_box中");
 console.log("innerHTML的内容为: " + second_box.innerHTML); // 留意到'html换行结构有被保留', 且strong标签也在
 console.log("innerText的内容为: " + second_box.innerText); // Strong标签不见了, 换行的结构也是
 
+// 修改img标签的src属性, 显示不同的图片
+let img_src_list = ["../resources/html/3/cirno.gif", "../resources/html/3/star.png","../resources/html/3/vrc.png", "../resources/html/3/xiaomao.jpg"]; // 图片地址数组
+let list_counter = 0;
+let previous_btn = document.querySelector("#previous");
+let next_btn = document.querySelector("#next");
+let img_show = document.querySelector("img"); // 直接选中仅有的img标签
+
+const range_detect = (index) =>{
+  if(index === 0){
+    previous_btn.disabled = true;
+  } else if(index === 3){
+    next_btn.disabled = true;
+  }else{
+    previous_btn.disabled = false
+    next_btn.disabled = false;
+  }
+}
+
+range_detect(list_counter);
+
+previous_btn.onclick = ()=>{
+    list_counter--;
+    range_detect(list_counter);
+    img_show.src = img_src_list[list_counter];
+    console.log("已切换为上一张图片, list_counter = " + list_counter);
+}
+
+next_btn.onclick = ()=>{
+  list_counter++;
+  range_detect(list_counter);
+  img_show.src = img_src_list[list_counter];
+  console.log("已切换为上一张图片, list_counter = " + list_counter);
+}
+
+
+
