@@ -52,10 +52,6 @@ range_detect(list_counter);
 
 previous_btn.onclick = ()=>{
     list_counter--;
-    if(list_counter <= 0){
-      this.disabled = true;
-    }else{
-
     range_detect(list_counter);
     img_show.src = img_src_list[list_counter];
     console.log("已切换为上一张图片, list_counter = " + list_counter);
