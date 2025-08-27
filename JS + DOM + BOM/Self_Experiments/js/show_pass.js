@@ -17,8 +17,27 @@ img_show.onclick = ()=>{
     }
 }
 
-go_btn.onclick = () =>{
-    alert("输入的密码为: " + input_box.value);
+// 练手RegExp, 检测输入的密码是否包含大小写字母 + 数字
+let num_Re = /[0-9]+/;
+let lower_letter_Re = /[a-z]+/;
+let upper_letter_Re = /[A-Z]+/;
+let length_Re = /[0-9A-Za-z]{8,20}/; // 长度需要在8-20
+go_btn.onclick = () =>{ 
+    let msg = "输入的密码为: " + input_box.value;
+    const pwd = input_box.value;
+    console.log(pwd.search(num_Re));
+    if(pwd.search(num_Re) === -1){
+        msg += "\n密码未包含数字!";
+    }if(pwd.search(lower_letter_Re) === -1){
+        msg += "\n密码未包含小写字母!";
+    }if(pwd.search(upper_letter_Re) === -1){
+        msg += "\n密码未包含大写字母!";
+    }if(pwd.search(length_Re) === -1){
+        msg += "\n密码长度需要在8-20位之间!"
+    }else{
+        msg +="\n\n密码通过简单RE校验!";
+    }
+    alert(msg);
 }
 
 // 额外小实验, RegExp
