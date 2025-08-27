@@ -21,20 +21,25 @@ img_show.onclick = ()=>{
 let num_Re = /[0-9]+/;
 let lower_letter_Re = /[a-z]+/;
 let upper_letter_Re = /[A-Z]+/;
-let length_Re = /[0-9A-Za-z]{8,20}/; // 长度需要在8-20
+let length_Re = /[\w\W]{8,20}/; // 长度需要在8-20
 go_btn.onclick = () =>{ 
     let msg = "输入的密码为: " + input_box.value;
     const pwd = input_box.value;
+    let valid_pass = true;
     console.log(pwd.search(num_Re));
     if(pwd.search(num_Re) === -1){
         msg += "\n密码未包含数字!";
+        valid_pass = false;
     }if(pwd.search(lower_letter_Re) === -1){
         msg += "\n密码未包含小写字母!";
+        valid_pass = false;
     }if(pwd.search(upper_letter_Re) === -1){
         msg += "\n密码未包含大写字母!";
+        valid_pass = false;
     }if(pwd.search(length_Re) === -1){
         msg += "\n密码长度需要在8-20位之间!"
-    }else{
+        valid_pass = false;
+    }if(valid_pass){
         msg +="\n\n密码通过简单RE校验!";
     }
     alert(msg);
