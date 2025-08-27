@@ -25,10 +25,22 @@ go_btn.onclick = () =>{
 const numbers_and_letters = new RegExp("[0-9a-zA-Z]","g");
 let test_str = "1@#B)c";
 // 以RegExp对象为主体进行判断
-let result_list = numbers_and_letters.exec(test_str);
-console.log(result_list);
+let result_list = [];
+let current_matched;
+while(( current_matched = numbers_and_letters.exec(test_str))!==null){
+    result_list = result_list.concat(current_matched);
+}
+console.log("用RegExp的exec方法取得的匹配数组: ");
+console.dir(result_list);
+// 以String对象为主体进行判断
+let str_result_list = test_str.match(numbers_and_letters);
+console.log(`String的match方法取得匹配的数组:`);
+console.dir(str_result_list);
+
 
 // 数组对象的相关方法
+console.log("");
+console.log("下面开始是数组对象的相关实验");
 let test_arr = [3,2,1,5,4,6,0,9];
 let range = test_arr.slice(1,3);
 console.log(range);
