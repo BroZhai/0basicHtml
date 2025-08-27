@@ -27,3 +27,8 @@ let test_str = "1@#B)c";
 // 以RegExp对象为主体进行判断
 let result_list = numbers_and_letters.exec(test_str);
 console.log(result_list);
+
+// 数组对象的相关方法
+let test_arr = [3,2,1,5,4,6,0,9];
+let range = test_arr.slice(1,3);
+console.log(range);
