@@ -20,3 +20,10 @@ img_show.onclick = ()=>{
 go_btn.onclick = () =>{
     alert("输入的密码为: " + input_box.value);
 }
+
+// 额外小实验, RegExp
+const numbers_and_letters = new RegExp("[0-9a-zA-Z]","g");
+let test_str = "1@#B)c";
+// 以RegExp对象为主体进行判断
+let result_list = numbers_and_letters.exec(test_str);
+console.log(result_list);
