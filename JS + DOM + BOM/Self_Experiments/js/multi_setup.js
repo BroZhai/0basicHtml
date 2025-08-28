@@ -15,11 +15,11 @@ for(let curbtn of all_btns){
 let all_imgs = document.querySelectorAll("img");
 let src_list = ["imgs/mc.png", "imgs/silent.png", "imgs/universe.png", "imgs/vket.png"]
 let body = document.querySelector("body");
-for(i=0; i<src_list.length ; i++){
+for(let i=0; i<src_list.length ; i++){ // 问题出在这里的for循环中没有加关键字对'i'进行限定, 导致i一致都被视为'全局变量', 应该加let修饰让'变量提升', 限定每轮访问都有自己独立的i
     all_imgs[i].src = src_list[i];
     all_imgs[i].onclick = () => {
         body.style.backgroundImage = "url("+src_list[i]+")";
-        body.style.borderImageRepeat = "no-repeat";
-        console.log(`图片${i}被触发`);
+        body.style.backgroundRepeat = "no-repeat";
+        // console.log(`图片${i}被触发`);
     }
 }
