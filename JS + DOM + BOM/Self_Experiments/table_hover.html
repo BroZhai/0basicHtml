@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格悬停高亮</title>
+    <link rel="icon" href="data:," />
+
+    <style>
+        #my_table{
+            border: 1px solid red;
+            position: absolute;
+        }
+
+        #demon{
+            background-color: gray;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="my_table">
+        <table>
+            <thead>
+                <tr id="demon">
+                    <td>产品ID</td>
+                    <td>名称</td>
+                    <td>描述</td>
+                    <td>数量</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mp3</td>
+                    <td>一款便携式音乐播放设备</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Mp4</td>
+                    <td>一款迷你的多媒体播放器</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mp5</td>
+                    <td>使用9mm的微型冲锋枪</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script src="js/table_hover.js" type="text/javascript" charset="UTF-8"></script>
+
+</html>
