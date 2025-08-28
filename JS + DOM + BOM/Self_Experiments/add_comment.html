@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态元素节点插入</title>
+    <link rel="icon" href="data:," />
+    <style>
+        li{
+            background-color: rgb(187, 238, 200);
+        }
+
+        button{
+            height: 80px;
+            position: absolute;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="edit_area">
+        <!-- 编辑发送区 -->
+        <textarea name="txt" rows="5" cols="30" placeholder="请输入评论"></textarea>
+        <button>发送</button>
+    </div>
+    <div>
+        <!-- 展示区 -->
+        <ul id="display_ul">
+            <li data-index="1">我是第一条评论</li>
+        </ul>
+    </div>
+
+</body>
+
+<script src="js/add_comment.js" type="text/javascript" charset="UTF-8"></script>
+
+</html>
