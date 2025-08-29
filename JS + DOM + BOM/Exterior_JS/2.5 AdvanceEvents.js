@@ -9,7 +9,6 @@ my_btns[0].addEventListener('click', ()=> { // 监听到了同一个'触发事�
     alert("才怪嘞, 你是大Baka!"); // 在'聪明人'alert方法完成后继续执行 'Baka', 传统的.onclick写法则会直接覆盖前面的所有内容
 })
 
-
 // 第二个按钮
 let pop_msg = () =>{
     alert("你不会再看见我第二次了 :)");
@@ -17,3 +16,18 @@ let pop_msg = () =>{
 }
 
 my_btns[1].addEventListener('click', pop_msg);
+
+
+// 研究捕获和冒泡
+let child_div = document.querySelector("#child");
+let parent_div = child_div.parentElement;
+
+child_div.addEventListener("click", ()=>{
+    alert("子元素冒泡");
+})
+
+parent_div.addEventListener("click", ()=>{
+    alert("父元素");
+}, true); // 这里的true指定'沿路调用顺序'为 捕获阶段 (外到内), 因此父级会先于子级一步调用
+
+// 删除true后两个则都是'冒泡', 则是先内部的子级冒, 随后才是外部的父级冒
