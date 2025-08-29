@@ -4,7 +4,6 @@ let my_btns = document.querySelectorAll("button");
 my_btns[0].addEventListener('click', ()=> {
     alert("你是聪明人!");
 });
-
 my_btns[0].addEventListener('click', ()=> { // 监听到了同一个'触发事件'
     alert("才怪嘞, 你是大Baka!"); // 在'聪明人'alert方法完成后继续执行 'Baka', 传统的.onclick写法则会直接覆盖前面的所有内容
 })
