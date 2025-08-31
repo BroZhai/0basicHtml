@@ -40,15 +40,14 @@ parent_div.addEventListener("click", (e)=>{
 
 // 事件委托 实验, 利用'父元素'的冒泡机制, 可实现对子元素触发事件时的'统一捕获'
 let ul_parent = document.querySelector("ul");
+
 ul_parent.addEventListener("click", (e) =>{ // 这个事件监听可以直接'作用'在所有的'子级'上, 省得要取所有的子级而增大DOM的开销
-    
-    // e.target= 'pink';
-    if(e.target.style.backgroundColor === "pink"){
+    if(e.target.style.backgroundColor === ""){
+		console.log(`li ${e.target.innerHTML}被点击了, 已设置其背景色为粉色`);
+        e.target.style.backgroundColor = "pink";
+    }else{
         console.log(`li ${e.target.innerHTML}被再次点击了, 已取消了其背景色`);
         e.target.style.backgroundColor = "";
-    }else{
-        console.log(`li ${e.target.innerHTML}被点击了, 已设置其背景色为粉色`);
-        e.target.style.backgroundColor = "pink";
     }
     
 })
