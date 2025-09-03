@@ -10,10 +10,10 @@ img_show.onclick = ()=>{
     if(show_password){
         input_box.type = "text";
         // this.src = ... // 注意 箭头函数的内部取不到this, 可以用event.target(指向'最开始触发'的DOM, 这里即是最开始点击的img dom), 普通函数的this就正常
-        event.target.src = "../../resources/JS/notshow.png"
+        event.target.src = "../../../resources/JS/notshow.png"
     }else{
         input_box.type = "password";
-        event.target.src = "../../resources/JS/show.png"
+        event.target.src = "../../../resources/JS/show.png"
     }
 }
 
