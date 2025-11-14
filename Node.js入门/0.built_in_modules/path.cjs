@@ -11,5 +11,6 @@ fs.readFile(joined_path, (err,data) =>{
         console.log("文件不存在!");
     }else{
         console.log("File Hit!");
+        console.log(`提取出来的文件名为: ${path.basename(joined_path)}, 去掉后缀为: ${path.basename(joined_path, ".txt")}`);
     }
 })
