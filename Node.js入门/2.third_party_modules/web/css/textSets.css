@@ -1,0 +1,54 @@
+/*针对于"文本"的样式设计
+text-align: 文字"横向"对齐 (left,center,right)
+text-indent: 首行缩进"多少" (单位有 px 和 <字宽>em)
+line-height: 行间距的高
+text-decoration: 文本"装饰" 
+    none: 去除一切装饰
+    underline: 下划线
+    line-through: 中划线
+    over-line: 上划线
+    *针对"划线"的样式:*
+    dotted: 点状
+    dashed: 短横
+    double: 双划线
+text-shadow: 文本阴影
+    语法: text-shadow: 阴影颜色 x偏移 y偏移 阴影半径 
+
+vertical-align: 文本图片水平对齐 (需要有参照物)
+*/
+
+h3{
+    font-size: 50px;
+    text-align: center; /*设置标题居中对齐*/
+}
+
+.baka1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-indent: 2em; /*设置"2个字符"的缩进*/
+    line-height: 50px;
+}
+
+#cirno{
+    font-weight: lighter;
+    text-decoration:underline solid;
+}
+
+#cirno+p{
+    color:rgba(0, 0, 255, 0.4) /*使用rgba变文字透明度*/
+}
+
+span{
+    font: oblique bold 16px "华文楷体";
+    background: cyan;
+    width: 15em; /*em: "字"宽*/
+}
+img,span{
+    vertical-align: middle;  /*参考"前置元素"的"行高"，进行行内"居中"*/
+    /*可以看到文字出在"cirno"右侧行高中央""*/
+}
+em{
+    /*语法: text-shadow: 阴影颜色 x偏移(右+) y偏移(下+) 阴影半径 */
+    font: oblique bold 40px "华文楷体";
+    text-shadow: gray 3px 3px 2px;
+    text-align: right;
+}
