@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>纯HTML提交JSON</title>
+</head>
+<body>
+
+<h3>用户注册（纯HTML实现JSON提交）</h3>
+
+<!-- 关键就在这三行 -->
+<form id="user_form" action="http://localhost:8080/api/submit" method="post">
+    <input type="text"     name="username" placeholder="用户名" required><br><br>
+    <input type="password" name="password" placeholder="密码"   required><br><br>
+    <input type="number"   name="age"      placeholder="年龄"   required><br><br>
+    
+    <button type="submit">立即提交（发送JSON）</button>
+</form>
+
+
+<script>
+    let user_form = document.querySelector("#user_form");
+    user_form.addEventListener('submit', (e) => {
+        // console.log();
+        e.preventDefault();
+        const formData = new FormData(e.target); // e.target指向表单的DOM
+        const jsonData = {};
+        for (const [key, value] of formData.entries()) {
+            jsonData[key] = value; // 遍历formData对象中的'每一个数据对', 并变成json
+        }
+
+        // 用js的fetch(url, 数据)发起http请求
+        fetch(e.target.action, { // 使用表单中的提交地址
+            method: e.target.method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        }).then(res => res.json())
+        .then(data => console.log('成功', data))
+        .catch(err => console.log('失败', err))
+    })
+</script>
+
+</body>
+</html>
