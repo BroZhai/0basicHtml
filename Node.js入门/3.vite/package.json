@@ -1,0 +1,21 @@
+{
+  "name": "3.vite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "vite",
+    "dev:backend": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "concurrently": "^9.2.1",
+    "express": "^5.2.1",
+    "vite": "^7.2.4"
+  }
+}

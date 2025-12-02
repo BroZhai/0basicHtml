@@ -1,0 +1,1 @@
+export const counter = 14; // 随便命名导出一个变量, 给main.js使用
