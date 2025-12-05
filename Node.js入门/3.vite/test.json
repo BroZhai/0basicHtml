@@ -1,0 +1,8 @@
+{
+    "username": "cirno",
+    "age": "9",
+    "skills": {
+        "physical": "bash",
+        "magical": "ice_blizzard"
+    }
+}
