@@ -1,6 +1,9 @@
 import express from "express";
 import multer from "multer";
 import path from "node:path"; // ESM的 require('path')
+import { CLIENT_RENEG_WINDOW } from "node:tls";
+import fs from "node:fs"
+import { access } from "node:fs/promises";
 
 const app = express();
 
@@ -16,6 +19,7 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + ext_name); // 确定保存的'文件名'
     }
 });
+
 
 // 文件过滤 (未使用)
 const fileFilter = (req, file, cb) => {
@@ -48,4 +52,40 @@ app.post("/upload/single", upload.single('myfile'), (req, res) =>{
         success: true,
         filename: req.file.fieldname
     })
+})
+
+// 判断文件是否存在 (异步方法), 返回true / fasle
+async function check_exist(path){
+    try{
+        await access(path);
+        return true;
+    }catch(err){
+        console.log(`发生了错误: ${err}`);
+        return false;
+    }
+}
+
+// 单文件的'下载'处理路由 (get请求)
+app.get("/download/single", async (req, res) => {
+    // console.log(req.query);
+    const query_list = Object.entries(req.query);
+    console.log(query_list);
+    const cur_dir = import.meta.dirname;
+    const filepath = path.join(cur_dir,query_list[0][0],query_list[0][1]);
+    console.log(`计算出来的路径: ${filepath}`);
+    if(await check_exist(filepath)){
+        res.download(filepath);
+        console.log("成功返回文件下载");
+    }
+    else{
+        console.log("文件不存在!");
+        res.sendStatus(404);
+    }
+    
+    
+    // res.send({
+    //     success: true,
+    //     parm: `读取的键名为: ${query_list[0][0]}, 对应的值为: ${query_list[0][1]}`,
+    //     path: `计算出来的路径: ${filepath}`
+    // })
 })

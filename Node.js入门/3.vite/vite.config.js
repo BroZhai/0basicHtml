@@ -13,6 +13,10 @@ export default defineConfig({
             '/upload/single':{
                 target: "http://localhost:5050/",
                 changeOrigin: true
+            },
+            '/download/single':{
+                target: "http://localhost:5050/",
+                changeOrigin: true
             }
         }
     }
