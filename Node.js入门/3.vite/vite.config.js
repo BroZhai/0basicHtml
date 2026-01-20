@@ -9,6 +9,10 @@ export default defineConfig({
             '/api/test':{
                 target: "http://localhost:5050/",
                 changeOrigin: true,
+            },
+            '/upload/single':{
+                target: "http://localhost:5050/",
+                changeOrigin: true
             }
         }
     }

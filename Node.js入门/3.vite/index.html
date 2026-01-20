@@ -5,7 +5,13 @@
     <title>Vite</title>
 </head>
 <body>
-    <h2>This is index.html provided by Vite</h2>
+    <h2>This is index.html provided by LiveServer</h2>
+
+    <!-- 前端文件上传区 -->
+    <form action="/upload/single" method="post" enctype="multipart/form-data">
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+    </form>
     <script src="main.js" type="module"></script>
 </body>
 </html>
