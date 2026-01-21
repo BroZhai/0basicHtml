@@ -7,6 +7,8 @@ import { access } from "node:fs/promises";
 
 const app = express();
 
+app.use(express.static(import.meta.dirname));
+
 // 存储配置
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -75,6 +77,12 @@ app.get("/download/single", async (req, res) => {
     console.log(`计算出来的路径: ${filepath}`);
     if(await check_exist(filepath)){
         res.download(filepath);
+        // res.sendFile(filepath, (err) => {
+        //     if(err){
+        //         console.log('sendFile发送文件时发生了错误');
+        //         res.status(404).send('sendFile发送文件时发生了错误');
+        //     }
+        // });
         console.log("成功返回文件下载");
     }
     else{
@@ -88,4 +96,19 @@ app.get("/download/single", async (req, res) => {
     //     parm: `读取的键名为: ${query_list[0][0]}, 对应的值为: ${query_list[0][1]}`,
     //     path: `计算出来的路径: ${filepath}`
     // })
+})
+
+// 处理 a链接的下载
+app.get('/link_download/single', async (req,res) => {
+    console.log("成功访问/link_download/single!");
+    // res.sendStatus(502);
+    const cur_dir = import.meta.dirname;
+    const filepath = path.join(cur_dir, "/upload_folder/link/lucky.jpg");
+    if(await check_exist(filepath)){
+        console.log("link成功找到文件!");
+        res.download(filepath);
+    }else{
+        console.log(`错误: ${filepath} 文件不存在! 请查错...`);
+        res.sendStatus(404);
+    }
 })
