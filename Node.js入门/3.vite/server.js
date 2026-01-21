@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "node:path"; // ESM的 require('path')
 import { CLIENT_RENEG_WINDOW } from "node:tls";
 import fs from "node:fs"
-import { access } from "node:fs/promises";
+import { access, readdir } from "node:fs/promises";
 
 const app = express();
 
@@ -16,9 +16,9 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random * 1E9); // 加个'独特后缀'确保'文件名'唯一
-        const ext_name = path.extname(file.originalname);
-        console.log(file.originalname);
-        cb(null, file.fieldname + ext_name); // 确定保存的'文件名'
+        // const ext_name = path.extname(file.originalname);
+        // console.log(file.originalname);
+        cb(null, file.originalname); // 确定保存的'文件名'
     }
 });
 
@@ -76,13 +76,13 @@ app.get("/download/single", async (req, res) => {
     const filepath = path.join(cur_dir,query_list[0][0],query_list[0][1]);
     console.log(`计算出来的路径: ${filepath}`);
     if(await check_exist(filepath)){
-        res.download(filepath);
-        // res.sendFile(filepath, (err) => {
-        //     if(err){
-        //         console.log('sendFile发送文件时发生了错误');
-        //         res.status(404).send('sendFile发送文件时发生了错误');
-        //     }
-        // });
+        // res.download(filepath);
+        res.sendFile(filepath, (err) => {
+            if(err){
+                console.log('sendFile发送文件时发生了错误');
+                res.status(404).send('sendFile发送文件时发生了错误');
+            }
+        });
         console.log("成功返回文件下载");
     }
     else{
@@ -99,11 +99,15 @@ app.get("/download/single", async (req, res) => {
 })
 
 // 处理 a链接的下载
-app.get('/link_download/single', async (req,res) => {
-    console.log("成功访问/link_download/single!");
+app.get('/link_download', async (req,res) => {
+    console.log("成功访问/link_download");
     // res.sendStatus(502);
     const cur_dir = import.meta.dirname;
-    const filepath = path.join(cur_dir, "/upload_folder/link/lucky.jpg");
+    const filename = req.query.filename;
+    // console.log(filename);
+
+    // res.sendStatus(502);
+    const filepath = path.join(cur_dir, "/upload_folder/files",filename);
     if(await check_exist(filepath)){
         console.log("link成功找到文件!");
         res.download(filepath);
@@ -111,4 +115,18 @@ app.get('/link_download/single', async (req,res) => {
         console.log(`错误: ${filepath} 文件不存在! 请查错...`);
         res.sendStatus(404);
     }
+})
+
+// 扫描'目录' /scan 路由
+app.get('/scan', async(req, res) => {
+    console.log('/scan路由触发');
+    const cur_dir = import.meta.dirname;
+    const tgt_path = path.join(cur_dir,"/upload_folder/files");
+    const dir_list = await readdir(tgt_path);
+    // console.log(dir_list);
+
+
+    res.send({
+        dir: dir_list
+    });
 })

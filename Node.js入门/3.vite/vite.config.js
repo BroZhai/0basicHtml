@@ -18,7 +18,11 @@ export default defineConfig({
                 target: "http://localhost:5050/",
                 changeOrigin: true
             },
-            '/':{
+            '/scan':{
+                target: "http://localhost:5050/",
+                changeOrigin: true
+            },
+            '/link_download':{
                 target: "http://localhost:5050/",
                 changeOrigin: true
             }

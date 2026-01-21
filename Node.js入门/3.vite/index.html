@@ -5,7 +5,7 @@
     <title>Vite</title>
 </head>
 <body>
-    <h2>This is index.html provided by LiveServer</h2>
+    <h2>This is index.html provided by Vite</h2>
 
     <!-- 前端文件上传区 -->
     <form action="/upload/single" method="post" enctype="multipart/form-data">
@@ -15,9 +15,13 @@
     <br>
     <form action="/download/single" method="get">
         <button type="submit" name="/upload_folder/files" value="cirno.gif">Download Baka</button>
-        <button type="submit" name="/upload_folder/files" value="trance.mp3">Download trance</button>
+        <button type="submit" name="/upload_folder/files" value="A.pdf">Download trance</button>
     </form>
-    <a href="/link_download/single">click test</a>
+    <a href="/scan" id="scan_link">click test</a>
+    <h3>File List</h3>
+    <ul id="file_list">
+        <!-- <li><a href="#">ajimi</a></li> -->
+    </ul>
     <script src="main.js" type="module"></script>
 </body>
 </html>
