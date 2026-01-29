@@ -17,10 +17,20 @@
         <button type="submit" name="/upload_folder/files" value="cirno.gif">Download Baka</button>
         <button type="submit" name="/upload_folder/files" value="A.pdf">Download trance</button>
     </form>
-    <a href="/scan" id="scan_link">click test</a>
-    <h3>File List</h3>
+    <a href="/scan" id="scan_link">scan files under "files"</a>
+    <h3>File List in 'upload_folder'</h3>
     <ul id="file_list">
         <!-- <li><a href="#">ajimi</a></li> -->
+    </ul>
+    <hr>
+    <form action="/create_folder" method="get">
+        <input type="text" id="create_folder" name="folder_name" placeholder="Create your custom folder">
+        <button type="submit">submit</button>
+    </form>
+    <a href="/scan_folder" id="scan_folder">scan folders under "upload_folder"</a>
+    <h3>Folder List</h3>
+    <ul id="folder_list">
+
     </ul>
     <script src="main.js" type="module"></script>
 </body>

@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "node:path"; // ESM的 require('path')
 import { CLIENT_RENEG_WINDOW } from "node:tls";
 import fs from "node:fs"
-import { access, readdir } from "node:fs/promises";
+import { access, readdir, mkdir } from "node:fs/promises";
 
 const app = express();
 
@@ -117,7 +117,7 @@ app.get('/link_download', async (req,res) => {
     }
 })
 
-// 扫描'目录' /scan 路由
+// 扫描'目录中的文件' /scan 路由
 app.get('/scan', async(req, res) => {
     console.log('/scan路由触发');
     const cur_dir = import.meta.dirname;
@@ -129,4 +129,68 @@ app.get('/scan', async(req, res) => {
     res.send({
         dir: dir_list
     });
+})
+
+// 扫描'可用目录'
+app.get('/scan_folder', async (req, res) => {
+    console.log("/scan_folder路由触发");
+    const cur_dir = import.meta.dirname;
+    const tgt_path = path.join(cur_dir, "/upload_folder");
+    let folders = await readdir(tgt_path);
+
+    res.send({
+        dir: folders
+    })
+})
+
+// 扫描'给定目录'中的可用文件
+app.get('/check_folder', async (req, res) => {
+    console.log('/deep_scan路由触发');
+    // console.log(req.query);
+    let tgt_folder = req.query.folder;
+    const cur_dir = import.meta.dirname;
+    const tgt_path = path.join(cur_dir, "/upload_folder",tgt_folder);
+    let files = await readdir(tgt_path);
+    res.send({
+        available_files: files
+    });
+})
+
+// 处理'创建文件夹'get响应 (在upload_folder) 中, 字段通过get请求发来 (实际可能会换成post来确保安全)
+app.get('/create_folder', async (req, res) => {
+    console.log('/create_folder路由触发');
+    // console.log(req.query);
+    let folder_name = req.query.folder_name;
+    // console.log(`拿到的folder_name: ${folder_name}`);
+    const cur_dir = import.meta.dirname;
+    const target_folder = path.join(cur_dir,"/upload_folder",folder_name);
+
+    try{
+        await mkdir(target_folder);
+        await access(target_folder);
+        res.send("Success!")
+    }catch(err){
+        console.log(`发生了错误: ${err}`);
+        res.send("Failed...")
+    }
+    // await mkdir(target_folder).then((result) => {
+    //     console.log("创建成功");
+    // })
+    // .catch((err) => {
+    //     console.log(`发生了错误: ${err}`);
+    //     res.send("Failed...")
+    //     return;
+    // })
+    
+    // await access(target_folder).then((res) => {
+    //     console.log(`文件夹 ${target_folder} 存在`);
+    //     res.send("Success!");
+    // })
+    // .catch((err) => {
+    //     console.log(`创建失败, 目录 ${target_folder}`);
+    //     console.log(`具体错误: ${err}`);
+    //     res.send("Failed...")
+    // })
+    
+    
 })
