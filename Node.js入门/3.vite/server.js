@@ -2,8 +2,8 @@ import express from "express";
 import multer from "multer";
 import path from "node:path"; // ESM的 require('path')
 import { CLIENT_RENEG_WINDOW } from "node:tls";
-import fs from "node:fs"
-import { access, readdir, mkdir } from "node:fs/promises";
+import fs, { write } from "node:fs"
+import { access, readdir, mkdir, writeFile } from "node:fs/promises";
 
 const app = express();
 
@@ -167,7 +167,15 @@ app.get('/create_folder', async (req, res) => {
 
     try{
         await mkdir(target_folder);
-        await access(target_folder);
+        // await access(target_folder); // mkdir在创建前会自动帮忙检查 (是否存在)
+
+        // 目录创建成功后, 顺带创建3个文件
+        const html_file = path.join(target_folder,`${folder_name}.html`);
+        const css_file = path.join(target_folder,`${folder_name}.css`);
+        const js_file = path.join(target_folder,`${folder_name}.js`);
+        await writeFile(html_file,`html content of ${folder_name}`);
+        await writeFile(css_file,`css content of ${folder_name}`);
+        await writeFile(js_file,`js content of ${folder_name}`);
         res.send("Success!")
     }catch(err){
         console.log(`发生了错误: ${err}`);
